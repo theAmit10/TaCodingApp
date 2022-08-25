@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TaCoding</string>
+    <string name="contest">Contest</string>
+    <string name="problem">Problem</string>
+    <string name="user">Users</string>
+    <string name="news">News</string>
+    <string name="add">Add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
