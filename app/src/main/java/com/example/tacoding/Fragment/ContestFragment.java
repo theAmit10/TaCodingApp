@@ -11,15 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
+import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Model.CodingPlatformModel;
+import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
 
 public class ContestFragment extends Fragment {
 
+    // for coding platform
     RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
+
+    //for top coder
+    RecyclerView topCoderRv;
+    ArrayList<TopCoderModel> topcoderList;
 
     public ContestFragment() {
         // Required empty public constructor
@@ -35,10 +42,10 @@ public class ContestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_contest, container, false);
+
+        // for coding platform
         codingPlatformRv = view.findViewById(R.id.codingPlatformRV);
-
         list = new ArrayList<>();
-
         list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
@@ -47,16 +54,31 @@ public class ContestFragment extends Fragment {
         list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-
         list.add(new CodingPlatformModel(R.drawable.ic_people));
 
         CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
-        codingPlatformRv.setNestedScrollingEnabled(false);
-
         codingPlatformRv.setLayoutManager(linearLayoutManager);
+        codingPlatformRv.setNestedScrollingEnabled(false);
         codingPlatformRv.setAdapter(codingPlatformAdapter);
+
+        // For Top Coder
+        topCoderRv = view.findViewById(R.id.topCoderRV);
+        topcoderList = new ArrayList<>();
+        topcoderList.add(new TopCoderModel(R.drawable.p7,"Wasu","Grand Master","CodeForces"));
+        topcoderList.add(new TopCoderModel(R.drawable.p1,"James","Master","CodeChef"));
+        topcoderList.add(new TopCoderModel(R.drawable.p2,"Goku","Candidate","Hackerrank"));
+        topcoderList.add(new TopCoderModel(R.drawable.p3,"Gyan","Grand Master","Codechef"));
+        topcoderList.add(new TopCoderModel(R.drawable.p4,"Sinchan","intermediate","CodeForces"));
+        topcoderList.add(new TopCoderModel(R.drawable.p5,"Nobita","Master","CodeForces"));
+        topcoderList.add(new TopCoderModel(R.drawable.p6,"Raju","Candidate Master","CodeForces"));
+        topcoderList.add(new TopCoderModel(R.drawable.p2,"Rakesh","Grand Master","CodeForces"));
+
+        TopCoderAdapter topCoderAdapter = new TopCoderAdapter(topcoderList, getContext());
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        topCoderRv.setLayoutManager(linearLayoutManager1);
+        topCoderRv.setNestedScrollingEnabled(false);
+        topCoderRv.setAdapter(topCoderAdapter);
 
         return view;
     }
