@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
+import com.example.tacoding.Adapter.ContestAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Model.CodingPlatformModel;
+import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 
@@ -27,6 +29,10 @@ public class ContestFragment extends Fragment {
     //for top coder
     RecyclerView topCoderRv;
     ArrayList<TopCoderModel> topcoderList;
+
+    //For Contest
+    RecyclerView contestRv;
+    ArrayList<ContestModel> contestList;
 
     public ContestFragment() {
         // Required empty public constructor
@@ -79,6 +85,24 @@ public class ContestFragment extends Fragment {
         topCoderRv.setLayoutManager(linearLayoutManager1);
         topCoderRv.setNestedScrollingEnabled(false);
         topCoderRv.setAdapter(topCoderAdapter);
+
+
+        // For Contest List
+        contestRv = view.findViewById(R.id.contestRv);
+        contestList =new ArrayList<>();
+        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Coding Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_hackerearth_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerEarth","Starter Pack Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_hackerrank_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerRank"," Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_leetcode_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"LeetCode","Long Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
+        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
+
+        ContestAdapter contestAdapter = new ContestAdapter(contestList, getContext());
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        contestRv.setLayoutManager(linearLayoutManager2);
+        contestRv.setNestedScrollingEnabled(false);
+        contestRv.setAdapter(contestAdapter);
 
         return view;
     }

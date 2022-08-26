@@ -8,10 +8,13 @@
         android:id="@+id/codingPlatformImage"
         android:layout_width="@dimen/_50font_mdp"
         android:layout_height="@dimen/_45font_mdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+
         android:src="@drawable/ic_people"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/contestDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/platformImage"
+        android:layout_width="@dimen/_40font_mdp"
+        android:layout_height="@dimen/_40font_mdp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_codechef_svgrepo_com" />
+
+    <ImageView
+        android:id="@+id/reminder"
+        android:layout_width="@dimen/_40font_mdp"
+        android:layout_height="@dimen/_30font_mdp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_alarm_24" />
+
+    <TextView
+        android:id="@+id/contestTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Contest Title"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/view7"
+        app:layout_constraintTop_toBottomOf="@+id/platformImage" />
+
+    <EditText
+        android:id="@+id/contestDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:maxLines="3"
+        android:nestedScrollingEnabled="true"
+        android:text="Contest Description"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/setStartTime"
+        app:layout_constraintStart_toStartOf="@+id/contestTitle"
+        app:layout_constraintTop_toBottomOf="@+id/contestTitle"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/contestDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="27 Sept, 2022 "
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/reminder"
+        app:layout_constraintEnd_toStartOf="@+id/reminder"
+        app:layout_constraintTop_toTopOf="@+id/platformImage" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="End Time"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/contestDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/contestTitle"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:text="Start Time"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/endTime"
+        app:layout_constraintTop_toTopOf="@+id/contestTitle" />
+
+    <TextView
+        android:id="@+id/setEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="9:00 PM"
+        app:layout_constraintEnd_toEndOf="@+id/endTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/endTime"
+        app:layout_constraintTop_toBottomOf="@+id/endTime" />
+
+    <TextView
+        android:id="@+id/setStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="7:00 PM"
+        app:layout_constraintEnd_toStartOf="@+id/setEndTime"
+        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
