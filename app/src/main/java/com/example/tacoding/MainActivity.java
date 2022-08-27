@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.tacoding.Fragment.ContestFragment;
 import com.example.tacoding.Fragment.NewsFragment;
 import com.example.tacoding.Fragment.ProblemFragment;
+import com.example.tacoding.Fragment.ProfileFragment;
 import com.example.tacoding.Fragment.UserFragment;
 import com.example.tacoding.databinding.ActivityMainBinding;
 import com.iammert.library.readablebottombar.ReadableBottomBar;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.fragmentContainer, new ProblemFragment());
                         break;
                     case 4:
-                        transaction.replace(R.id.fragmentContainer, new ContestFragment());
+                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
                         break;
                 }
 
