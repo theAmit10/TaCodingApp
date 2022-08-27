@@ -72,7 +72,7 @@
                         android:layout_marginStart="16dp">
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image"
+                            android:id="@+id/addPlatformImage"
                             android:layout_width="@dimen/_50font_mdp"
                             android:layout_height="@dimen/_45font_mdp"
                             android:src="@drawable/ic_add_svgrepo_com"

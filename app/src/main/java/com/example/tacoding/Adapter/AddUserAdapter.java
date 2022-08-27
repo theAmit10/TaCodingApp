@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tacoding.Model.ProfileUserDetailModel;
+import com.example.tacoding.Model.AddUserModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
 
-public class ProfileUserDetailAdapter extends RecyclerView.Adapter<ProfileUserDetailAdapter.viewHolder>{
+public class AddUserAdapter extends RecyclerView.Adapter<AddUserAdapter.viewHolder>{
 
-    ArrayList<ProfileUserDetailModel> list;
+    ArrayList<AddUserModel> list;
     Context context;
 
-    public ProfileUserDetailAdapter(ArrayList<ProfileUserDetailModel> list, Context context) {
+    public AddUserAdapter(ArrayList<AddUserModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -28,17 +28,18 @@ public class ProfileUserDetailAdapter extends RecyclerView.Adapter<ProfileUserDe
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.story_design_profile_progress,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.story_design_add_user_sample,parent,false);
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        ProfileUserDetailModel profileUserDetailModel = list.get(position);
+        AddUserModel addUserModel = list.get(position);
 
-        holder.profileUserName.setText(profileUserDetailModel.getProfileUserName());
-        holder.profileUserImage.setImageResource(profileUserDetailModel.getProfileUserImage());
+        holder.profileUserName.setText(addUserModel.getProfileUserName());
+        holder.addprofileUserImage.setImageResource(addUserModel.getAddprofileUserImage());
+        holder.userPlatform.setText(addUserModel.getUserPlatform());
 
 
     }
@@ -49,12 +50,13 @@ public class ProfileUserDetailAdapter extends RecyclerView.Adapter<ProfileUserDe
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{
-        ImageView profileUserImage;
-        TextView profileUserName;
+        ImageView addprofileUserImage;
+        TextView profileUserName, userPlatform;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            profileUserImage = itemView.findViewById(R.id.profileUserImage);
+            addprofileUserImage = itemView.findViewById(R.id.addprofileUserImage);
             profileUserName = itemView.findViewById(R.id.profileUserName);
+            userPlatform = itemView.findViewById(R.id.userPlatform);
         }
     }
 }

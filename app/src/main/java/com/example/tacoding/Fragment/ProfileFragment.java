@@ -14,7 +14,7 @@ import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ProfileAdapter;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ProfileModel;
-import com.example.tacoding.Model.ProfileUserDetailModel;
+import com.example.tacoding.Model.AddUserModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
     ArrayList<ProfileModel> profileList;
 
     // for profileUserDetailsModel
-    ArrayList<ProfileUserDetailModel> profileUserDetailModelArrayList;
+    ArrayList<AddUserModel> addUserModelArrayList;
 
 
 
@@ -89,9 +89,7 @@ public class ProfileFragment extends Fragment {
         profileProgressRV.setNestedScrollingEnabled(false);
         profileProgressRV.setAdapter(profileAdapter);
 
-        // for profile user details
-//        profileUserDetailModelArrayList = new ArrayList<>();
-//        profileUserDetailModelArrayList.add(new ProfileUserDetailModel(R.drawable.p3,"WASU"));
+
 
 
         return view;
