@@ -10,15 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ContestAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
+import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
+import com.github.thunder413.datetimeutils.DateTimeUnits;
+import com.github.thunder413.datetimeutils.DateTimeUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ContestFragment extends Fragment {
 
@@ -33,6 +47,7 @@ public class ContestFragment extends Fragment {
     //For Contest
     RecyclerView contestRv;
     ArrayList<ContestModel> contestList;
+    ContestAdapter contestAdapter;
 
     public ContestFragment() {
         // Required empty public constructor
@@ -41,6 +56,7 @@ public class ContestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadContest();
     }
 
     @Override
@@ -90,15 +106,16 @@ public class ContestFragment extends Fragment {
         // For Contest List
         contestRv = view.findViewById(R.id.contestRv);
         contestList =new ArrayList<>();
-        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Coding Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_hackerearth_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerEarth","Starter Pack Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_hackerrank_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerRank"," Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_leetcode_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"LeetCode","Long Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
-        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Coding Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_hackerearth_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerEarth","Starter Pack Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_hackerrank_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"HackerRank"," Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_leetcode_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"LeetCode","Long Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
+//        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
 
-        ContestAdapter contestAdapter = new ContestAdapter(contestList, getContext());
+
+        contestAdapter = new ContestAdapter(contestList, getContext());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         contestRv.setLayoutManager(linearLayoutManager2);
         contestRv.setNestedScrollingEnabled(false);
@@ -106,4 +123,80 @@ public class ContestFragment extends Fragment {
 
         return view;
     }
+
+
+
+    public void  loadContest(){
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://codeforces.com/api/contest.list";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray contestJsonArray = response.getJSONArray("result");
+                            System.out.println("success");
+
+                                for (int i = 0; i < contestJsonArray.length(); i++) {
+                                    JSONObject contestJsonObject = contestJsonArray.getJSONObject(i);
+
+                                    ContestModel contestModel = new ContestModel(
+                                            contestJsonObject.getString("type"),
+                                            contestJsonObject.getString("name"),
+                                            contestJsonObject.getString("startTimeSeconds"),
+                                            contestJsonObject.getString("durationSeconds")
+                                    );
+
+                                    // Converting Second to Date and time
+                                    DateTimeUtils.setTimeZone("UTC");
+                                    Date sdate = DateTimeUtils.formatDate(Long.parseLong(contestModel.getStartDate()), DateTimeUnits.SECONDS);
+                                    String strDate = String.valueOf(sdate);
+                                    String syear =  strDate.substring(strDate.length()-4);
+                                    System.out.println("Year : " +syear);
+                                    int year = Integer.parseInt(syear);
+
+                                    // setting end Date
+                                    Date edate = DateTimeUtils.formatDate(Long.parseLong(contestModel.getEndDate()), DateTimeUnits.SECONDS);
+                                    String eDate = String.valueOf(edate);
+
+                                    contestModel.setStartDate(strDate);
+                                    contestModel.setEndDate(eDate);
+                                    if(year >= 2021) {
+                                        contestList.add(contestModel);
+                                    }
+
+                                    System.out.println("Start TIME : " +contestModel.getStartDate() );
+                                    System.out.println("Contest Titile : " + contestModel.getContestTitle());
+                                    System.out.println("Contest DESC : " + contestModel.getContestDescription());
+
+
+                                }
+
+
+                        contestAdapter.updateContest(contestList);
+                            System.out.println("success Amit");
+                        } catch (JSONException e) {
+                            System.out.println("Error Amit");
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        System.out.println("Error Found " +error.getLocalizedMessage());
+
+                    }
+                });
+
+
+        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
 }

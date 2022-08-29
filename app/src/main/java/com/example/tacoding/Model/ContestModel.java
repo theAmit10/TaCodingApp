@@ -13,6 +13,13 @@ public class ContestModel {
         this.endDate = endDate;
     }
 
+    public ContestModel(String contestTitle, String contestDescription, String startDate, String endDate) {
+        this.contestTitle = contestTitle;
+        this.contestDescription = contestDescription;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public int getPlatformImage() {
         return platformImage;
     }

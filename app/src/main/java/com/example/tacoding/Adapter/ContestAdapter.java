@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.R;
+import com.github.thunder413.datetimeutils.DateTimeUnits;
+import com.github.thunder413.datetimeutils.DateTimeUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHolder> {
@@ -38,12 +41,23 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
 
         ContestModel contestModel = list.get(position);
 
-        holder.platformImage.setImageResource(contestModel.getPlatformImage());
+        holder.platformImage.setImageResource(R.drawable.ic_codeforces_svgrepo_com);
+//        holder.contestTitle.setText(contestModel.getContestTitle());
         holder.contestTitle.setText(contestModel.getContestTitle());
+        System.out.println("contest Title Working....");
         holder.contestDescription.setText(contestModel.getContestDescription());
+
+
+
         holder.startDate.setText(contestModel.getStartDate());
         holder.endDate.setText(contestModel.getEndDate());
 
+    }
+
+    public void updateContest(ArrayList<ContestModel> updatedConstest){
+//        list.clear();
+        list.addAll(updatedConstest);
+        notifyDataSetChanged();
     }
 
     @Override

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Tabs xmlns:android="http://schemas.android.com/apk/res/android">
     <tab
-        drawable="@drawable/ic_people"
+        drawable="@drawable/ic_contest"
         text="@string/contest" />
     <tab
-        drawable="@drawable/ic_people"
+        drawable="@drawable/ic_addfriend"
         text="@string/user" />
     <tab
-        drawable="@drawable/ic_people"
+        drawable="@drawable/ic_news"
         text="@string/news" />
     <tab
-        drawable="@drawable/ic_people"
+        drawable="@drawable/ic_problem"
         text="@string/problem" />
     <tab
-        drawable="@drawable/ic_people"
+        drawable="@drawable/ic_profile"
         text="@string/add" />
 </Tabs>
