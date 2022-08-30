@@ -4,8 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_add_svgrepo_com.xml" value="0.1855" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_addfriend.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_baseline_add_alarm_24.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_codechef_svgrepo_com.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_codeforces_svgrepo_com.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_contest.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_hackerearth_svgrepo_com.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_kick_start.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_people.xml" value="0.125" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_problem.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_profile.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_profile_svgrepo_com.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_topcoder_svgrepo_com.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/coding_platform_story_design.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_contest.xml" value="0.264" />

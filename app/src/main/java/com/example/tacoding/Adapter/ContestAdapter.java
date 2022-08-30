@@ -17,12 +17,15 @@ import com.github.thunder413.datetimeutils.DateTimeUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHolder> {
 
     ArrayList<ContestModel> list;
     Context context;
+
 
     public ContestAdapter(ArrayList<ContestModel> list, Context context) {
         this.list = list;
@@ -41,10 +44,10 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
 
         ContestModel contestModel = list.get(position);
 
-        holder.platformImage.setImageResource(R.drawable.ic_codeforces_svgrepo_com);
-//        holder.contestTitle.setText(contestModel.getContestTitle());
+        holder.platformImage.setImageResource(contestModel.getPlatformImage());
+
         holder.contestTitle.setText(contestModel.getContestTitle());
-        System.out.println("contest Title Working....");
+
         holder.contestDescription.setText(contestModel.getContestDescription());
 
 

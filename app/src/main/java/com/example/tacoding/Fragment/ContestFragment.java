@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
@@ -33,6 +34,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ContestFragment extends Fragment {
 
@@ -48,6 +51,7 @@ public class ContestFragment extends Fragment {
     RecyclerView contestRv;
     ArrayList<ContestModel> contestList;
     ContestAdapter contestAdapter;
+    Map<String, Integer> map = new HashMap<String, Integer>();
 
     public ContestFragment() {
         // Required empty public constructor
@@ -114,6 +118,19 @@ public class ContestFragment extends Fragment {
 //        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
 //        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
 
+        // for adding contest image
+        map.put("CodeChef",R.drawable.ic_codechef_svgrepo_com);
+        map.put("HackerEarth",R.drawable.ic_hackerearth_svgrepo_com);
+        map.put("HackerRank",R.drawable.ic_hackerrank_svgrepo_com);
+        map.put("CodeForces",R.drawable.ic_codeforces_svgrepo_com);
+        map.put("LeetCode",R.drawable.ic_leetcode_svgrepo_com);
+        map.put("AtCoder",R.drawable.ic_codechef_svgrepo_com);
+        map.put("CodeForces::Gym",R.drawable.ic_codeforces_svgrepo_com);
+        map.put("TopCoder",R.drawable.ic_topcoder_svgrepo_com);
+        map.put("CS Academy",R.drawable.ic_codeforces_svgrepo_com);
+        map.put("Kick Start",R.drawable.ic_kick_start);
+        map.put("Toph",R.drawable.ic_codeforces_svgrepo_com);
+
 
         contestAdapter = new ContestAdapter(contestList, getContext());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
@@ -126,10 +143,13 @@ public class ContestFragment extends Fragment {
 
 
 
+
     public void  loadContest(){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "https://codeforces.com/api/contest.list";
+        String url1 = "https://competitive-coding-api.herokuapp.com/api/codechef/the_amit";
+        String contestUrl = "https://www.kontests.net/api/v1/all";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -144,6 +164,7 @@ public class ContestFragment extends Fragment {
                                     JSONObject contestJsonObject = contestJsonArray.getJSONObject(i);
 
                                     ContestModel contestModel = new ContestModel(
+
                                             contestJsonObject.getString("type"),
                                             contestJsonObject.getString("name"),
                                             contestJsonObject.getString("startTimeSeconds"),
@@ -194,7 +215,56 @@ public class ContestFragment extends Fragment {
                 });
 
 
-        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                (Request.Method.GET, contestUrl, null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for(int i=0; i<response.length(); i++){
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                jsonObject.getString("name");
+                                jsonObject.getString("url");
+                                jsonObject.getString("site");
+                                System.out.println("contest name : " +jsonObject.getString("name"));
+                                System.out.println("contest url : " +jsonObject.getString("url"));
+                                System.out.println("contest site : " +jsonObject.getString("site"));
+
+                                ContestModel contestModelList = new ContestModel(
+                                        jsonObject.getString("site"),
+                                        jsonObject.getString("name"),
+                                        jsonObject.getString("start_time"),
+                                        jsonObject.getString("end_time"),
+                                        jsonObject.getString("url"),
+                                        jsonObject.getString("in_24_hours"),
+                                        jsonObject.getString("status")
+                                );
+
+                                // setting contest image
+                                contestModelList.setPlatformImage(map.get(jsonObject.getString("site")));
+                                contestList.add(contestModelList);
+                            }
+
+                            contestAdapter.updateContest(contestList);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+
+
+
+//        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(getContext()).addToRequestQueue(jsonArrayRequest);
 
 
     }
