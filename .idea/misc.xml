@@ -10,7 +10,9 @@
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_codeforces_svgrepo_com.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_contest.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_hackerearth_svgrepo_com.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_hackerrank_svgrepo_com.xml" value="0.1" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_kick_start.xml" value="0.1185" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_news.xml" value="0.1" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_people.xml" value="0.125" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_problem.xml" value="0.1185" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/drawable/ic_profile.xml" value="0.1185" />
@@ -24,8 +26,9 @@
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_profile.xml" value="0.2783882783882784" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_user.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_add_user_sample.xml" value="0.2653985507246377" />
-        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_contest.xml" value="0.264" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_contest.xml" value="0.4" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_problem_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_problem_tags_model.xml" value="0.264" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_profile_progress.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_top_coder.xml" value="0.264" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/xml/tabs.xml" value="0.2210144927536232" />

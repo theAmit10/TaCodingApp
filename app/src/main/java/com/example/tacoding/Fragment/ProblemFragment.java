@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ProblemAdapter;
+import com.example.tacoding.Adapter.ProblemTagsAdapter;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ProblemModel;
+import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
@@ -21,8 +23,12 @@ import java.util.ArrayList;
 public class ProblemFragment extends Fragment {
 
     // for coding platform
-    RecyclerView codingPlatformRv;
-    ArrayList<CodingPlatformModel> list;
+    // FOR PROBLEM TAGS
+    RecyclerView problemTagRV;
+    ArrayList<ProblemTagModel> list;
+
+
+
 
     // FOR PROBLEM RV
     RecyclerView problemRV;
@@ -45,23 +51,52 @@ public class ProblemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_problem, container, false);
 
         // for coding platform
-        codingPlatformRv = view.findViewById(R.id.codingPlatformRV);
+        problemTagRV = view.findViewById(R.id.problemTagRV);
         list = new ArrayList<>();
-        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerrank_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_people));
 
-        CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list,getContext());
+        list.add(new ProblemTagModel("2-sat"));
+        list.add(new ProblemTagModel("binary search"));
+        list.add(new ProblemTagModel("bitmasks"));
+        list.add(new ProblemTagModel("brute force"));
+        list.add(new ProblemTagModel("chinese remainder theorem"));
+        list.add(new ProblemTagModel("combinatorics"));
+        list.add(new ProblemTagModel("constructive algorithms"));
+        list.add(new ProblemTagModel("data structures"));
+        list.add(new ProblemTagModel("dfs and similar"));
+        list.add(new ProblemTagModel("divide and conquer"));
+        list.add(new ProblemTagModel("dp"));
+        list.add(new ProblemTagModel("dsu"));
+        list.add(new ProblemTagModel("expression parsing"));
+        list.add(new ProblemTagModel("fft"));
+        list.add(new ProblemTagModel("flows"));
+        list.add(new ProblemTagModel("games"));
+        list.add(new ProblemTagModel("geometry"));
+        list.add(new ProblemTagModel("graph matchings"));
+        list.add(new ProblemTagModel("graphs"));
+        list.add(new ProblemTagModel("greedy"));
+        list.add(new ProblemTagModel("hashing"));
+        list.add(new ProblemTagModel("implementation"));
+        list.add(new ProblemTagModel("interactive"));
+        list.add(new ProblemTagModel("math"));
+        list.add(new ProblemTagModel("metrices"));
+        list.add(new ProblemTagModel("meet-in-the-middle"));
+        list.add(new ProblemTagModel("number theory"));
+        list.add(new ProblemTagModel("probablities"));
+        list.add(new ProblemTagModel("schedules"));
+        list.add(new ProblemTagModel("shortest paths"));
+        list.add(new ProblemTagModel("sortings"));
+        list.add(new ProblemTagModel("string suffix structures"));
+        list.add(new ProblemTagModel("strings"));
+        list.add(new ProblemTagModel("ternary search"));
+        list.add(new ProblemTagModel("trees"));
+        list.add(new ProblemTagModel("two pointers"));
+
+
+        ProblemTagsAdapter problemTagsAdapter = new ProblemTagsAdapter(list,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        codingPlatformRv.setLayoutManager(linearLayoutManager);
-        codingPlatformRv.setNestedScrollingEnabled(false);
-        codingPlatformRv.setAdapter(codingPlatformAdapter);
+        problemTagRV.setLayoutManager(linearLayoutManager);
+        problemTagRV.setNestedScrollingEnabled(false);
+        problemTagRV.setAdapter(problemTagsAdapter);
 
         // FOR PROBLEM RECYCLER VIEW
         problemRV = view.findViewById(R.id.problemRV);

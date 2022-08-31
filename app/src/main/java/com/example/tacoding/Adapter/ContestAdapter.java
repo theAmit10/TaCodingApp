@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,15 +46,18 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
         ContestModel contestModel = list.get(position);
 
         holder.platformImage.setImageResource(contestModel.getPlatformImage());
-
         holder.contestTitle.setText(contestModel.getContestTitle());
-
         holder.contestDescription.setText(contestModel.getContestDescription());
-
-
-
         holder.startDate.setText(contestModel.getStartDate());
         holder.endDate.setText(contestModel.getEndDate());
+
+        holder.itemView.findViewById(R.id.contestView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show();
+                
+            }
+        });
 
     }
 

@@ -51,7 +51,7 @@ public class ProfileFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         // for coding platform
-        codingPlatformRv = view.findViewById(R.id.codingPlatformRV);
+        codingPlatformRv = view.findViewById(R.id.problemTagRV);
         list = new ArrayList<>();
         list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));

@@ -6,9 +6,13 @@
     android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/view7"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_150mdp"
+        android:id="@+id/contestView"
+        android:layout_width="393dp"
+        android:layout_height="192dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,14 +46,14 @@
         android:fontFamily="@font/iceland"
         android:text="Contest Title"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/reminder"
         app:layout_constraintStart_toEndOf="@+id/platformImage"
         app:layout_constraintTop_toTopOf="@+id/platformImage" />
 
     <TextView
         android:id="@+id/contestDescription"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
@@ -58,6 +62,7 @@
         android:nestedScrollingEnabled="true"
         android:text="Contest Description"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/platformImage"
         app:layout_constraintTop_toBottomOf="@+id/platformImage"
         tools:ignore="TouchTargetSizeCheck" />
@@ -66,10 +71,11 @@
         android:id="@+id/endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="End Time"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startTime"
         app:layout_constraintTop_toBottomOf="@+id/startTime" />
 
@@ -77,10 +83,11 @@
         android:id="@+id/startTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="Start Time"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/contestDescription"
         app:layout_constraintTop_toBottomOf="@+id/contestDescription" />
 
@@ -88,12 +95,11 @@
         android:id="@+id/setEndTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="14dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="9:00 PM"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/endTime"
+        app:layout_constraintStart_toStartOf="@+id/setStartTime"
         app:layout_constraintTop_toTopOf="@+id/endTime" />
 
     <TextView
