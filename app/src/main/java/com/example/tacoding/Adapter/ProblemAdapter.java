@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tacoding.Model.ProblemModel;
+import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
@@ -35,11 +36,24 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         ProblemModel problemModel = list.get(position);
 
-        holder.problemPlatformImage.setImageResource(problemModel.getProblemPlatformImage());
-        holder.problemContestName.setText(problemModel.getProblemContestName());
-        holder.problemTitle.setText(problemModel.getProblemTitle());
+        holder.contestId.setText(problemModel.getContestId());
+        holder.name.setText(problemModel.getName());
+        holder.rating.setText(problemModel.getRating());
+//        holder.tags.setText(problemModel.getTags());
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<problemModel.getTags().size(); i++){
+            sb.append(problemModel.getTags().get(i)).toString();
+            sb.append(" | ");
+        }
+        holder.tags.setText(sb.toString());
 
 
+
+    }
+
+    public void updateProblem(ArrayList<ProblemModel> updatedProblem){
+        list.addAll(updatedProblem);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,17 +62,18 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{
-        ImageView problemPlatformImage;
-        TextView problemContestName, problemTitle;
+
+        TextView contestId, name, rating, tags;
 
 
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            problemPlatformImage = itemView.findViewById(R.id.problemPlatformImage);
-            problemContestName = itemView.findViewById(R.id.problemContestName);
-            problemTitle = itemView.findViewById(R.id.problemContestTitle);
+            contestId = itemView.findViewById(R.id.problemContestTitle);
+            name = itemView.findViewById(R.id.problemContestName);
+            rating = itemView.findViewById(R.id.setRating);
+            tags  = itemView.findViewById(R.id.setTags);
         }
     }
 }

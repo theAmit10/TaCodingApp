@@ -1,37 +1,76 @@
 package com.example.tacoding.Model;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
 public class ProblemModel {
-    int problemPlatformImage;
-    String problemContestName, problemTitle;
 
-    public ProblemModel(int problemPlatformImage, String problemContestName, String problemTitle) {
-        this.problemPlatformImage = problemPlatformImage;
-        this.problemContestName = problemContestName;
-        this.problemTitle = problemTitle;
+
+    String contestId, index, name;
+    String rating ;
+    ArrayList<String> tags;
+
+
+    public ProblemModel(String contestId, String index, String name,String rating, ArrayList<String> tags) {
+        this.contestId = contestId;
+        this.index = index;
+        this.name = name;
+        this.rating = rating;
+        this.tags = tags;
     }
 
-    public int getProblemPlatformImage() {
-        return problemPlatformImage;
+    public ProblemModel(String contestId, String index, String name, ArrayList<String> tags) {
+        this.contestId = contestId;
+        this.index = index;
+        this.name = name;
+        this.tags = tags;
+
+
+
     }
 
-    public void setProblemPlatformImage(int problemPlatformImage) {
-        this.problemPlatformImage = problemPlatformImage;
+    public String getRating() {
+        return rating;
     }
 
-    public String getProblemContestName() {
-        return problemContestName;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
-    public void setProblemContestName(String problemContestName) {
-        this.problemContestName = problemContestName;
+    public ArrayList<String> getTags() {
+        return tags;
     }
 
-    public String getProblemTitle() {
-        return problemTitle;
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
     }
 
-    public void setProblemTitle(String problemTitle) {
-        this.problemTitle = problemTitle;
+    public String getContestId() {
+        return contestId;
     }
+
+    public void setContestId(String contestId) {
+        this.contestId = contestId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
 }
 
