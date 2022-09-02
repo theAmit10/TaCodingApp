@@ -24,22 +24,27 @@ import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
+import com.example.tacoding.databinding.FragmentContestBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ContestFragment extends Fragment {
 
+    FragmentContestBinding binding;
 
 
     // for coding platform
     RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
+    CodingPlatformAdapter codingPlatformAdapter;
+    ArrayList<String> selectedContestList;
 
     //for top coder
     RecyclerView topCoderRv;
@@ -49,7 +54,8 @@ public class ContestFragment extends Fragment {
     RecyclerView contestRv;
     ArrayList<ContestModel> contestList;
     ContestAdapter contestAdapter;
-    Map<String, Integer> map = new HashMap<String, Integer>();
+    public static Map<String, Integer> map = new HashMap<String, Integer>();
+
 
     public ContestFragment() {
         // Required empty public constructor
@@ -76,29 +82,63 @@ public class ContestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_contest, container, false);
+//        View view = inflater.inflate(R.layout.fragment_contest, container, false);
+        binding = FragmentContestBinding.inflate(inflater,container,false);
 
         // for coding platform
-        codingPlatformRv = view.findViewById(R.id.problemTagRV);
+//        codingPlatformRv = view.findViewById(R.id.problemTagRV);
+        codingPlatformRv = binding.problemTagRV;
         list = new ArrayList<>();
-        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerrank_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_people));
+        map.put("CodeChef", R.drawable.ic_codechef_svgrepo_com);
+        map.put("HackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
+        map.put("HackerRank", R.drawable.ic_hackerrank_svgrepo_com);
+        map.put("CodeForces", R.drawable.ic_codeforces_svgrepo_com);
+        map.put("LeetCode", R.drawable.ic_leetcode_svgrepo_com);
+        map.put("AtCoder", R.drawable.ic_codechef_svgrepo_com);
+        map.put("CodeForces::Gym", R.drawable.ic_codeforces_svgrepo_com);
+        map.put("TopCoder", R.drawable.ic_topcoder_svgrepo_com);
+        map.put("CS Academy", R.drawable.ic_codeforces_svgrepo_com);
+        map.put("Kick Start", R.drawable.ic_kick_start);
+        map.put("Toph", R.drawable.ic_codeforces_svgrepo_com);
 
-        CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list, getContext());
+
+
+        // adding conding contest image
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String k = entry.getKey();
+            Integer v = entry.getValue();
+            System.out.println("key: " + k + ", value: " + v);
+            list.add(new CodingPlatformModel(v,k));
+        }
+
+        // setting platform clicked
+
+
+
+
+//        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_hackerrank_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
+//        list.add(new CodingPlatformModel(R.drawable.ic_people));
+
+
+
+
+
+        codingPlatformAdapter = new CodingPlatformAdapter(list, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         codingPlatformRv.setLayoutManager(linearLayoutManager);
         codingPlatformRv.setNestedScrollingEnabled(false);
         codingPlatformRv.setAdapter(codingPlatformAdapter);
 
         // For Top Coder
-        topCoderRv = view.findViewById(R.id.topCoderRV);
+//        topCoderRv = view.findViewById(R.id.topCoderRV);
+        topCoderRv = binding.topCoderRV;
         topcoderList = new ArrayList<>();
         topcoderList.add(new TopCoderModel(R.drawable.p7, "Wasu", "Grand Master", "CodeForces"));
         topcoderList.add(new TopCoderModel(R.drawable.p1, "James", "Master", "CodeChef"));
@@ -117,7 +157,8 @@ public class ContestFragment extends Fragment {
 
 
         // For Contest List
-        contestRv = view.findViewById(R.id.contestRv);
+//        contestRv = view.findViewById(R.id.contestRv);
+        contestRv = binding.contestRv;
         contestList = new ArrayList<>();
 //        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
 //        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Coding Challenge","9:00 PM","11: 00 PM"));
@@ -128,17 +169,17 @@ public class ContestFragment extends Fragment {
 //        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
 
         // for adding contest image
-        map.put("CodeChef", R.drawable.ic_codechef_svgrepo_com);
-        map.put("HackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
-        map.put("HackerRank", R.drawable.ic_hackerrank_svgrepo_com);
-        map.put("CodeForces", R.drawable.ic_codeforces_svgrepo_com);
-        map.put("LeetCode", R.drawable.ic_leetcode_svgrepo_com);
-        map.put("AtCoder", R.drawable.ic_codechef_svgrepo_com);
-        map.put("CodeForces::Gym", R.drawable.ic_codeforces_svgrepo_com);
-        map.put("TopCoder", R.drawable.ic_topcoder_svgrepo_com);
-        map.put("CS Academy", R.drawable.ic_codeforces_svgrepo_com);
-        map.put("Kick Start", R.drawable.ic_kick_start);
-        map.put("Toph", R.drawable.ic_codeforces_svgrepo_com);
+//        map.put("CodeChef", R.drawable.ic_codechef_svgrepo_com);
+//        map.put("HackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
+//        map.put("HackerRank", R.drawable.ic_hackerrank_svgrepo_com);
+//        map.put("CodeForces", R.drawable.ic_codeforces_svgrepo_com);
+//        map.put("LeetCode", R.drawable.ic_leetcode_svgrepo_com);
+//        map.put("AtCoder", R.drawable.ic_codechef_svgrepo_com);
+//        map.put("CodeForces::Gym", R.drawable.ic_codeforces_svgrepo_com);
+//        map.put("TopCoder", R.drawable.ic_topcoder_svgrepo_com);
+//        map.put("CS Academy", R.drawable.ic_codeforces_svgrepo_com);
+//        map.put("Kick Start", R.drawable.ic_kick_start);
+//        map.put("Toph", R.drawable.ic_codeforces_svgrepo_com);
 
 
         contestAdapter = new ContestAdapter(contestList, getContext());
@@ -147,7 +188,7 @@ public class ContestFragment extends Fragment {
         contestRv.setNestedScrollingEnabled(false);
         contestRv.setAdapter(contestAdapter);
 
-        return view;
+        return binding.getRoot();
     }
 
 
@@ -232,9 +273,9 @@ public class ContestFragment extends Fragment {
                                 jsonObject.getString("name");
                                 jsonObject.getString("url");
                                 jsonObject.getString("site");
-                                System.out.println("contest name : " + jsonObject.getString("name"));
-                                System.out.println("contest url : " + jsonObject.getString("url"));
-                                System.out.println("contest site : " + jsonObject.getString("site"));
+//                                System.out.println("contest name : " + jsonObject.getString("name"));
+//                                System.out.println("contest url : " + jsonObject.getString("url"));
+//                                System.out.println("contest site : " + jsonObject.getString("site"));
 
                                 ContestModel contestModelList = new ContestModel(
                                         jsonObject.getString("site"),
@@ -249,9 +290,26 @@ public class ContestFragment extends Fragment {
                                 // setting contest image
                                 contestModelList.setPlatformImage(map.get(jsonObject.getString("site")));
                                 contestList.add(contestModelList);
+
+//                                selectedContestList = new ArrayList<>();
+//
+
+                                selectedContestList = codingPlatformAdapter.getArrayListSELECTED();
+//                                codingPlatformAdapter.updateSelected(selectedContestList);
+
+                                for(int z=0; z<selectedContestList.size();z++){
+                                    System.out.println("MINE : " +selectedContestList.get(z));
+                                }
+
                             }
 
+
+
+//                            codingPlatformAdapter.updateSelected(selectedContestList);
+
                             contestAdapter.updateContest(contestList);
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

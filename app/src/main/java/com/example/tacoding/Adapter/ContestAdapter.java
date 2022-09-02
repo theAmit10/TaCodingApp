@@ -67,6 +67,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
         notifyDataSetChanged();
     }
 
+
     @Override
     public int getItemCount() {
         return list.size();
