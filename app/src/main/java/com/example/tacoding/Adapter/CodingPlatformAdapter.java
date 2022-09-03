@@ -21,16 +21,16 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
 
     ArrayList<CodingPlatformModel> list;
     Context context;
-
-
     ArrayList<String> selectedPlatformSet = new ArrayList<>();
-//    Set<String> selectedPlatformSet = new HashSet<>();
+
 
 
     public CodingPlatformAdapter(ArrayList<CodingPlatformModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -45,7 +45,6 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
         holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
         holder.codingPlatformName.setText(codingPlatformModel.getCodingPlatformName());
 
-
         holder.codingPlatformImage.setOnClickListener(new View.OnClickListener() {
 
             @SuppressLint("ResourceAsColor")
@@ -56,18 +55,12 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
                     selectedPlatformSet.add(holder.codingPlatformName.getText().toString());
                     holder.codingPlatformImage.setImageResource(R.drawable.pogo_ic_checked_tick_svgrepo_com);
                     Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show();
-
-
                 } else {
                     selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
                     selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
                     holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
                     Toast.makeText(context, "Disselected", Toast.LENGTH_SHORT).show();
-
-
                 }
-
-
                 if (selectedPlatformSet.size() > 0) {
                     for (int i = 0; i < selectedPlatformSet.size(); i++) {
                         System.out.println("YOYOYOY : " + selectedPlatformSet);
@@ -75,9 +68,9 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
                     }
                 }
 
-
             }
         });
+
 
 
     }
@@ -89,6 +82,10 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
     }
 
 
+    public void updateSelectedList(){
+        selectedPlatformSet.addAll(selectedPlatformSet);
+        notifyDataSetChanged();
+    }
 
 
     @Override

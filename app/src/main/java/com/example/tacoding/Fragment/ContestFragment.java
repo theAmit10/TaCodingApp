@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,7 +46,9 @@ public class ContestFragment extends Fragment {
     RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
     CodingPlatformAdapter codingPlatformAdapter;
-    ArrayList<String> selectedContestList;
+
+    ArrayList<String> selectedPlatformSet = new ArrayList<>();
+
 
     //for top coder
     RecyclerView topCoderRv;
@@ -113,9 +117,6 @@ public class ContestFragment extends Fragment {
 
         // setting platform clicked
 
-
-
-
 //        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
 //        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
 //        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
@@ -135,6 +136,60 @@ public class ContestFragment extends Fragment {
         codingPlatformRv.setLayoutManager(linearLayoutManager);
         codingPlatformRv.setNestedScrollingEnabled(false);
         codingPlatformRv.setAdapter(codingPlatformAdapter);
+
+
+
+
+
+//        System.out.println("CHECKING  :  ");
+//        selectedContestList = codingPlatformAdapter.getArrayListSELECTED();
+//
+//
+//        for(int z=0; z<selectedContestList.size();z++){
+//            System.out.println("MINE : " +selectedContestList.get(z));
+//        }
+//        System.out.println("CHECKING  : DONE  ");
+
+
+
+
+
+
+
+//        codingPlatformRv.findViewById(R.id.codingPlatformImage).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Toast.makeText(getContext(), "AMIT GO ON", Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//
+//
+//
+////                if (!selectedPlatformSet.contains(codingPlatformRv.findViewById(R.id.codingPlatformName))) {
+////                    selectedPlatformSet.add(holder.codingPlatformName.getText().toString());
+////                    holder.codingPlatformImage.setImageResource(R.drawable.pogo_ic_checked_tick_svgrepo_com);
+////                    Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show();
+////                } else {
+////                    selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
+////                    selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
+////                    holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
+////                    Toast.makeText(context, "Disselected", Toast.LENGTH_SHORT).show();
+////                }
+////                if (selectedPlatformSet.size() > 0) {
+////                    for (int i = 0; i < selectedPlatformSet.size(); i++) {
+////                        System.out.println("YOYOYOY : " + selectedPlatformSet);
+////
+////                    }
+////                }
+//            }
+//        });
+//
+
+
+
 
         // For Top Coder
 //        topCoderRv = view.findViewById(R.id.topCoderRV);
@@ -294,12 +349,12 @@ public class ContestFragment extends Fragment {
 //                                selectedContestList = new ArrayList<>();
 //
 
-                                selectedContestList = codingPlatformAdapter.getArrayListSELECTED();
-//                                codingPlatformAdapter.updateSelected(selectedContestList);
-
-                                for(int z=0; z<selectedContestList.size();z++){
-                                    System.out.println("MINE : " +selectedContestList.get(z));
-                                }
+//                                selectedContestList = codingPlatformAdapter.getArrayListSELECTED();
+////                                codingPlatformAdapter.updateSelected(selectedContestList);
+//
+//                                for(int z=0; z<selectedContestList.size();z++){
+//                                    System.out.println("MINE : " +selectedContestList.get(z));
+//                                }
 
                             }
 
