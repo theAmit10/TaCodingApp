@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.R;
+//import com.example.tacoding.taDatabase.SelectedContestList;
 
 import java.util.ArrayList;
 
@@ -23,13 +24,13 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
     Context context;
     ArrayList<String> selectedPlatformSet = new ArrayList<>();
 
+//    ArrayList<SelectedContestList> mSelectedPlatformList = new ArrayList<SelectedContestList>();
 
 
     public CodingPlatformAdapter(ArrayList<CodingPlatformModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
-
 
 
     @NonNull
@@ -42,48 +43,62 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CodingPlatformModel codingPlatformModel = list.get(position);
-        holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
+//        SelectedContestList selectedContestList = mSelectedPlatformList.get(position);
+
+//        holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
         holder.codingPlatformName.setText(codingPlatformModel.getCodingPlatformName());
 
         holder.codingPlatformImage.setOnClickListener(new View.OnClickListener() {
-
-            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
-
                 if (!selectedPlatformSet.contains(holder.codingPlatformName.getText().toString())) {
+
                     selectedPlatformSet.add(holder.codingPlatformName.getText().toString());
+//                    SelectedContestList sc = new SelectedContestList(holder.codingPlatformName.getText().toString());
+
+
+
                     holder.codingPlatformImage.setImageResource(R.drawable.pogo_ic_checked_tick_svgrepo_com);
                     Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show();
+                    updateSelectedList();
+
                 } else {
                     selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
                     selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
                     holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
                     Toast.makeText(context, "Disselected", Toast.LENGTH_SHORT).show();
+                    updateSelectedList();
                 }
-                if (selectedPlatformSet.size() > 0) {
-                    for (int i = 0; i < selectedPlatformSet.size(); i++) {
-                        System.out.println("YOYOYOY : " + selectedPlatformSet);
-
-                    }
-                }
-
+//                if (selectedPlatformSet.size() > 0) {
+//
+//                    for (int i = 0; i < selectedPlatformSet.size(); i++) {
+//                        System.out.println("YOYOYOY : " + selectedPlatformSet);
+//
+//                    }
+//                }
             }
         });
 
+
+        if (selectedPlatformSet.size() > 0) {
+            for (int i = 0; i < selectedPlatformSet.size(); i++) {
+                System.out.println("YOYOYOYG : " + selectedPlatformSet);
+
+            }
+        }
 
 
     }
 
     public ArrayList<String> getArrayListSELECTED() {
-
         return selectedPlatformSet;
-
     }
 
 
-    public void updateSelectedList(){
-        selectedPlatformSet.addAll(selectedPlatformSet);
+    public void updateSelectedList() {
+
+//        selectedPlatformSet.addAll(selectedPlatformSet);
+
         notifyDataSetChanged();
     }
 
@@ -106,3 +121,4 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
         }
     }
 }
+

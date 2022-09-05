@@ -14,6 +14,11 @@ public class CodingPlatformModel {
         this.codingPlatformImage = codingPlatformImage;
     }
 
+    public CodingPlatformModel(String codingPlatformName)
+    {
+        this.codingPlatformName = codingPlatformName;
+    }
+
     public String getCodingPlatformName() {
         return codingPlatformName;
     }

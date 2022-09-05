@@ -3,6 +3,7 @@ package com.example.tacoding.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,8 @@ import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
+//import com.example.tacoding.taDatabase.SelectedContestList;
+//import com.example.tacoding.taDatabase.SelectedContestListViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,12 +44,10 @@ public class ContestFragment extends Fragment {
 
     FragmentContestBinding binding;
 
-
     // for coding platform
     RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
     CodingPlatformAdapter codingPlatformAdapter;
-
     ArrayList<String> selectedPlatformSet = new ArrayList<>();
 
 
@@ -59,6 +60,8 @@ public class ContestFragment extends Fragment {
     ArrayList<ContestModel> contestList;
     ContestAdapter contestAdapter;
     public static Map<String, Integer> map = new HashMap<String, Integer>();
+
+//    SelectedContestListViewModel mViewModel;
 
 
     public ContestFragment() {
@@ -80,6 +83,13 @@ public class ContestFragment extends Fragment {
         };
         thread.start();
 //        loadContest();
+
+//        mViewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(SelectedContestListViewModel.class);
+
+
+
+
+
     }
 
     @Override
@@ -149,6 +159,15 @@ public class ContestFragment extends Fragment {
 //            System.out.println("MINE : " +selectedContestList.get(z));
 //        }
 //        System.out.println("CHECKING  : DONE  ");
+
+        codingPlatformAdapter.updateSelectedList();
+
+        selectedPlatformSet = codingPlatformAdapter.getArrayListSELECTED();
+        for(int z=0; z<selectedPlatformSet.size();z++){
+            System.out.println("MINE : " +selectedPlatformSet.get(z));
+        }
+        System.out.println("CHECKING  : DONE  ");
+
 
 
 
@@ -316,6 +335,9 @@ public class ContestFragment extends Fragment {
 //
 //                    }
 //                });
+
+
+
 
         String contestUrl = "https://www.kontests.net/api/v1/all";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
