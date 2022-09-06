@@ -1,4 +1,4 @@
-package com.example.tacoding.taDatabase;
-
-public class SelectedContestListAdapter {
-}
+//package com.example.tacoding.taDatabase;
+//
+//public class SelectedContestListAdapter {
+//}

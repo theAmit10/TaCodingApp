@@ -27,6 +27,7 @@ import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
+import com.example.tacoding.SDatabase.WordViewModel;
 import com.example.tacoding.databinding.FragmentContestBinding;
 //import com.example.tacoding.taDatabase.SelectedContestList;
 //import com.example.tacoding.taDatabase.SelectedContestListViewModel;
@@ -61,8 +62,7 @@ public class ContestFragment extends Fragment {
     ContestAdapter contestAdapter;
     public static Map<String, Integer> map = new HashMap<String, Integer>();
 
-//    SelectedContestListViewModel mViewModel;
-
+    private WordViewModel mWordViewModel;
 
     public ContestFragment() {
         // Required empty public constructor
@@ -82,10 +82,12 @@ public class ContestFragment extends Fragment {
             }
         };
         thread.start();
-//        loadContest();
 
+//        loadContest();
 //        mViewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(SelectedContestListViewModel.class);
 
+
+        mWordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
 
 
 
