@@ -8,21 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.R;
-import com.example.tacoding.SDatabase.Word;
-import com.example.tacoding.SDatabase.WordRoomDatabase;
-import com.example.tacoding.SDatabase.WordRoomDatabase_Impl;
-import com.example.tacoding.SDatabase.WordViewModel;
-//import com.example.tacoding.taDatabase.SelectedContestList;
-
 import java.util.ArrayList;
 
 public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAdapter.viewHolder> {
@@ -30,11 +21,6 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
     ArrayList<CodingPlatformModel> list;
     Context context;
     ArrayList<String> selectedPlatformSet = new ArrayList<>();
-
-    private WordViewModel mWVM;
-
-
-//    ArrayList<SelectedContestList> mSelectedPlatformList = new ArrayList<SelectedContestList>();
 
 
     public CodingPlatformAdapter(ArrayList<CodingPlatformModel> list, Context context) {
@@ -47,15 +33,13 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.coding_platform_story_design, parent, false);
-        mWVM = new ViewModelProvider((ViewModelStoreOwner) this.context).get(WordViewModel.class);
+
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         CodingPlatformModel codingPlatformModel = list.get(position);
-//        SelectedContestList selectedContestList = mSelectedPlatformList.get(position);
-//        holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
         holder.codingPlatformName.setText(codingPlatformModel.getCodingPlatformName());
 
         final boolean[] check = {true};
@@ -71,14 +55,10 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
                 if (!selectedPlatformSet.contains(holder.codingPlatformName.getText().toString())) {
 
                     selectedPlatformSet.add(holder.codingPlatformName.getText().toString());
-//                    SelectedContestList sc = new SelectedContestList(holder.codingPlatformName.getText().toString());
                     holder.codingPlatformImage.setImageResource(R.drawable.pogo_ic_checked_tick_svgrepo_com);
                     Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show();
                     check[0] = false;
-                    Word word = new Word(holder.codingPlatformName.getText().toString());
-                    mWVM.insert(word);
 
-                    System.out.println("AMIT"+ mWVM.getAllWords().toString());
 
                     updateSelectedList();
 
@@ -89,13 +69,7 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
                     Toast.makeText(context, "Disselected", Toast.LENGTH_SHORT).show();
                     updateSelectedList();
                 }
-//                if (selectedPlatformSet.size() > 0) {
-//
-//                    for (int i = 0; i < selectedPlatformSet.size(); i++) {
-//                        System.out.println("YOYOYOY : " + selectedPlatformSet);
-//
-//                    }
-//                }
+
             }
         });
 
@@ -116,9 +90,6 @@ public class CodingPlatformAdapter extends RecyclerView.Adapter<CodingPlatformAd
 
 
     public void updateSelectedList() {
-
-//        selectedPlatformSet.addAll(selectedPlatformSet);
-
         notifyDataSetChanged();
     }
 
