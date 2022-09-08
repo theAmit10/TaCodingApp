@@ -19,6 +19,9 @@ public interface PlatformDao {
     @Update
     void update(Platform platform);
 
+    @Query("DELETE FROM platform_table")
+    void deleteAll();
+
     @Delete
     void delete(Platform platform);
 

@@ -23,4 +23,12 @@ public class Platform {
     public String getPlatformName(){return this.mPlatformName;}
 
     public int getPlatformImage(){return this.mPlatformImage;}
+
+    public void setmPlatformName(@NonNull String mPlatformName) {
+        this.mPlatformName = mPlatformName;
+    }
+
+    public void setmPlatformImage(int mPlatformImage) {
+        this.mPlatformImage = mPlatformImage;
+    }
 }

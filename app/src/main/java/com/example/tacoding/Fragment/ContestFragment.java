@@ -2,6 +2,7 @@ package com.example.tacoding.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.ActivityChooserView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
+
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,36 +22,39 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ContestAdapter;
+
+import com.example.tacoding.Adapter.IPlatformRVAdapter;
+import com.example.tacoding.Adapter.PlatformAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
-import com.example.tacoding.SDatabase.WordViewModel;
 import com.example.tacoding.databinding.FragmentContestBinding;
-//import com.example.tacoding.taDatabase.SelectedContestList;
-//import com.example.tacoding.taDatabase.SelectedContestListViewModel;
+import com.example.tacoding.tadatabase.Platform;
+import com.example.tacoding.tadatabase.PlatformViewModel;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class ContestFragment extends Fragment {
+public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
     FragmentContestBinding binding;
+    PlatformViewModel platformViewModel;
 
     // for coding platform
     RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
-    CodingPlatformAdapter codingPlatformAdapter;
-    ArrayList<String> selectedPlatformSet = new ArrayList<>();
-
+    PlatformAdapter platformAdapter;
+    ArrayList<String> MINESelecetedPlatform = new ArrayList<>();
 
     //for top coder
     RecyclerView topCoderRv;
@@ -61,8 +65,9 @@ public class ContestFragment extends Fragment {
     ArrayList<ContestModel> contestList;
     ContestAdapter contestAdapter;
     public static Map<String, Integer> map = new HashMap<String, Integer>();
+    public static Map<String, Integer> sMap = new HashMap<String, Integer>();
 
-    private WordViewModel mWordViewModel;
+
 
     public ContestFragment() {
         // Required empty public constructor
@@ -83,14 +88,7 @@ public class ContestFragment extends Fragment {
         };
         thread.start();
 
-//        loadContest();
-//        mViewModel = new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(SelectedContestListViewModel.class);
-
-
-        mWordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
-
-
-
+        platformViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(PlatformViewModel.class);
 
     }
 
@@ -113,107 +111,69 @@ public class ContestFragment extends Fragment {
         map.put("AtCoder", R.drawable.ic_codechef_svgrepo_com);
         map.put("CodeForces::Gym", R.drawable.ic_codeforces_svgrepo_com);
         map.put("TopCoder", R.drawable.ic_topcoder_svgrepo_com);
-        map.put("CS Academy", R.drawable.ic_codeforces_svgrepo_com);
-        map.put("Kick Start", R.drawable.ic_kick_start);
-        map.put("Toph", R.drawable.ic_codeforces_svgrepo_com);
+        map.put("CS Academy", R.drawable.ic_csacademy);
+        map.put("Kick Start", R.drawable.ic_u_kickstarter);
+        map.put("Toph", R.drawable.ic_code);
 
 
+        sMap.put("CodeChef", R.drawable.s_codechef);
+        sMap.put("HackerEarth", R.drawable.s_hackerearth);
+        sMap.put("HackerRank", R.drawable.s_hackerrank);
+        sMap.put("CodeForces", R.drawable.s_codeforces);
+        sMap.put("LeetCode", R.drawable.s_leetcode);
+        sMap.put("AtCoder", R.drawable.ta_atcoder);
+        sMap.put("CodeForces::Gym", R.drawable.s_codeforces);
+        sMap.put("TopCoder", R.drawable.s_topcoder);
+        sMap.put("CS Academy", R.drawable.s_csacademy);
+        sMap.put("Kick Start", R.drawable.s_kickstarter);
+        sMap.put("Toph", R.drawable.ta_toph);
 
-        // adding conding contest image
+
+        platformAdapter = new PlatformAdapter(getContext().getApplicationContext(),this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        codingPlatformRv.setLayoutManager(linearLayoutManager);
+        codingPlatformRv.setAdapter(platformAdapter);
+        codingPlatformRv.setNestedScrollingEnabled(false);
+
+        // adding conding platform to database
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String k = entry.getKey();
             Integer v = entry.getValue();
+
+            System.out.println("PLATFORM INSERTING");
             System.out.println("key: " + k + ", value: " + v);
-            list.add(new CodingPlatformModel(v,k));
+            Platform platform = new Platform(k,v);
+            platformViewModel.insert(platform);
+            System.out.println("PLATFORM INSERTED");
+
         }
 
-        // setting platform clicked
+        // checking data in the database and updating adapter
+        platformViewModel.getmAllPlatform().observe(
+                getViewLifecycleOwner(), platforms -> {
+                    System.out.println("CHECKING DATA IN DATABASE");
+                    System.out.println("LENGTH : " +platformAdapter.getItemCount());
 
-//        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_hackerrank_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-//        list.add(new CodingPlatformModel(R.drawable.ic_people));
+                    System.out.println("FOUND : " +platformViewModel.getmAllPlatform().getValue());
 
 
+                    for(int i=0; i<platforms.size(); i++){
+                        System.out.println("FOUND DATA NAME : " + platforms.get(i).getPlatformName());
+                        System.out.println("FOUND DATA IMAGE : " + platforms.get(i).getPlatformImage());
+                    }
 
+                    System.out.println("CHECKED DATA IN DATABASE");
 
+                    platformAdapter.updateList((ArrayList<Platform>) platforms);
 
-        codingPlatformAdapter = new CodingPlatformAdapter(list, getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        codingPlatformRv.setLayoutManager(linearLayoutManager);
-        codingPlatformRv.setNestedScrollingEnabled(false);
-        codingPlatformRv.setAdapter(codingPlatformAdapter);
-
+                }
+        );
 
 
 
 
-//        System.out.println("CHECKING  :  ");
-//        selectedContestList = codingPlatformAdapter.getArrayListSELECTED();
-//
-//
-//        for(int z=0; z<selectedContestList.size();z++){
-//            System.out.println("MINE : " +selectedContestList.get(z));
-//        }
-//        System.out.println("CHECKING  : DONE  ");
-
-        codingPlatformAdapter.updateSelectedList();
-
-        selectedPlatformSet = codingPlatformAdapter.getArrayListSELECTED();
-        for(int z=0; z<selectedPlatformSet.size();z++){
-            System.out.println("MINE : " +selectedPlatformSet.get(z));
-        }
-        System.out.println("CHECKING  : DONE  ");
-
-
-
-
-
-
-
-
-//        codingPlatformRv.findViewById(R.id.codingPlatformImage).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Toast.makeText(getContext(), "AMIT GO ON", Toast.LENGTH_SHORT).show();
-//
-//
-//
-//
-//
-//
-//
-////                if (!selectedPlatformSet.contains(codingPlatformRv.findViewById(R.id.codingPlatformName))) {
-////                    selectedPlatformSet.add(holder.codingPlatformName.getText().toString());
-////                    holder.codingPlatformImage.setImageResource(R.drawable.pogo_ic_checked_tick_svgrepo_com);
-////                    Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show();
-////                } else {
-////                    selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
-////                    selectedPlatformSet.remove(holder.codingPlatformName.getText().toString());
-////                    holder.codingPlatformImage.setImageResource(codingPlatformModel.getCodingPlatformImage());
-////                    Toast.makeText(context, "Disselected", Toast.LENGTH_SHORT).show();
-////                }
-////                if (selectedPlatformSet.size() > 0) {
-////                    for (int i = 0; i < selectedPlatformSet.size(); i++) {
-////                        System.out.println("YOYOYOY : " + selectedPlatformSet);
-////
-////                    }
-////                }
-//            }
-//        });
-//
-
-
-
-
-        // For Top Coder
-//        topCoderRv = view.findViewById(R.id.topCoderRV);
+        //          For Top Coder
+        //        topCoderRv = view.findViewById(R.id.topCoderRV);
         topCoderRv = binding.topCoderRV;
         topcoderList = new ArrayList<>();
         topcoderList.add(new TopCoderModel(R.drawable.p7, "Wasu", "Grand Master", "CodeForces"));
@@ -244,18 +204,7 @@ public class ContestFragment extends Fragment {
 //        contestList.add(new ContestModel(R.drawable.ic_codechef_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeChef","Long Challenge","9:00 PM","11: 00 PM"));
 //        contestList.add(new ContestModel(R.drawable.ic_codeforces_svgrepo_com,R.drawable.ic_baseline_add_alarm_24,"CodeForces","Long Challenge","9:00 PM","11: 00 PM"));
 
-        // for adding contest image
-//        map.put("CodeChef", R.drawable.ic_codechef_svgrepo_com);
-//        map.put("HackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
-//        map.put("HackerRank", R.drawable.ic_hackerrank_svgrepo_com);
-//        map.put("CodeForces", R.drawable.ic_codeforces_svgrepo_com);
-//        map.put("LeetCode", R.drawable.ic_leetcode_svgrepo_com);
-//        map.put("AtCoder", R.drawable.ic_codechef_svgrepo_com);
-//        map.put("CodeForces::Gym", R.drawable.ic_codeforces_svgrepo_com);
-//        map.put("TopCoder", R.drawable.ic_topcoder_svgrepo_com);
-//        map.put("CS Academy", R.drawable.ic_codeforces_svgrepo_com);
-//        map.put("Kick Start", R.drawable.ic_kick_start);
-//        map.put("Toph", R.drawable.ic_codeforces_svgrepo_com);
+
 
 
         contestAdapter = new ContestAdapter(contestList, getContext());
@@ -411,4 +360,15 @@ public class ContestFragment extends Fragment {
 
     }
 
+    @Override
+    public void onITemClick(Platform platform) {
+
+        if(!MINESelecetedPlatform.contains(platform.getPlatformName())){
+            MINESelecetedPlatform.add(platform.getPlatformName());
+            platform.setmPlatformImage(R.drawable.pogo_ic_checked_tick_svgrepo_com);
+            Toast.makeText(getContext(), "SELECTED "+platform.getPlatformName(), Toast.LENGTH_SHORT).show();
+        }else{
+
+        }
+    }
 }

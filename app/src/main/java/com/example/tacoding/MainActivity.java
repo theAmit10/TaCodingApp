@@ -2,6 +2,7 @@ package com.example.tacoding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import com.example.tacoding.Fragment.ProblemFragment;
 import com.example.tacoding.Fragment.ProfileFragment;
 import com.example.tacoding.Fragment.UserFragment;
 import com.example.tacoding.databinding.ActivityMainBinding;
+import com.example.tacoding.tadatabase.PlatformViewModel;
 import com.iammert.library.readablebottombar.ReadableBottomBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 //        setContentView(R.layout.activity_main);
         setContentView(binding.getRoot());
+
 
 
         // setting the root fragment for home page
