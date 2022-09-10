@@ -11,10 +11,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {Platform.class}, version = 1, exportSchema = false)
+@Database(entities = {Platform.class,PlatformName.class}, version = 2, exportSchema = false)
 abstract class PlatformDatabase extends RoomDatabase {
 
     abstract PlatformDao platformDao();
+
 
     // marking the instance as volatile to ensure atomic access to the variable
     private static volatile PlatformDatabase INSTANCE;
@@ -29,6 +30,7 @@ abstract class PlatformDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     PlatformDatabase.class, "platform_database")
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

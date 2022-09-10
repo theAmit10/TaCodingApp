@@ -32,3 +32,4 @@ public class Platform {
         this.mPlatformImage = mPlatformImage;
     }
 }
+

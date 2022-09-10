@@ -13,6 +13,8 @@ import java.util.List;
 @Dao
 public interface PlatformDao {
 
+    //FOR PLATFORM TABLE
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Platform platform);
 
@@ -25,7 +27,25 @@ public interface PlatformDao {
     @Delete
     void delete(Platform platform);
 
+
     @Query("SELECT * FROM platform_table ORDER BY platform_name ASC")
     LiveData<List<Platform>> getAllPlatformData();
+
+
+    // FOR PLATFORMNAME  TABLE
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertName(PlatformName platformName);
+
+
+    @Delete
+    void deleteName(PlatformName platformName);
+
+    @Query("SELECT * FROM platform_name_table ORDER BY platform_name ASC")
+    LiveData<List<PlatformName>> getAllPlatformName();
+
+
+
+
 
 }

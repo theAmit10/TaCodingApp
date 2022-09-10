@@ -62,9 +62,10 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
     }
 
     public void updateContest(ArrayList<ContestModel> updatedConstest){
-//        list.clear();
+        list.clear();
         list.addAll(updatedConstest);
         notifyDataSetChanged();
+
     }
 
 

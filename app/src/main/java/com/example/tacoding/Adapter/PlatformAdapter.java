@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tacoding.R;
@@ -34,7 +32,6 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.Platfo
 
         viewHolder.codingPlatformImage.setOnClickListener(allPlatforms -> {
             listener.onITemClick(allPlatform.get(viewHolder.getAdapterPosition()));
-            Toast.makeText(context, "SELECTED", Toast.LENGTH_SHORT).show();
         });
 
         return viewHolder;
