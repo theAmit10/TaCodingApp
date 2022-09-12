@@ -24,6 +24,9 @@ public interface PlatformDao {
     @Query("DELETE FROM platform_table")
     void deleteAll();
 
+    @Query("DELETE FROM platform_name_table")
+    void deleteAllNames();
+
     @Delete
     void delete(Platform platform);
 

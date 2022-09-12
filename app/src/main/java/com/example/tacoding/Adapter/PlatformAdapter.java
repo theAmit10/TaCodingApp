@@ -10,18 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tacoding.R;
 import com.example.tacoding.tadatabase.Platform;
+import com.example.tacoding.tadatabase.PlatformName;
+
 import java.util.ArrayList;
 
 public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.PlatformViewHolder> {
 
     ArrayList<Platform> allPlatform = new ArrayList<>();
+    ArrayList<PlatformName> allPlatformName = new ArrayList<>();
     Context context;
 
     IPlatformRVAdapter listener;
 
-    public PlatformAdapter(Context context, IPlatformRVAdapter listener) {
+
+
+    public PlatformAdapter(Context context, IPlatformRVAdapter listener ) {
         this.context = context;
         this.listener = listener;
+
     }
 
     @NonNull
@@ -33,6 +39,7 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.Platfo
         viewHolder.codingPlatformImage.setOnClickListener(allPlatforms -> {
             listener.onITemClick(allPlatform.get(viewHolder.getAdapterPosition()));
         });
+
 
         return viewHolder;
     }

@@ -20,6 +20,10 @@ public class Platform {
         this.mPlatformImage = platformImage;
     }
 
+    public void setNplatformImage(@NonNull int mPlatformImage) {
+        this.mPlatformImage = mPlatformImage;
+    }
+
     public String getPlatformName(){return this.mPlatformName;}
 
     public int getPlatformImage(){return this.mPlatformImage;}

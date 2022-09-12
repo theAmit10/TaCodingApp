@@ -19,4 +19,6 @@ public class PlatformName {
     public String getNplatformName() {
         return this.nplatformName;
     }
+
+
 }

@@ -10,7 +10,10 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Dao;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ContestAdapter;
 
+import com.example.tacoding.Adapter.IPlatformNameAdapter;
 import com.example.tacoding.Adapter.IPlatformRVAdapter;
 import com.example.tacoding.Adapter.PlatformAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
@@ -36,6 +40,7 @@ import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
 import com.example.tacoding.tadatabase.Platform;
+import com.example.tacoding.tadatabase.PlatformDao;
 import com.example.tacoding.tadatabase.PlatformName;
 import com.example.tacoding.tadatabase.PlatformViewModel;
 
@@ -50,8 +55,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class ContestFragment extends Fragment implements IPlatformRVAdapter {
+public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPlatformNameAdapter {
 
     FragmentContestBinding binding;
     PlatformViewModel platformViewModel;
@@ -72,7 +80,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     public static Map<String, Integer> map = new HashMap<String, Integer>();
     public static Map<String, Integer> sMap = new HashMap<String, Integer>();
     ArrayList<ContestModel> filteredContestList = new ArrayList<>();
-
+    private PlatformName PlatformNameTA;
 
 
     public ContestFragment() {
@@ -84,8 +92,9 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Thread thread = new Thread() {
-
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new Runnable() {
+            @Override
             public void run() {
                 try {
                     loadContest();
@@ -93,9 +102,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                     e.printStackTrace();
                 }
             }
-        };
-
-        thread.start();
+        });
 
         platformViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(PlatformViewModel.class);
 
@@ -168,7 +175,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         platformViewModel.getmAllPlatform().observe(
                 getViewLifecycleOwner(), platforms -> {
                     System.out.println("CHECKING DATA IN DATABASE");
-                    System.out.println("FOUND : " +platformViewModel.getmAllPlatform().getValue());
+                    System.out.println("FOUND PLATFORM AMIT : " +platformViewModel.getmAllPlatform().getValue());
                     System.out.println("CHECKED DATA IN DATABASE");
                     platformAdapter.updateList((ArrayList<Platform>) platforms);
 
@@ -203,9 +210,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         contestRv = binding.contestRv;
         contestList = new ArrayList<>();
 
-
-
-
         contestAdapter = new ContestAdapter(contestList, getContext());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         contestRv.setLayoutManager(linearLayoutManager2);
@@ -217,77 +221,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
 
     public void loadContest() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-//        String url = "https://codeforces.com/api/contest.list";
-//        String url1 = "https://competitive-coding-api.herokuapp.com/api/codechef/the_amit";
-
-
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-//                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-//
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray contestJsonArray = response.getJSONArray("result");
-//                            System.out.println("success");
-//
-//                            for (int i = 0; i < contestJsonArray.length(); i++) {
-//                                JSONObject contestJsonObject = contestJsonArray.getJSONObject(i);
-//
-//                                ContestModel contestModel = new ContestModel(
-//
-//                                        contestJsonObject.getString("type"),
-//                                        contestJsonObject.getString("name"),
-//                                        contestJsonObject.getString("startTimeSeconds"),
-//                                        contestJsonObject.getString("durationSeconds")
-//                                );
-//
-//                                // Converting Second to Date and time
-//                                DateTimeUtils.setTimeZone("UTC");
-//                                Date sdate = DateTimeUtils.formatDate(Long.parseLong(contestModel.getStartDate()), DateTimeUnits.SECONDS);
-//                                String strDate = String.valueOf(sdate);
-//                                String syear = strDate.substring(strDate.length() - 4);
-//                                System.out.println("Year : " + syear);
-//                                int year = Integer.parseInt(syear);
-//
-//                                // setting end Date
-//                                Date edate = DateTimeUtils.formatDate(Long.parseLong(contestModel.getEndDate()), DateTimeUnits.SECONDS);
-//                                String eDate = String.valueOf(edate);
-//
-//                                contestModel.setStartDate(strDate);
-//                                contestModel.setEndDate(eDate);
-//                                if (year >= 2021) {
-//                                    contestList.add(contestModel);
-//                                }
-//
-//                                System.out.println("Start TIME : " + contestModel.getStartDate());
-//                                System.out.println("Contest Titile : " + contestModel.getContestTitle());
-//                                System.out.println("Contest DESC : " + contestModel.getContestDescription());
-//
-//
-//                            }
-//
-//
-//                            contestAdapter.updateContest(contestList);
-//                            System.out.println("success Amit");
-//                        } catch (JSONException e) {
-//                            System.out.println("Error Amit");
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // TODO: Handle error
-//                        System.out.println("Error Found " + error.getLocalizedMessage());
-//
-//                    }
-//                });
-
-
-
 
         String contestUrl = "https://www.kontests.net/api/v1/all";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
@@ -321,29 +254,50 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                             }
 
                             // here filtering the contest via selected platform
+                            ExecutorService executorService = Executors.newSingleThreadExecutor();
+                            executorService.execute(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    System.out.println("NOW FILTERED LIST ONLY ");
 
 
-                            System.out.println("NOW FILTERED LIST ONLY ");
-                            platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(),platformNames -> {
+                                    Handler handler = new Handler(Looper.getMainLooper());
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
 
-                                if(platformNames.size() > 0){
-                                    System.out.println("IF BLOCK LENGTH : " +platformNames.size());
-                                    for(int x=0; x<platformNames.size(); x++){
-                                        for(int y=0; y<contestList.size();y++){
-                                            if(contestList.get(y).getContestTitle().equals(platformNames.get(x).getNplatformName())){
-                                                filteredContestList.add(contestList.get(y));
-//                                                System.out.println("DATA FOUND : " +filteredContestList.get(x).getContestTitle());
-                                            }
+                                            platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(),platformNames -> {
+
+                                                if(platformNames.size() > 0){
+                                                    System.out.println("IF BLOCK SELECTED LENGTH : " +platformNames.size());
+                                                    System.out.println("IF BLOCK CONTEST LENGTH : " +contestList.size());
+                                                    for(int x=0; x<platformNames.size(); x++){
+                                                        for(int y=0; y<contestList.size();y++){
+                                                            if(contestList.get(y).getContestTitle().equals(platformNames.get(x).getNplatformName())){
+                                                                filteredContestList.add(contestList.get(y));
+                                                            }
+                                                        }
+                                                    }
+                                                    System.out.println("NODATA GET");
+                                                    contestAdapter.updateContest(filteredContestList);
+                                                }else {
+                                                    System.out.println("ELSE BLOCK  RUNNING ");
+                                                    System.out.println("ELSE BLOCK BEFORE -> LENGTH : " +contestList.size());
+                                                    contestAdapter.updateContest(contestList);
+                                                    System.out.println("ELSE BLOCK AFTER -> LENGTH : " +contestList.size());
+                                                }
+                                            });
+
                                         }
-                                    }
-                                    contestAdapter.updateContest(filteredContestList);
-                                }else {
-                                    System.out.println("ELSE BLOCK  RUNNING ");
-                                    System.out.println("ELSE BLOCK BEFORE -> LENGTH : " +contestList.size());
-                                    contestAdapter.updateContest(contestList);
-                                    System.out.println("ELSE BLOCK AFTER -> LENGTH : " +contestList.size());
+                                    });
+
+
                                 }
                             });
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -359,8 +313,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                     }
                 });
 
-
-//        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonArrayRequest);
 
 
@@ -370,81 +322,141 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     public void onITemClick(Platform platform) {
 
         PlatformName platformName = new PlatformName(platform.getPlatformName());
-        System.out.println("PLATFORM AMIT : " +platformName.getNplatformName());
-        System.out.println("PLATFORM TA : " +platform.getPlatformName());
+        platformViewModel.insertName(platformName);
 
-        platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(), platformNames -> {
+        System.out.println("SELECTED ITEM TO BE DELETED : "+platform.getPlatformName());
 
-            boolean check = false;
-
-            String a = platform.getPlatformName().toLowerCase(Locale.ROOT);
-
-            for(int j=0; j<platformNames.size();j++){
-                if(platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)){
-                    check = true;
-                    break;
-                }
-            }
-
-            System.out.println("CHECKING 1 : "+check);
-
-            if(check){
-                System.out.println("GOOOD : " +check);
-            }else {
-                System.out.println("BAD : " +check);
-            }
-
-
-
-
-            if(check){
-                platformViewModel.deleteName(platformName);
-                for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                    String k = entry.getKey();
-                    Integer v = entry.getValue();
-                    System.out.println("PLATFORM DELETTING");
-                    if(k.equalsIgnoreCase(platformName.getNplatformName())){
-                        platform.setmPlatformImage(v);
-                    }
-                    System.out.println("PLATFORM DELETED");
-
-                }
-                System.out.println("DELETED ITEM : "+platformName.getNplatformName());
-            }else{
-                platformViewModel.insertName(platformName);
-                System.out.println("CHECKING DATA IN PLATFORMNAME DATABASE");
-                System.out.println("LENGTH : " +platformNames.size());
-                System.out.println("FOUND : " +platformViewModel.getmAllPlatformName().getValue());
-
-                for (Map.Entry<String, Integer> entry : sMap.entrySet()) {
-                    String k = entry.getKey();
-                    Integer v = entry.getValue();
-                    System.out.println("PLATFORM DELETTING");
-                    if(k.equalsIgnoreCase(platformName.getNplatformName())){
-                        platform.setmPlatformImage(v);
-                    }
-                    System.out.println("PLATFORM DELETED");
-
-                }
-
-                for(int i=0; i<platformNames.size(); i++){
-                    System.out.println("FOUND NAME : " + platformNames.get(i).getNplatformName());
-                }
-
-                System.out.println("CHECKED DATA IN DATABASE");
-
-            }
-
-            platformAdapter.notifyDataSetChanged();
-            contestAdapter.updateContest(filteredContestList);
-//            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
-        });
-
-
-
-
+//        platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(),platformNames -> {
+//
+//            for(int i=0; i<platformNames.size(); i++){
+//                if(platformNames.get(i).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(platform.getPlatformName())){
+//                    platformViewModel.deleteName(platformNames.get(i));
+////                    platformViewModel.insertName(platformNames.get(i));
+//                    for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//                        String k = entry.getKey();
+//                        Integer v = entry.getValue();
+//                        System.out.println("key: " + k + ", value: " + v);
+//
+//                       if(platform.getPlatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(k.toLowerCase(Locale.ROOT))){
+//                           platform.setmPlatformImage(v);
+//                           System.out.println("Image Changed ");
+//                           platformAdapter.notifyDataSetChanged();
+//                       }
+//
+//
+//                    }
+//                }
+//            }
+//            System.out.println("LENGTH AFTER : " +platformNames.size());
+//
+//
+//            System.out.println(" AFTER ALL SELECTED PLATFORM");
+//            for(int i=0; i<platformNames.size(); i++){
+//                System.out.println("ITEM : "+platformNames.get(i).getNplatformName());
+//            }
+//
+//
+//        });
 
 
 
     }
+
+    @Override
+    public void onItemNameClick(PlatformName platformName) {
+        System.out.println("SELECTED ITEM  : "+platformName.getNplatformName());
+
+    }
+
+//
+//                try {
+//                    System.out.println("SELECTED PLATFORM  : " +platform.getPlatformName());
+//
+//                    platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(), platformNames -> {
+//
+//                        boolean check = false;
+//
+//                        String a = platform.getPlatformName().toLowerCase(Locale.ROOT);
+//
+//                        for(int j=0; j<platformNames.size();j++){
+//                            if(platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)){
+//                                check = true; //means it exist in db
+//                                break;
+//                            }
+//                        }
+//
+//                        System.out.println(" SELECTED  : "+a +" EXISTS : "+check);
+//
+//                        if(check){
+//                            System.out.println("GOOOD : " +check);
+//                        }else {
+//                            System.out.println("BAD : " +check);
+//                        }
+//
+//
+//
+//                        if(check){
+//                            for(int j=0; j<platformNames.size();j++){
+//                                if(platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)){
+//                                    for (Map.Entry<String, Integer> entry : sMap.entrySet()) {
+//                                        String k = entry.getKey();
+//                                        Integer v = entry.getValue();
+//
+//                                        if(k.equalsIgnoreCase(platformNames.get(j).getNplatformName())){
+//                                            System.out.println("PLATFORM DELETTING");
+//                                            platform.setmPlatformImage(v);
+//                                            platform.setNplatformImage(v);
+//                                            System.out.println("ITEM : "+k);
+//                                            platformViewModel.deleteName(platformNames.get(j));
+//                                            System.out.println("PLATFORM DELETED");
+//                                            break;
+//                                        }
+//
+//                                    }
+//                                }
+//                            }
+//
+//                            for(int i=0; i<platformNames.size(); i++){
+//                                System.out.println("FOUND NAME AFTER DELETING : " + platformNames.get(i).getNplatformName());
+//                            }
+//
+//                        }else{
+//                            System.out.println("PLATFORM INSERTING ");
+//                            PlatformName platformName = new PlatformName(platform.getPlatformName());
+//                            platformViewModel.insertName(platformName);
+//                            System.out.println("CHECKING DATA IN PLATFORMNAME DATABASE");
+//                            System.out.println("LENGTH : " +platformNames.size());
+//                            System.out.println("FOUND : " +platformViewModel.getmAllPlatformName().getValue());
+//                            System.out.println("PLATFORM INSERTED ");
+//
+//                            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//                                String k = entry.getKey();
+//                                Integer v = entry.getValue();
+//
+//                                if(k.equalsIgnoreCase(platformName.getNplatformName())){
+//                                    platform.setmPlatformImage(v);
+//                                    platform.setNplatformImage(v);
+//                                    break;
+//                                }
+//
+//                            }
+//
+//                            System.out.println("CHECKED DATA IN DATABASE");
+//
+//                            for(int i=0; i<platformNames.size(); i++){
+//                                System.out.println("FOUND NAME AFTER INSERTING : " + platformNames.get(i).getNplatformName());
+//                            }
+//
+//                        }
+//            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
+//                    });
+//
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//
+//
+//
 }
