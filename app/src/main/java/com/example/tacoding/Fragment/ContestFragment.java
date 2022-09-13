@@ -62,7 +62,7 @@ import java.util.concurrent.Executors;
 public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPlatformNameAdapter {
 
     FragmentContestBinding binding;
-    PlatformViewModel platformViewModel;
+    public static PlatformViewModel platformViewModel;
 
     // for coding platform
     RecyclerView codingPlatformRv;
@@ -92,6 +92,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Toast.makeText(getContext(), "RELOADING", Toast.LENGTH_SHORT).show();
+
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new Runnable() {
             @Override
@@ -105,6 +107,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPl
         });
 
         platformViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(PlatformViewModel.class);
+
+
 
     }
 
@@ -175,12 +179,29 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPl
         platformViewModel.getmAllPlatform().observe(
                 getViewLifecycleOwner(), platforms -> {
                     System.out.println("CHECKING DATA IN DATABASE");
-                    System.out.println("FOUND PLATFORM AMIT : " +platformViewModel.getmAllPlatform().getValue());
-                    System.out.println("CHECKED DATA IN DATABASE");
+
+                    System.out.println(" BEFORE PLATFORM ARRAYLIST : ");
+                    for(int i=0; i<platforms.size();i++){
+                        System.out.println("DATA NAME : "+platforms.get(i).getPlatformName());
+                        System.out.println("DATA IMAGE : "+platforms.get(i).getPlatformImage());
+                    }
+
                     platformAdapter.updateList((ArrayList<Platform>) platforms);
 
+                    System.out.println("CHECKED DATA IN DATABASE");
+
                 }
+
         );
+
+        platformViewModel.getmAllPlatformName().observeForever(platformNames ->
+        {
+            System.out.println("#####################SELECTED PLATFORM DATA #####################");
+            for(int i=0; i<platformNames.size();i++){
+                System.out.println("VAL : " +platformNames.get(i).getNplatformName());
+            }
+            System.out.println("#####################SELECTED PLATFORM DATA #####################");
+        });
 
 
 
@@ -323,6 +344,12 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter, IPl
 
         PlatformName platformName = new PlatformName(platform.getPlatformName());
         platformViewModel.insertName(platformName);
+//        contestAdapter.notifyDataSetChanged();
+        contestAdapter.updateContest(filteredContestList);
+        platformAdapter.notifyDataSetChanged();
+
+       getParentFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
+
 
         System.out.println("SELECTED ITEM TO BE DELETED : "+platform.getPlatformName());
 
