@@ -26,7 +26,6 @@ import java.util.Map;
 public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.PlatformViewHolder> {
 
     ArrayList<Platform> allPlatform = new ArrayList<>();
-    ArrayList<PlatformName> allPlatformName = new ArrayList<>();
     Context context;
 
 
@@ -66,7 +65,7 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.Platfo
 
             while (i < platformNames.size()) {
 
-                if (platformNames.get(i).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(currentPlatform.getPlatformName().toLowerCase(Locale.ROOT))) {
+                if (currentPlatform.getPlatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(platformNames.get(i).getNplatformName().toLowerCase(Locale.ROOT))) {
                     System.out.println("FIRST IF " + platformNames.get(i).getNplatformName() + " AND " + currentPlatform.getPlatformName());
                     for (Map.Entry<String, Integer> entry : map.entrySet()) {
                         String k = entry.getKey();
@@ -134,4 +133,3 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.Platfo
         }
     }
 }
-
