@@ -43,6 +43,9 @@ public class ProblemFragment extends Fragment {
 
     String selectedFilter = "all";
 
+    String lowRange = "800";
+    String maxRange = "3500";
+
     // for coding platform
     // FOR PROBLEM TAGS
     ArrayList<ProblemTagModel> list;
@@ -157,14 +160,6 @@ public class ProblemFragment extends Fragment {
 //        problemRV.setAdapter(problemAdapter);
 
 
-
-        binding.AdvancedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Connected ", Toast.LENGTH_SHORT).show();
-                filteredList("fishermen");
-            }
-        });
 
         binding.allFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -429,26 +424,27 @@ public class ProblemFragment extends Fragment {
         });
 
 
+        binding.BeginnersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                beginners(view);
+            }
+        });
+
+        binding.IntermediatesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intermediate(view);
+            }
+        });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        binding.AdvancedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                advanced(view);
+            }
+        });
 
 
 
@@ -459,7 +455,7 @@ public class ProblemFragment extends Fragment {
     public void initSearchWidget(){
         SearchView searchView = binding.problemSearchView;
         searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint("Search through PROBLEM NAME ");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -574,6 +570,30 @@ public class ProblemFragment extends Fragment {
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
+    public void filterListRating(String low, String high){
+        lowRange = low;
+        maxRange = high;
+
+        int val1 = Integer.parseInt(low);
+        int val2 = Integer.parseInt(high);
+        ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
+
+        for(ProblemModel problemModel: problemList){
+
+            if((Integer.parseInt(problemModel.getRating()) >= val1) && (Integer.parseInt(problemModel.getRating()) <= val2) ){
+                System.out.println("Rating  : " +problemModel.getRating());
+                filterProblemList.add(problemModel);
+            }
+        }
+
+
+        ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
+        problemRV.setAdapter(problemAdapter1);
+
+        problemAdapter.notifyDataSetChanged();
+
+    }
+
     public void filteredList(String status){
 
         selectedFilter = status;
@@ -598,24 +618,34 @@ public class ProblemFragment extends Fragment {
 
     public void allFilterTapped(View view) {
         selectedFilter = "all";
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
         ProblemAdapter problemAdapter2 = new ProblemAdapter(problemList, getContext());
         problemRV.setAdapter(problemAdapter2);
+        problemAdapter.notifyDataSetChanged();
 
     }
 
 
     public void advanced(View view) {
-        filteredList("fishermen");
+        selectedFilter = "ADVANCED";
+        lowRange = "2000";
+        maxRange = "4000";
+        filterListRating(lowRange,maxRange);
         Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void intermediate(View view) {
-        filteredList("digital logarithm");
+        selectedFilter = "INTERMEDIATE";
+        lowRange = "900";
+        maxRange = "2000";
+        filterListRating(lowRange,maxRange);
         Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void beginners(View view) {
+        selectedFilter = "BIGINNERS";
+        lowRange = "800";
+        maxRange = "900";
+        filterListRating(lowRange,maxRange);
         Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
     }
 

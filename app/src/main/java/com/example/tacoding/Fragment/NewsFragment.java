@@ -81,17 +81,6 @@ public class NewsFragment extends Fragment {
             }
         });
 
-//        binding.allFilter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), "ALL SELECTED", Toast.LENGTH_SHORT).show();
-//                filteredword = "all";
-//                NewsAdapter newsAdapter1 = new NewsAdapter(list, getContext());
-//                newsRV.setAdapter(newsAdapter1);
-//
-//            }
-//        });
-
 
 
 
