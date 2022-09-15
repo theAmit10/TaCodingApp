@@ -5,6 +5,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.example.tacoding.Fragment.ContestFragment;
 import com.example.tacoding.Fragment.NewsFragment;
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setting the root fragment for home page
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, new ContestFragment());
+        transaction.replace(R.id.fragmentContainer, new NewsFragment());
         transaction.commit();
 
         binding.bottomNavigation.setOnItemSelectListener(new ReadableBottomBar.ItemSelectListener() {
@@ -62,4 +65,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_item,menu);
+        MenuItem menuItem = menu.findItem(R.id.searchAction);
+
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("SEARCH HERE ");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
 }
+
+

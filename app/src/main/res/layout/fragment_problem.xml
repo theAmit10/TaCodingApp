@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Fragment.ProblemFragment">
 
     <View
@@ -46,6 +46,20 @@
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/problemSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:queryHint="Problem Name ">
+
+    </androidx.appcompat.widget.SearchView>
+
+
     <View
         android:id="@+id/view3"
         android:layout_width="0dp"
@@ -57,22 +71,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/problemSearchView" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fillViewport="true"
         android:isScrollContainer="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/problemTags"
@@ -97,20 +113,276 @@
                 android:isScrollContainer="true"
                 android:nestedScrollingEnabled="true"
                 android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/problemTags">
+                >
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/problemTagRV"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp" />
-                </RelativeLayout>
+                    <Button
+                        android:id="@+id/allFilter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="allFilterTapped"
+                        android:text="All" />
+
+                    <Button
+                        android:id="@+id/binarySearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="binarySearch"
+                        android:text="binary search" />
+
+                    <Button
+                        android:id="@+id/twoSat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="twoSat"
+                        android:text="2-sat" />
+
+
+                    <Button
+                        android:id="@+id/bitmasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="bitmasks"
+                        android:text="bitmasks" />
+
+                    <Button
+                        android:id="@+id/bruteForce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="bruteForce"
+                        android:text="brute force" />
+                    <Button
+                        android:id="@+id/chineseRemainderTheorem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="chineseRemainderTheorem"
+                        android:text="chinese remainder theorem" />
+
+                    <Button
+                        android:id="@+id/combinatorics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="combinatorics"
+                        android:text="combinatorics" />
+
+                    <Button
+                        android:id="@+id/constructiveAlgorithms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="constructiveAlgorithms"
+                        android:text="constructive algorithms" />
+
+                    <Button
+                        android:id="@+id/dataStructures"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="dataStructures"
+                        android:text="data structures" />
+
+                    <Button
+                        android:id="@+id/dfsAndSimilar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="dfsAndSimilar"
+                        android:text="dfs and similar" />
+
+                    <Button
+                        android:id="@+id/divideAndConquer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="divideAndConquer"
+                        android:text="divide and conquer" />
+
+                    <Button
+                        android:id="@+id/dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="dp"
+                        android:text="dp" />
+
+                    <Button
+                        android:id="@+id/dsu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="dsu"
+                        android:text="dsu" />
+
+                    <Button
+                        android:id="@+id/expressionParsing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="expressionParsing"
+                        android:text="expression parsing" />
+
+                    <Button
+                        android:id="@+id/fft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="fft"
+                        android:text="fft" />
+
+                    <Button
+                        android:id="@+id/flows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="flows"
+                        android:text="flows" />
+
+                    <Button
+                        android:id="@+id/games"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="games"
+                        android:text="games" />
+
+                    <Button
+                        android:id="@+id/geometry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="geometry"
+                        android:text="geometry" />
+
+                    <Button
+                        android:id="@+id/graphMatchings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="graphMatchings"
+                        android:text="graph matchings" />
+
+                    <Button
+                        android:id="@+id/graphs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="graphs"
+                        android:text="graphs" />
+
+                    <Button
+                        android:id="@+id/greedy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="greedy"
+                        android:text="greedy" />
+
+                    <Button
+                        android:id="@+id/hashing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="hashing"
+                        android:text="hashing" />
+
+                    <Button
+                        android:id="@+id/interactive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="interactive"
+                        android:text="interactive" />
+
+
+                    <Button
+                        android:id="@+id/math"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="math"
+                        android:text="math" />
+
+                    <Button
+                        android:id="@+id/metrices"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="metrices"
+                        android:text="metrices" />
+
+                    <Button
+                        android:id="@+id/meetInTheMiddle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="meetInTheMiddle"
+                        android:text="meet-in-the-middle" />
+
+                    <Button
+                        android:id="@+id/numberTheory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="numberTheory"
+                        android:text="number theory" />
+
+                    <Button
+                        android:id="@+id/probablities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="probablities"
+                        android:text="probablities" />
+
+                    <Button
+                        android:id="@+id/schedules"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="schedules"
+                        android:text="schedules" />
+
+                    <Button
+                        android:id="@+id/shortestPaths"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="shortestPaths"
+                        android:text="shortest paths" />
+
+                    <Button
+                        android:id="@+id/sortings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="sortings"
+                        android:text="sortings" />
+
+                    <Button
+                        android:id="@+id/stringSuffixStructures"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="stringSuffixStructures"
+                        android:text="string suffix structures" />
+
+                    <Button
+                        android:id="@+id/strings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="strings"
+                        android:text="strings" />
+
+                    <Button
+                        android:id="@+id/ternarySearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="ternarySearch"
+                        android:text="ternary search" />
+
+                    <Button
+                        android:id="@+id/trees"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="trees"
+                        android:text="trees" />
+
+                    <Button
+                        android:id="@+id/implementation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="implementation"
+                        android:text="implementation" />
+
+                    <Button
+                        android:id="@+id/twoPointers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="twoPointers"
+                        android:text="two pointers" />
+
+
+                </LinearLayout>
+
             </HorizontalScrollView>
 
             <View
@@ -127,17 +399,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-            <View
-                android:id="@+id/view14"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_70font_mdp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/view6"
-                app:layout_constraintStart_toStartOf="@+id/view6"
-                app:layout_constraintTop_toBottomOf="@+id/view6" />
-
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
@@ -149,30 +410,41 @@
                 app:layout_constraintStart_toStartOf="@+id/view14"
                 app:layout_constraintTop_toTopOf="@+id/view14" />
 
-            <Button
-                android:id="@+id/BeginnersBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beginners"
-                app:layout_constraintBottom_toBottomOf="@+id/view14"
-                app:layout_constraintStart_toStartOf="@+id/view14" />
 
-            <Button
-                android:id="@+id/IntermediatesBtn"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Intermediates"
-                app:layout_constraintStart_toEndOf="@+id/BeginnersBtn"
-                app:layout_constraintTop_toTopOf="@+id/BeginnersBtn" />
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
 
-            <Button
-                android:id="@+id/AdvancedBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Advanced "
-                app:layout_constraintEnd_toEndOf="@+id/view14"
-                app:layout_constraintTop_toTopOf="@+id/IntermediatesBtn" />
+
+
+                <Button
+                    android:id="@+id/BeginnersBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="beginners"
+                    android:text="Beginners" />
+
+
+                <Button
+                    android:id="@+id/IntermediatesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:onClick="intermediate"
+                    android:text="Intermediates" />
+
+                <Button
+                    android:id="@+id/AdvancedBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="advanced"
+                    android:text="Advanced " />
+
+
+            </LinearLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/problemRV"
@@ -187,7 +459,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view14" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,16 +26,18 @@
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/coding_platform_story_design.xml" value="0.4" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_contest.xml" value="0.264" />
-        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_news.xml" value="0.25885416666666666" />
-        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_problem.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_news.xml" value="0.1" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_problem.xml" value="0.16279069767441862" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_profile.xml" value="0.2783882783882784" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/fragment_user.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_desgn_news.xml" value="0.26313405797101447" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_add_user_sample.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_contest.xml" value="0.4" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_problem_fragment.xml" value="0.264" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_problem_tags_model.xml" value="0.264" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_profile_progress.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/layout/story_design_top_coder.xml" value="0.264" />
+        <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/menu/menu_item.xml" value="0.19722222222222222" />
         <entry key="..\:/Users/Demon/AndroidStudioProjects/TaCoding/app/src/main/res/xml/tabs.xml" value="0.2210144927536232" />
       </map>
     </option>

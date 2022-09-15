@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,14 +15,17 @@ import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHolder> {
+public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHolder>{
     ArrayList<ProblemModel> list;
     Context context;
+
 
     public ProblemAdapter(ArrayList<ProblemModel> list, Context context) {
         this.list = list;
         this.context = context;
+
     }
 
     @NonNull
@@ -52,6 +57,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
     }
 
     public void updateProblem(ArrayList<ProblemModel> updatedProblem){
+
+//        list.clear();
         list.addAll(updatedProblem);
         notifyDataSetChanged();
     }
@@ -60,6 +67,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
     public int getItemCount() {
         return list.size();
     }
+
+
 
     public class viewHolder extends RecyclerView.ViewHolder{
 

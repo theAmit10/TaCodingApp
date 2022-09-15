@@ -4,6 +4,7 @@ import static java.lang.Thread.sleep;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,6 +26,7 @@ import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ProblemModel;
 import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
+import com.example.tacoding.databinding.FragmentProblemBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,12 +34,17 @@ import org.json.JSONObject;
 
 import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ProblemFragment extends Fragment {
 
+    FragmentProblemBinding binding;
+
+    String selectedFilter = "all";
+
     // for coding platform
     // FOR PROBLEM TAGS
-    RecyclerView problemTagRV;
     ArrayList<ProblemTagModel> list;
 
 
@@ -53,28 +61,39 @@ public class ProblemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Thread loadProblemThread = new Thread(){
-            public void run(){
+        ExecutorService loadProblemThread  = Executors.newSingleThreadExecutor();
+        loadProblemThread.execute(new Runnable() {
+            @Override
+            public void run() {
                 try {
+
                     loadProblem();
+
+
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
-        };
-        loadProblemThread.start();
+        });
+
+
 
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_problem, container, false);
+//        View view = inflater.inflate(R.layout.fragment_problem, container, false);
+
+        binding  = FragmentProblemBinding.inflate(inflater, container, false);
 
         // for coding platform
-        problemTagRV = view.findViewById(R.id.problemTagRV);
+
         list = new ArrayList<>();
 
         list.add(new ProblemTagModel("2-sat"));
@@ -115,14 +134,11 @@ public class ProblemFragment extends Fragment {
         list.add(new ProblemTagModel("two pointers"));
 
 
-        ProblemTagsAdapter problemTagsAdapter = new ProblemTagsAdapter(list, getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        problemTagRV.setLayoutManager(linearLayoutManager);
-        problemTagRV.setNestedScrollingEnabled(false);
-        problemTagRV.setAdapter(problemTagsAdapter);
+
+
 
         // FOR PROBLEM RECYCLER VIEW
-        problemRV = view.findViewById(R.id.problemRV);
+        problemRV = binding.problemRV;
         problemList = new ArrayList<>();
 //        problemList.add(new ProblemModel(R.drawable.ic_codechef_svgrepo_com, "Long Coding Challenge", "XOR Swap "));
 //        problemList.add(new ProblemModel(R.drawable.ic_codeforces_svgrepo_com, "Short Coding Challenge", "Swap "));
@@ -132,14 +148,347 @@ public class ProblemFragment extends Fragment {
 //        problemList.add(new ProblemModel(R.drawable.ic_leetcode_svgrepo_com, "Coding Challenge", "bit manipulation"));
 //        problemList.add(new ProblemModel(R.drawable.ic_codechef_svgrepo_com, "Long Coding Challenge", "gready Problems"));
 
-        problemAdapter = new ProblemAdapter(problemList, getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        problemRV.setLayoutManager(linearLayoutManager1);
-        problemRV.setNestedScrollingEnabled(false);
-        problemRV.setAdapter(problemAdapter);
 
 
-        return view;
+//        problemAdapter = new ProblemAdapter(problemList, getContext());
+//        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        problemRV.setLayoutManager(linearLayoutManager1);
+//        problemRV.setNestedScrollingEnabled(false);
+//        problemRV.setAdapter(problemAdapter);
+
+
+
+        binding.AdvancedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Connected ", Toast.LENGTH_SHORT).show();
+                filteredList("fishermen");
+            }
+        });
+
+        binding.allFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allFilterTapped(view);
+            }
+        });
+
+
+        binding.binarySearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binarySearch(view);
+            }
+        });
+
+        binding.twoSat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                twoSat(view);
+            }
+        });
+
+
+
+        binding.bitmasks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bitmasks(view);
+            }
+        });
+
+        binding.bruteForce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bruteForce(view);
+            }
+        });
+
+        binding.chineseRemainderTheorem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chineseRemainderTheorem(view);
+            }
+        });
+
+        binding.combinatorics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                combinatorics(view);
+            }
+        });
+
+        binding.constructiveAlgorithms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                constructiveAlgorithms(view);
+            }
+        });
+
+        binding.dataStructures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataStructures(view);
+            }
+        });
+
+        binding.dfsAndSimilar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dfsAndSimilar(view);
+            }
+        });
+
+        binding.divideAndConquer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                divideAndConquer(view);
+            }
+        });
+
+        binding.dp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dp(view);
+            }
+        });
+
+        binding.dsu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dsu(view);
+            }
+        });
+
+        binding.expressionParsing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expressionParsing(view);
+            }
+        });
+
+        binding.fft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fft(view);
+            }
+        });
+
+        binding.flows.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flows(view);
+            }
+        });
+
+        binding.games.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                games(view);
+            }
+        });
+
+        binding.geometry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                geometry(view);
+            }
+        });
+
+        binding.graphMatchings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                graphMatchings(view);
+            }
+        });
+
+        binding.graphs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                graphs(view);
+            }
+        });
+
+        binding.greedy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                greedy(view);
+            }
+        });
+
+        binding.hashing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hashing(view);
+            }
+        });
+
+        binding.interactive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interactive(view);
+            }
+        });
+
+        binding.math.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                math(view);
+            }
+        });
+
+        binding.metrices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                metrices(view);
+            }
+        });
+
+        binding.meetInTheMiddle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                meetInTheMiddle(view);
+            }
+        });
+
+        binding.numberTheory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberTheory(view);
+            }
+        });
+
+        binding.probablities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                probablities(view);
+            }
+        });
+
+        binding.schedules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                schedules(view);
+            }
+        });
+
+        binding.shortestPaths.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shortestPaths(view);
+            }
+        });
+
+        binding.sortings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortings(view);
+            }
+        });
+
+        binding.stringSuffixStructures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stringSuffixStructures(view);
+            }
+        });
+
+        binding.strings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strings(view);
+            }
+        });
+
+        binding.ternarySearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ternarySearch(view);
+            }
+        });
+
+        binding.trees.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                trees(view);
+            }
+        });
+
+        binding.implementation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                implementation(view);
+            }
+        });
+
+        binding.twoPointers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                twoPointers(view);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return binding.getRoot();
+    }
+
+    public void initSearchWidget(){
+        SearchView searchView = binding.problemSearchView;
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search Here");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                System.out.println("ENTERED TEXT : "+newText);
+                ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
+
+                for(ProblemModel problemModel: problemList){
+                    if(problemModel.getName().toLowerCase().contains(newText.toLowerCase())){
+                        filterProblemList.add(problemModel);
+                    }
+                }
+
+
+                ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
+                problemRV.setAdapter(problemAdapter1);
+//                problemAdapter.notifyDataSetChanged();
+
+                return false;
+            }
+        });
+
+
     }
 
     public void loadProblem() {
@@ -182,6 +531,10 @@ public class ProblemFragment extends Fragment {
                                         problemModel.setRating("1100");
                                     }
 
+                                    System.out.println("CONTEST ID : "+problemJsonObject.getString("contestId"));
+                                    System.out.println("INDEX : "+problemJsonObject.getString("index"));
+                                    System.out.println("NAME : "+problemJsonObject.getString("name"));
+
                                 if(problemList.size() <400){
                                     problemList.add(problemModel);}
                                 else{
@@ -193,10 +546,15 @@ public class ProblemFragment extends Fragment {
                                     }
 
 
-//                                System.out.println("THis is Amit " + problemModel.getTags());
-
                             }
-                            problemAdapter.updateProblem(problemList);
+                            problemAdapter = new ProblemAdapter(problemList, getContext());
+                            LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                            problemRV.setLayoutManager(linearLayoutManager1);
+                            problemRV.setNestedScrollingEnabled(false);
+                            problemRV.setAdapter(problemAdapter);
+//                            problemAdapter.updateProblem(problemList);
+
+                            initSearchWidget();
 
                         } catch (JSONException e) {
                             System.out.println("try catch error");
@@ -213,9 +571,270 @@ public class ProblemFragment extends Fragment {
                     }
                 });
 
-// Access the RequestQueue through your singleton class.
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
+    public void filteredList(String status){
 
+        selectedFilter = status;
+        ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
+
+        for(ProblemModel problemModel: problemList){
+
+            if(problemModel.getTags().contains(selectedFilter)){
+                System.out.println("CONTAING LIST : " +problemModel.getTags());
+                filterProblemList.add(problemModel);
+            }
+        }
+
+
+        ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
+        problemRV.setAdapter(problemAdapter1);
+
+        problemAdapter.notifyDataSetChanged();
+
+    }
+
+
+    public void allFilterTapped(View view) {
+        selectedFilter = "all";
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        ProblemAdapter problemAdapter2 = new ProblemAdapter(problemList, getContext());
+        problemRV.setAdapter(problemAdapter2);
+
+    }
+
+
+    public void advanced(View view) {
+        filteredList("fishermen");
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void intermediate(View view) {
+        filteredList("digital logarithm");
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void beginners(View view) {
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void twoSat(View view) {
+        selectedFilter = "2-sat";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void bitmasks(View view) {
+        selectedFilter = "bitmasks";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void bruteForce(View view) {
+        selectedFilter = "brute force";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void chineseRemainderTheorem(View view) {
+        selectedFilter = "chinese remainder theorem";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void combinatorics(View view) {
+        selectedFilter = "combinatorics";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void constructiveAlgorithms(View view) {
+        selectedFilter = "constructive algorithms";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void dataStructures(View view) {
+        selectedFilter = "data structures";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void divideAndConquer(View view) {
+        selectedFilter = "divide and conquer";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void dp(View view) {
+        selectedFilter = "dp";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void dsu(View view) {
+        selectedFilter = "dsu";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void expressionParsing(View view) {
+        selectedFilter = "expression parsing";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void fft(View view) {
+        selectedFilter = "fft";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void games(View view) {
+        selectedFilter = "games";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void geometry(View view) {
+        selectedFilter = "geometry";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void graphMatchings(View view) {
+        selectedFilter = "graph matchings";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void graphs(View view) {
+        selectedFilter = "graphs";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void greedy(View view) {
+        selectedFilter = "greedy";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void hashing(View view) {
+        selectedFilter = "hashing";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void interactive(View view) {
+        selectedFilter = "interactive";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void math(View view) {
+        selectedFilter = "math";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void metrices(View view) {
+        selectedFilter = "metrices";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void meetInTheMiddle(View view) {
+        selectedFilter = "meet-in-the-middle";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void numberTheory(View view) {
+        selectedFilter = "number theory";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void probablities(View view) {
+        selectedFilter = "probablities";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void schedules(View view) {
+        selectedFilter = "schedules";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void shortestPaths(View view) {
+        selectedFilter = "shortest paths";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void sortings(View view) {
+        selectedFilter = "sortings";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void stringSuffixStructures(View view) {
+        selectedFilter = "string suffix structures";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void strings(View view) {
+        selectedFilter = "strings";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void ternarySearch(View view) {
+        selectedFilter = "ternary search";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void trees(View view) {
+        selectedFilter = "trees";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void implementation(View view) {
+        selectedFilter = "implementation";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void twoPointers(View view) {
+        selectedFilter = "two pointers";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void binarySearch(View view) {
+        selectedFilter = "binary search";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void dfsAndSimilar(View view) {
+        selectedFilter = "dfs and similar";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void flows(View view) {
+        selectedFilter = "flows";
+        filteredList(selectedFilter);
+        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+    }
 }
