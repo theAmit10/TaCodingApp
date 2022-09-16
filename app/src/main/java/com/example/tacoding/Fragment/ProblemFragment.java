@@ -41,7 +41,10 @@ public class ProblemFragment extends Fragment {
 
     FragmentProblemBinding binding;
 
+    SearchView searchView;
+
     String selectedFilter = "all";
+    String currentSearchText = "";
 
     String lowRange = "800";
     String maxRange = "3500";
@@ -448,12 +451,11 @@ public class ProblemFragment extends Fragment {
 
 
 
-
         return binding.getRoot();
     }
 
     public void initSearchWidget(){
-        SearchView searchView = binding.problemSearchView;
+        searchView = binding.problemSearchView;
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setQueryHint("Search through PROBLEM NAME ");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -466,19 +468,30 @@ public class ProblemFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
+                currentSearchText = newText;
+                selectedFilter = newText;
+
                 System.out.println("ENTERED TEXT : "+newText);
                 ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
 
                 for(ProblemModel problemModel: problemList){
                     if(problemModel.getName().toLowerCase().contains(newText.toLowerCase())){
-                        filterProblemList.add(problemModel);
+
+                        if(selectedFilter.equalsIgnoreCase("all")){
+                            filterProblemList.add(problemModel);
+                        }else {
+                            if(problemModel.getName().toLowerCase().contains(selectedFilter)){
+                                filterProblemList.add(problemModel);
+                            }
+                        }
+
                     }
                 }
 
 
                 ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
                 problemRV.setAdapter(problemAdapter1);
-//                problemAdapter.notifyDataSetChanged();
+                problemAdapter.notifyDataSetChanged();
 
                 return false;
             }
@@ -596,14 +609,20 @@ public class ProblemFragment extends Fragment {
 
     public void filteredList(String status){
 
-        selectedFilter = status;
+
         ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
 
         for(ProblemModel problemModel: problemList){
 
-            if(problemModel.getTags().contains(selectedFilter)){
+            if(problemModel.getTags().contains(status.toLowerCase())){
                 System.out.println("CONTAING LIST : " +problemModel.getTags());
-                filterProblemList.add(problemModel);
+                if(currentSearchText == ""){
+                    filterProblemList.add(problemModel);
+                }else {
+                    if(problemModel.getName().toLowerCase().contains(currentSearchText.toLowerCase())){
+                        filterProblemList.add(problemModel);
+                    }
+                }
             }
         }
 
@@ -618,6 +637,8 @@ public class ProblemFragment extends Fragment {
 
     public void allFilterTapped(View view) {
         selectedFilter = "all";
+        searchView.setQuery("", false);
+        searchView.clearFocus();
         ProblemAdapter problemAdapter2 = new ProblemAdapter(problemList, getContext());
         problemRV.setAdapter(problemAdapter2);
         problemAdapter.notifyDataSetChanged();
