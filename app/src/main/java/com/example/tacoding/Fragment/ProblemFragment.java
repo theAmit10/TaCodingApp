@@ -5,6 +5,7 @@ import static java.lang.Thread.sleep;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,7 +45,10 @@ public class ProblemFragment extends Fragment {
 
     SearchView searchView;
 
-    String selectedFilter = "all";
+    private String selectedFilter = "";
+
+
+    ArrayList<String> filteredWord = new ArrayList<>();
     String currentSearchText = "";
 
     String lowRange = "800";
@@ -59,6 +64,17 @@ public class ProblemFragment extends Fragment {
     ArrayList<ProblemModel> problemList;
     ProblemAdapter problemAdapter;
 
+    Button allButton, twosat, binarySearch, bitmasks, bruteForce, chineseReaminderTherem, combinatorics, constructiveAlgorithum, dataStructure, dfsAndSimilar, divideAndConquer,
+            dp, dsu, expressionParsing, fft, flows, games, geometry, graphMatchings, graphs,
+            greedy, hashing, implementation, interactive, math, metrices, meetInTheMiddle,
+            numberTheory, probablities, schedules, shortestPath, sortings, stringSuffixStructure,
+            strings, ternarySearch, trees, twoPointers;
+
+    Button beginners, intermediate, advanced;
+
+    private int white, darkGray, red;
+
+
     public ProblemFragment() {
         // Required empty public constructor
     }
@@ -67,7 +83,9 @@ public class ProblemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ExecutorService loadProblemThread  = Executors.newSingleThreadExecutor();
+        filteredWord.add("all");
+
+        ExecutorService loadProblemThread = Executors.newSingleThreadExecutor();
         loadProblemThread.execute(new Runnable() {
             @Override
             public void run() {
@@ -76,18 +94,14 @@ public class ProblemFragment extends Fragment {
                     loadProblem();
 
 
-
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
 
-
-
     }
-
 
 
     @Override
@@ -96,7 +110,7 @@ public class ProblemFragment extends Fragment {
         // Inflate the layout for this fragment
 //        View view = inflater.inflate(R.layout.fragment_problem, container, false);
 
-        binding  = FragmentProblemBinding.inflate(inflater, container, false);
+        binding = FragmentProblemBinding.inflate(inflater, container, false);
 
         // for coding platform
 
@@ -140,9 +154,6 @@ public class ProblemFragment extends Fragment {
         list.add(new ProblemTagModel("two pointers"));
 
 
-
-
-
         // FOR PROBLEM RECYCLER VIEW
         problemRV = binding.problemRV;
         problemList = new ArrayList<>();
@@ -155,13 +166,20 @@ public class ProblemFragment extends Fragment {
 //        problemList.add(new ProblemModel(R.drawable.ic_codechef_svgrepo_com, "Long Coding Challenge", "gready Problems"));
 
 
-
 //        problemAdapter = new ProblemAdapter(problemList, getContext());
 //        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 //        problemRV.setLayoutManager(linearLayoutManager1);
 //        problemRV.setNestedScrollingEnabled(false);
 //        problemRV.setAdapter(problemAdapter);
 
+        // binding the all button
+        buttonBinding();
+
+        beginners = binding.BeginnersBtn;
+        intermediate = binding.IntermediatesBtn;
+        advanced = binding.AdvancedBtn;
+
+        lookSelected(allButton);
 
 
         binding.allFilter.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +203,6 @@ public class ProblemFragment extends Fragment {
                 twoSat(view);
             }
         });
-
 
 
         binding.bitmasks.setOnClickListener(new View.OnClickListener() {
@@ -450,11 +467,111 @@ public class ProblemFragment extends Fragment {
         });
 
 
-
         return binding.getRoot();
     }
 
-    public void initSearchWidget(){
+    private void buttonBinding() {
+        allButton = binding.allFilter;
+        twosat = binding.twoSat;
+        binarySearch = binding.binarySearch;
+        bitmasks = binding.bitmasks;
+        bruteForce = binding.bruteForce;
+        chineseReaminderTherem = binding.chineseRemainderTheorem;
+        combinatorics = binding.combinatorics;
+        constructiveAlgorithum = binding.constructiveAlgorithms;
+        dataStructure = binding.dataStructures;
+        dfsAndSimilar = binding.dfsAndSimilar;
+        divideAndConquer = binding.divideAndConquer;
+        dp = binding.dp;
+        dsu = binding.dsu;
+        expressionParsing = binding.expressionParsing;
+        fft = binding.fft;
+        flows = binding.flows;
+        games = binding.games;
+        geometry = binding.geometry;
+        graphMatchings = binding.graphMatchings;
+        graphs = binding.graphs;
+        greedy = binding.greedy;
+        hashing = binding.hashing;
+        implementation = binding.implementation;
+        interactive = binding.interactive;
+        math = binding.math;
+        metrices = binding.metrices;
+        meetInTheMiddle = binding.meetInTheMiddle;
+        numberTheory = binding.numberTheory;
+        probablities = binding.probablities;
+        schedules = binding.schedules;
+        shortestPath = binding.shortestPaths;
+        sortings = binding.sortings;
+        stringSuffixStructure = binding.stringSuffixStructures;
+        strings = binding.strings;
+        ternarySearch = binding.ternarySearch;
+        trees = binding.trees;
+        twoPointers = binding.twoPointers;
+
+
+        //inting color
+        white = ContextCompat.getColor(getContext(), R.color.white);
+        red = ContextCompat.getColor(getContext(), R.color.teal_200);
+        darkGray = ContextCompat.getColor(getContext(), R.color.black);
+
+
+    }
+
+    private void lookSelected(Button parsedButton) {
+        parsedButton.setTextColor(red);
+        parsedButton.setBackgroundColor(darkGray);
+
+    }
+
+    private void lookUnSelected(Button parsedButton) {
+        parsedButton.setTextColor(red);
+        parsedButton.setBackgroundColor(white);
+
+    }
+
+    private void unSelectedAllFilterButton() {
+        lookUnSelected(allButton);
+        lookUnSelected(twosat);
+        lookUnSelected(binarySearch);
+        lookUnSelected(bitmasks);
+        lookUnSelected(bruteForce);
+        lookUnSelected(chineseReaminderTherem);
+        lookUnSelected(combinatorics);
+        lookUnSelected(constructiveAlgorithum);
+        lookUnSelected(dataStructure);
+        lookUnSelected(dfsAndSimilar);
+        lookUnSelected(divideAndConquer);
+        lookUnSelected(dp);
+        lookUnSelected(dsu);
+        lookUnSelected(expressionParsing);
+        lookUnSelected(fft);
+        lookUnSelected(flows);
+        lookUnSelected(games);
+        lookUnSelected(geometry);
+        lookUnSelected(graphMatchings);
+        lookUnSelected(graphs);
+        lookUnSelected(greedy);
+        lookUnSelected(hashing);
+        lookUnSelected(implementation);
+        lookUnSelected(interactive);
+        lookUnSelected(math);
+        lookUnSelected(metrices);
+        lookUnSelected(meetInTheMiddle);
+        lookUnSelected(numberTheory);
+        lookUnSelected(probablities);
+        lookUnSelected(schedules);
+        lookUnSelected(shortestPath);
+        lookUnSelected(sortings);
+        lookUnSelected(stringSuffixStructure);
+        lookUnSelected(strings);
+        lookUnSelected(ternarySearch);
+        lookUnSelected(trees);
+        lookUnSelected(twoPointers);
+    }
+
+
+    public void initSearchWidget() {
         searchView = binding.problemSearchView;
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setQueryHint("Search through PROBLEM NAME ");
@@ -469,19 +586,20 @@ public class ProblemFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
 
                 currentSearchText = newText;
-                selectedFilter = newText;
 
-                System.out.println("ENTERED TEXT : "+newText);
+
+                System.out.println("ENTERED TEXT : " + newText);
                 ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
 
-                for(ProblemModel problemModel: problemList){
-                    if(problemModel.getName().toLowerCase().contains(newText.toLowerCase())){
-
-                        if(selectedFilter.equalsIgnoreCase("all")){
+                for (ProblemModel problemModel : problemList) {
+                    if (problemModel.getName().toLowerCase().contains(newText.toLowerCase())) {
+                        if (filteredWord.contains("all")) {
                             filterProblemList.add(problemModel);
-                        }else {
-                            if(problemModel.getName().toLowerCase().contains(selectedFilter)){
-                                filterProblemList.add(problemModel);
+                        } else {
+                            for (String filter : filteredWord) {
+                                if (problemModel.getName().toLowerCase().contains(filter)) {
+                                    filterProblemList.add(problemModel);
+                                }
                             }
                         }
 
@@ -521,8 +639,8 @@ public class ProblemFragment extends Fragment {
 
 //                                System.out.println("sucess" +problemJsonObject.getString("rating"));
 
-                                if(tagJsonArray != null){
-                                    for(int k=0; k<tagJsonArray.length(); k++){
+                                if (tagJsonArray != null) {
+                                    for (int k = 0; k < tagJsonArray.length(); k++) {
                                         tagArray.add((String) tagJsonArray.get(k));
                                     }
                                 }
@@ -533,26 +651,26 @@ public class ProblemFragment extends Fragment {
                                         problemJsonObject.getString("name"),
                                         tagArray
                                 );
-                                    try {
-                                        problemModel.setRating(problemJsonObject.getString("rating"));
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                        problemModel.setRating("1100");
-                                    }
+                                try {
+                                    problemModel.setRating(problemJsonObject.getString("rating"));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    problemModel.setRating("1100");
+                                }
 
-                                    System.out.println("CONTEST ID : "+problemJsonObject.getString("contestId"));
-                                    System.out.println("INDEX : "+problemJsonObject.getString("index"));
-                                    System.out.println("NAME : "+problemJsonObject.getString("name"));
+                                System.out.println("CONTEST ID : " + problemJsonObject.getString("contestId"));
+                                System.out.println("INDEX : " + problemJsonObject.getString("index"));
+                                System.out.println("NAME : " + problemJsonObject.getString("name"));
 
-                                if(problemList.size() <400){
-                                    problemList.add(problemModel);}
-                                else{
+                                if (problemList.size() < 400) {
+                                    problemList.add(problemModel);
+                                } else {
 
                                 }
-                                    System.out.println("TAGS ARE : " +problemModel.getTags());
-                                    if(problemModel.getTags().size() != 0){
-                                        System.out.println("First TAGS  : " +problemModel.getTags().get(0));
-                                    }
+                                System.out.println("TAGS ARE : " + problemModel.getTags());
+                                if (problemModel.getTags().size() != 0) {
+                                    System.out.println("First TAGS  : " + problemModel.getTags().get(0));
+                                }
 
 
                             }
@@ -583,7 +701,7 @@ public class ProblemFragment extends Fragment {
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void filterListRating(String low, String high){
+    public void filterListRating(String low, String high) {
         lowRange = low;
         maxRange = high;
 
@@ -591,10 +709,10 @@ public class ProblemFragment extends Fragment {
         int val2 = Integer.parseInt(high);
         ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
 
-        for(ProblemModel problemModel: problemList){
+        for (ProblemModel problemModel : problemList) {
 
-            if((Integer.parseInt(problemModel.getRating()) >= val1) && (Integer.parseInt(problemModel.getRating()) <= val2) ){
-                System.out.println("Rating  : " +problemModel.getRating());
+            if ((Integer.parseInt(problemModel.getRating()) >= val1) && (Integer.parseInt(problemModel.getRating()) <= val2)) {
+                System.out.println("Rating  : " + problemModel.getRating());
                 filterProblemList.add(problemModel);
             }
         }
@@ -607,23 +725,33 @@ public class ProblemFragment extends Fragment {
 
     }
 
-    public void filteredList(String status){
+    public void filteredList(String status) {
 
+        if (status != null && !filteredWord.contains(status)) {
+            filteredWord.add(status);
+        }
+
+        System.out.println("ENTERED TEXT FILTERED  : " + status);
 
         ArrayList<ProblemModel> filterProblemList = new ArrayList<>();
 
-        for(ProblemModel problemModel: problemList){
+        for (ProblemModel problemModel : problemList) {
 
-            if(problemModel.getTags().contains(status.toLowerCase())){
-                System.out.println("CONTAING LIST : " +problemModel.getTags());
-                if(currentSearchText == ""){
-                    filterProblemList.add(problemModel);
-                }else {
-                    if(problemModel.getName().toLowerCase().contains(currentSearchText.toLowerCase())){
+            for (String filter : filteredWord) {
+                System.out.println("LIST DATA : " + filter);
+                if (problemModel.getTags().contains(filter.toLowerCase())) {
+                    System.out.println("CONTAING LIST : " + problemModel.getTags());
+                    if (currentSearchText == "") {
                         filterProblemList.add(problemModel);
+                    } else {
+                        if (problemModel.getName().toLowerCase().contains(currentSearchText.toLowerCase())) {
+                            filterProblemList.add(problemModel);
+                        }
                     }
                 }
+
             }
+
         }
 
 
@@ -636,12 +764,20 @@ public class ProblemFragment extends Fragment {
 
 
     public void allFilterTapped(View view) {
-        selectedFilter = "all";
+
+        filteredWord.clear();
+        filteredWord.add("all");
         searchView.setQuery("", false);
         searchView.clearFocus();
+
+        unSelectedAllFilterButton();
+        lookSelected(allButton);
+
+//        Toast.makeText(getContext(), "ALL SELECTED", Toast.LENGTH_SHORT).show();
+
         ProblemAdapter problemAdapter2 = new ProblemAdapter(problemList, getContext());
         problemRV.setAdapter(problemAdapter2);
-        problemAdapter.notifyDataSetChanged();
+//        problemAdapter.notifyDataSetChanged();
 
     }
 
@@ -650,242 +786,359 @@ public class ProblemFragment extends Fragment {
         selectedFilter = "ADVANCED";
         lowRange = "2000";
         maxRange = "4000";
-        filterListRating(lowRange,maxRange);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        filterListRating(lowRange, maxRange);
+        lookSelected(advanced);
+        lookUnSelected(beginners);
+        lookUnSelected(intermediate);
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void intermediate(View view) {
         selectedFilter = "INTERMEDIATE";
         lowRange = "900";
         maxRange = "2000";
-        filterListRating(lowRange,maxRange);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        filterListRating(lowRange, maxRange);
+        lookSelected(intermediate);
+        lookUnSelected(advanced);
+        lookUnSelected(beginners);
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void beginners(View view) {
         selectedFilter = "BIGINNERS";
         lowRange = "800";
         maxRange = "900";
-        filterListRating(lowRange,maxRange);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        filterListRating(lowRange, maxRange);
+        lookSelected(beginners);
+        lookUnSelected(intermediate);
+        lookUnSelected(advanced);
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void twoSat(View view) {
+        filteredWord.remove("all");
+        lookSelected(twosat);
+        lookUnSelected(allButton);
         selectedFilter = "2-sat";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void bitmasks(View view) {
+        filteredWord.remove("all");
+        lookSelected(bitmasks);
+        lookUnSelected(allButton);
         selectedFilter = "bitmasks";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void bruteForce(View view) {
+        filteredWord.remove("all");
+        lookSelected(bruteForce);
+        lookUnSelected(allButton);
         selectedFilter = "brute force";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void chineseRemainderTheorem(View view) {
+        filteredWord.remove("all");
+        lookSelected(chineseReaminderTherem);
+        lookUnSelected(allButton);
         selectedFilter = "chinese remainder theorem";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void combinatorics(View view) {
+        filteredWord.remove("all");
+        lookSelected(combinatorics);
+        lookUnSelected(allButton);
         selectedFilter = "combinatorics";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void constructiveAlgorithms(View view) {
+        filteredWord.remove("all");
+        lookSelected(constructiveAlgorithum);
+        lookUnSelected(allButton);
         selectedFilter = "constructive algorithms";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
 
     public void dataStructures(View view) {
+        filteredWord.remove("all");
+        lookSelected(dataStructure);
+        lookUnSelected(allButton);
         selectedFilter = "data structures";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void divideAndConquer(View view) {
+        filteredWord.remove("all");
+        lookSelected(divideAndConquer);
+        lookUnSelected(allButton);
         selectedFilter = "divide and conquer";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void dp(View view) {
+        filteredWord.remove("all");
+        lookSelected(dp);
+        lookUnSelected(allButton);
         selectedFilter = "dp";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void dsu(View view) {
+        filteredWord.remove("all");
+        lookSelected(dsu);
+        lookUnSelected(allButton);
         selectedFilter = "dsu";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void expressionParsing(View view) {
+        filteredWord.remove("all");
+        lookSelected(expressionParsing);
+        lookUnSelected(allButton);
         selectedFilter = "expression parsing";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void fft(View view) {
+        filteredWord.remove("all");
+        lookSelected(fft);
+        lookUnSelected(allButton);
         selectedFilter = "fft";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void games(View view) {
+        filteredWord.remove("all");
+        lookSelected(games);
+        lookUnSelected(allButton);
         selectedFilter = "games";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void geometry(View view) {
+        filteredWord.remove("all");
+        lookSelected(geometry);
+        lookUnSelected(allButton);
         selectedFilter = "geometry";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void graphMatchings(View view) {
+        filteredWord.remove("all");
+        lookSelected(graphMatchings);
+        lookUnSelected(allButton);
         selectedFilter = "graph matchings";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void graphs(View view) {
+        filteredWord.remove("all");
+        lookSelected(graphs);
+        lookUnSelected(allButton);
         selectedFilter = "graphs";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void greedy(View view) {
+        filteredWord.remove("all");
+        lookSelected(greedy);
+        lookUnSelected(allButton);
         selectedFilter = "greedy";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void hashing(View view) {
+        filteredWord.remove("all");
+        lookSelected(hashing);
+        lookUnSelected(allButton);
         selectedFilter = "hashing";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void interactive(View view) {
+        filteredWord.remove("all");
+        lookSelected(interactive);
+        lookUnSelected(allButton);
         selectedFilter = "interactive";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void math(View view) {
+        filteredWord.remove("all");
+        lookSelected(math);
+        lookUnSelected(allButton);
         selectedFilter = "math";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void metrices(View view) {
+        filteredWord.remove("all");
+        lookSelected(metrices);
+        lookUnSelected(allButton);
         selectedFilter = "metrices";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
 
     }
 
     public void meetInTheMiddle(View view) {
+        filteredWord.remove("all");
+        lookSelected(meetInTheMiddle);
+        lookUnSelected(allButton);
         selectedFilter = "meet-in-the-middle";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void numberTheory(View view) {
+        filteredWord.remove("all");
+        lookSelected(numberTheory);
+        lookUnSelected(allButton);
         selectedFilter = "number theory";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void probablities(View view) {
+        filteredWord.remove("all");
+        lookSelected(probablities);
+        lookUnSelected(allButton);
         selectedFilter = "probablities";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void schedules(View view) {
+        filteredWord.remove("all");
+        lookSelected(schedules);
+        lookUnSelected(allButton);
         selectedFilter = "schedules";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void shortestPaths(View view) {
+        filteredWord.remove("all");
+        lookSelected(shortestPath);
+        lookUnSelected(allButton);
         selectedFilter = "shortest paths";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void sortings(View view) {
+        filteredWord.remove("all");
+        lookSelected(sortings);
+        lookUnSelected(allButton);
         selectedFilter = "sortings";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void stringSuffixStructures(View view) {
+        filteredWord.remove("all");
+        lookSelected(stringSuffixStructure);
+        lookUnSelected(allButton);
         selectedFilter = "string suffix structures";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void strings(View view) {
+        filteredWord.remove("all");
+        lookSelected(strings);
+        lookUnSelected(allButton);
         selectedFilter = "strings";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void ternarySearch(View view) {
+        filteredWord.remove("all");
+        lookSelected(ternarySearch);
+        lookUnSelected(allButton);
         selectedFilter = "ternary search";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void trees(View view) {
+        filteredWord.remove("all");
+        lookSelected(trees);
+        lookUnSelected(allButton);
         selectedFilter = "trees";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
 
     }
 
     public void implementation(View view) {
+        filteredWord.remove("all");
+        lookSelected(implementation);
+        lookUnSelected(allButton);
         selectedFilter = "implementation";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void twoPointers(View view) {
+        filteredWord.remove("all");
+        lookSelected(twoPointers);
+        lookUnSelected(allButton);
         selectedFilter = "two pointers";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void binarySearch(View view) {
+        filteredWord.remove("all");
+        lookSelected(binarySearch);
+        lookUnSelected(allButton);
         selectedFilter = "binary search";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void dfsAndSimilar(View view) {
+        filteredWord.remove("all");
+        lookSelected(dfsAndSimilar);
+        lookUnSelected(allButton);
         selectedFilter = "dfs and similar";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 
     public void flows(View view) {
+        filteredWord.remove("all");
+        lookSelected(flows);
+        lookUnSelected(allButton);
         selectedFilter = "flows";
         filteredList(selectedFilter);
-        Toast.makeText(getContext(), ""+selectedFilter, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + selectedFilter, Toast.LENGTH_SHORT).show();
     }
 }

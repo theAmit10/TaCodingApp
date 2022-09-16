@@ -38,9 +38,17 @@ public class NewsFragment extends Fragment {
     private  int white, darkGray, red;
 
 
+
+
+
+
     public NewsFragment() {
         // Required empty public constructor
     }
+
+
+
+
 
 
     @Override
