@@ -42,6 +42,18 @@
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/contestSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:queryHint="Contest Name "></androidx.appcompat.widget.SearchView>
+
+
     <View
         android:id="@+id/view3"
         android:layout_width="0dp"
@@ -53,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/contestSearchView" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -81,22 +93,170 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/problemTagRV"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="5dp" />
-                    </RelativeLayout>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/allFilter"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="allFilterTapped"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_people"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/codeChef"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="codeChef"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_codechef"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/hackerEarth"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="hackerEarth"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_hackerearth"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/hackerRank"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="hackerRank"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_hackerrank"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/codeForces"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="codeForces"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_codeforces"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/leetCode"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="leetCode"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_leetcode"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/atCoder"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="atCoder"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ta_atcoder"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/codeForcesGym"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="codeForcesGym"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_codeforces"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/topCoder"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="topCoder"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_topcoder"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/csAcademy"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="csAcademy"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_csacademy"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/kickStart"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="kickStart"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/s_kickstarter"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/Toph"
+                        android:layout_width="@dimen/_50font_mdp"
+                        android:layout_height="@dimen/_50font_mdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="Toph"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ta_toph"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
 
                 </LinearLayout>
+
             </HorizontalScrollView>
 
             <View

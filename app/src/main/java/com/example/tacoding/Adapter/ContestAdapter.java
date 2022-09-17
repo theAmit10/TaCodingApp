@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +53,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
         holder.startDate.setText(contestModel.getStartDate());
         holder.endDate.setText(contestModel.getEndDate());
 
+
         holder.itemView.findViewById(R.id.contestView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +63,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
         });
 
     }
+
 
     public void updateContest(ArrayList<ContestModel> updatedConstest){
         list.clear();
@@ -87,6 +91,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             contestDescription = itemView.findViewById(R.id.contestDescription);
             startDate = itemView.findViewById(R.id.setStartTime);
             endDate = itemView.findViewById(R.id.setEndTime);
+
         }
     }
 }

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tacoding.Adapter.CodingPlatformAdapter;
 import com.example.tacoding.Adapter.ProfileAdapter;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ProfileModel;
@@ -63,11 +62,12 @@ public class ProfileFragment extends Fragment {
         list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
         list.add(new CodingPlatformModel(R.drawable.ic_people));
 
-        CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list,getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        codingPlatformRv.setLayoutManager(linearLayoutManager);
-        codingPlatformRv.setNestedScrollingEnabled(false);
-        codingPlatformRv.setAdapter(codingPlatformAdapter);
+//        CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list,getContext());
+//        ProfileAdapter codingPlatformAdapter = new ProfileAdapter(list, getContext());
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        codingPlatformRv.setLayoutManager(linearLayoutManager);
+//        codingPlatformRv.setNestedScrollingEnabled(false);
+//        codingPlatformRv.setAdapter(codingPlatformAdapter);
 
 
         //for profile

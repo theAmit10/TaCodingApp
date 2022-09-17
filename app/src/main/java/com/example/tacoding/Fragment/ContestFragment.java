@@ -2,6 +2,7 @@ package com.example.tacoding.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -22,11 +25,13 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.tacoding.Adapter.ContestAdapter;
 
 import com.example.tacoding.Adapter.IPlatformRVAdapter;
+import com.example.tacoding.Adapter.NewsAdapter;
 import com.example.tacoding.Adapter.PlatformAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
+import com.example.tacoding.Model.NewsModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
@@ -52,6 +57,18 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
     FragmentContestBinding binding;
     public static PlatformViewModel platformViewModel;
+
+
+    // Filtering Contest
+    ArrayList<String> filterWord = new ArrayList<>();
+    SearchView searchView;
+    String currentString = "";
+    private ImageView allButton, codeChef, codeForces, codeForcesGym,
+            hackerEarth, hackerRank, leetCode, atCoder, topCoder, csAcademy,
+            kickStart, toph;
+
+    public static Map<String, Integer> filterMap = new HashMap<String, Integer>();
+    public static Map<String, Integer> selMap = new HashMap<String, Integer>();
 
 
 
@@ -85,6 +102,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
         Toast.makeText(getContext(), "RELOADING", Toast.LENGTH_SHORT).show();
 
+        filterWord.add("all");
+
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new Runnable() {
             @Override
@@ -111,7 +130,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         // for coding platform
 
         // adding non active drawable
-        codingPlatformRv = binding.problemTagRV;
+//        codingPlatformRv = binding.problemTagRV;
         list = new ArrayList<>();
         map.put("CodeChef", R.drawable.ic_codechef_svgrepo_com);
         map.put("HackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
@@ -139,12 +158,60 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         sMap.put("Kick Start", R.drawable.s_kickstarter);
         sMap.put("Toph", R.drawable.ta_toph);
 
+        // for filtermap
 
-        platformAdapter = new PlatformAdapter(getContext().getApplicationContext(), this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        codingPlatformRv.setLayoutManager(linearLayoutManager);
-        codingPlatformRv.setAdapter(platformAdapter);
-        codingPlatformRv.setNestedScrollingEnabled(false);
+        filterMap.put("allFilter", R.drawable.ic_profile);
+        filterMap.put("codeChef", R.drawable.ic_codechef_svgrepo_com);
+        filterMap.put("hackerEarth", R.drawable.ic_hackerearth_svgrepo_com);
+        filterMap.put("hackerRank", R.drawable.ic_hackerrank_svgrepo_com);
+        filterMap.put("codeForces", R.drawable.ic_codeforces_svgrepo_com);
+        filterMap.put("leetCode", R.drawable.ic_leetcode_svgrepo_com);
+        filterMap.put("atCoder", R.drawable.ic_code);
+        filterMap.put("codeForcesGym", R.drawable.ic_codeforces_svgrepo_com);
+        filterMap.put("topCoder", R.drawable.ic_topcoder_svgrepo_com);
+        filterMap.put("csAcademy", R.drawable.ic_csacademy);
+        filterMap.put("kickStart", R.drawable.ic_u_kickstarter);
+        filterMap.put("toph", R.drawable.ic_code);
+
+        filterMap.put("allFilter", R.drawable.ic_contest);
+        selMap.put("codeChef", R.drawable.s_codechef);
+        selMap.put("hackerEarth", R.drawable.s_hackerearth);
+        selMap.put("hackerRank", R.drawable.s_hackerrank);
+        selMap.put("codeForces", R.drawable.s_codeforces);
+        selMap.put("leetCode", R.drawable.s_leetcode);
+        selMap.put("atCoder", R.drawable.ta_atcoder);
+        selMap.put("codeForcesGym", R.drawable.s_codeforces);
+        selMap.put("topCoder", R.drawable.s_topcoder);
+        selMap.put("csAcademy", R.drawable.s_csacademy);
+        selMap.put("kickStart", R.drawable.s_kickstarter);
+        selMap.put("toph", R.drawable.ta_toph);
+
+        //
+//        lookSelected(allButton, "allFilter");
+
+
+//        platformAdapter = new PlatformAdapter(getContext().getApplicationContext(), this);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        codingPlatformRv.setLayoutManager(linearLayoutManager);
+//        codingPlatformRv.setAdapter(platformAdapter);
+//        codingPlatformRv.setNestedScrollingEnabled(false);
+
+        // initing imageView
+        allButton = binding.allFilter;
+        codeChef = binding.codeChef;
+        codeForces = binding.codeForces;
+        codeForcesGym = binding.codeForcesGym;
+        hackerEarth = binding.hackerEarth;
+        hackerRank = binding.hackerRank;
+        leetCode = binding.leetCode;
+        atCoder = binding.atCoder;
+        topCoder = binding.topCoder;
+        csAcademy = binding.csAcademy;
+        kickStart = binding.kickStart;
+        toph = binding.Toph;
+
+
+
 
 //        #############################################################
         // below code is commedted because the following data has been already added to the local database.
@@ -166,23 +233,23 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 //        }
 
         // checking data in the database and updating adapter
-        platformViewModel.getmAllPlatform().observe(
-                getViewLifecycleOwner(), platforms -> {
-                    System.out.println("CHECKING DATA IN DATABASE");
-
-                    System.out.println(" BEFORE PLATFORM ARRAYLIST : ");
-                    for (int i = 0; i < platforms.size(); i++) {
-                        System.out.println("DATA NAME : " + platforms.get(i).getPlatformName());
-                        System.out.println("DATA IMAGE : " + platforms.get(i).getPlatformImage());
-                    }
-
-                    platformAdapter.updateList((ArrayList<Platform>) platforms);
-
-                    System.out.println("CHECKED DATA IN DATABASE");
-
-                }
-
-        );
+//        platformViewModel.getmAllPlatform().observe(
+//                getViewLifecycleOwner(), platforms -> {
+//                    System.out.println("CHECKING DATA IN DATABASE");
+//
+//                    System.out.println(" BEFORE PLATFORM ARRAYLIST : ");
+//                    for (int i = 0; i < platforms.size(); i++) {
+//                        System.out.println("DATA NAME : " + platforms.get(i).getPlatformName());
+//                        System.out.println("DATA IMAGE : " + platforms.get(i).getPlatformImage());
+//                    }
+//
+//                    platformAdapter.updateList((ArrayList<Platform>) platforms);
+//
+//                    System.out.println("CHECKED DATA IN DATABASE");
+//
+//                }
+//
+//        );
 
         platformViewModel.getmAllPlatformName().observeForever(platformNames ->
         {
@@ -225,6 +292,95 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         contestRv.setNestedScrollingEnabled(false);
         contestRv.setAdapter(contestAdapter);
 
+        initSearchWidget();
+
+
+        binding.allFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allFilterTapped(view);
+            }
+        });
+
+        binding.codeChef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                codeChef(view);
+            }
+        });
+
+        binding.codeForces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                codeForces(view);
+            }
+        });
+
+        binding.codeForcesGym.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                codeForcesGym(view);
+            }
+        });
+
+        binding.leetCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                leetCode(view);
+
+            }
+        });
+
+        binding.atCoder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                atCoder(view);
+            }
+        });
+
+        binding.csAcademy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                csAcademy(view);
+            }
+        });
+
+        binding.hackerEarth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hackerEarth(view);
+            }
+        });
+
+        binding.hackerRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hackerRank(view);
+            }
+        });
+
+        binding.Toph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toph(view);
+            }
+        });
+
+        binding.kickStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kickStart(view);
+            }
+        });
+
+        binding.topCoder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                topCoder(view);
+            }
+        });
+
+
         return binding.getRoot();
     }
 
@@ -258,52 +414,12 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                                 // setting contest image
                                 contestModelList.setPlatformImage(sMap.get(jsonObject.getString("site")));
                                 contestList.add(contestModelList);
-
-
                             }
 
-                            // here filtering the contest via selected platform
-                            ExecutorService executorService = Executors.newSingleThreadExecutor();
-                            executorService.execute(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    System.out.println("NOW FILTERED LIST ONLY ");
-
-
-                                    Handler handler = new Handler(Looper.getMainLooper());
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(), platformNames -> {
-
-                                                if (platformNames.size() > 0) {
-                                                    System.out.println("IF BLOCK SELECTED LENGTH : " + platformNames.size());
-                                                    System.out.println("IF BLOCK CONTEST LENGTH : " + contestList.size());
-                                                    for (int x = 0; x < platformNames.size(); x++) {
-                                                        for (int y = 0; y < contestList.size(); y++) {
-                                                            if (contestList.get(y).getContestTitle().equals(platformNames.get(x).getNplatformName())) {
-                                                                filteredContestList.add(contestList.get(y));
-                                                            }
-                                                        }
-                                                    }
-                                                    System.out.println("NODATA GET");
-                                                    contestAdapter.updateContest(filteredContestList);
-                                                } else {
-                                                    System.out.println("ELSE BLOCK  RUNNING ");
-                                                    System.out.println("ELSE BLOCK BEFORE -> LENGTH : " + contestList.size());
-                                                    contestAdapter.updateContest(contestList);
-                                                    System.out.println("ELSE BLOCK AFTER -> LENGTH : " + contestList.size());
-                                                }
-                                            });
-
-                                        }
-                                    });
-
-
-                                }
-                            });
+                            ContestAdapter con = new ContestAdapter(contestList,getContext());
+                            contestRv.setAdapter(con);
+//                            contestAdapter.updateContest(contestList);
+                            System.out.println("BLOCK -> LENGTH : " + contestList.size());
 
 
                         } catch (JSONException e) {
@@ -328,44 +444,262 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     @Override
     public void onITemClick(Platform platform) {
 
-        PlatformName platformName = new PlatformName(platform.getPlatformName());
-        platformViewModel.insertName(platformName);
-
-
-        AtomicBoolean check = new AtomicBoolean(false);
-
-        platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(),platformNames -> {
-            String a = platform.getPlatformName().toLowerCase(Locale.ROOT);
-
-            for (int j = 0; j < platformNames.size(); j++) {
-                if (platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)) {
-                    check.set(true); //means it exist in db
-                    break;
-                }
-            }
-            System.out.println(" SELECTED  : " + a + " EXISTS : " + check);
-
-        });
-
-        System.out.println("###########################################################");
-        System.out.println("SELECTED PLATFORM WORKING  : " + platform.getPlatformName());
-        System.out.println("###########################################################");
-
-
-
-        if (check.get()) {
-            System.out.println("GOOOD : " + check);
-            platformViewModel.deleteName(platformName);
-
-        } else {
-            System.out.println("BAD : " + check);
-        }
-
-//        contestAdapter.updateContest(filteredContestList);
-
-        getParentFragmentManager().beginTransaction().detach(ContestFragment.this).commit();
-        getParentFragmentManager().beginTransaction().attach(ContestFragment.this).commit();
+//        PlatformName platformName = new PlatformName(platform.getPlatformName());
+//        platformViewModel.insertName(platformName);
+//
+//
+//        AtomicBoolean check = new AtomicBoolean(false);
+//
+//        platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(), platformNames -> {
+//            String a = platform.getPlatformName().toLowerCase(Locale.ROOT);
+//
+//            for (int j = 0; j < platformNames.size(); j++) {
+//                if (platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)) {
+//                    check.set(true); //means it exist in db
+//                    break;
+//                }
+//            }
+//            System.out.println(" SELECTED  : " + a + " EXISTS : " + check);
+//
+//        });
+//
+//        System.out.println("###########################################################");
+//        System.out.println("SELECTED PLATFORM WORKING  : " + platform.getPlatformName());
+//        System.out.println("###########################################################");
+//
+//
+//        if (check.get()) {
+//            System.out.println("GOOOD : " + check);
+//            platformViewModel.deleteName(platformName);
+//
+//        } else {
+//            System.out.println("BAD : " + check);
+//        }
+//
+////        contestAdapter.updateContest(filteredContestList);
+//
+//        getParentFragmentManager().beginTransaction().detach(ContestFragment.this).commit();
+//        getParentFragmentManager().beginTransaction().attach(ContestFragment.this).commit();
 
     }
 
+    private void lookSelected(ImageView parsedImage, String val) {
+        for (Map.Entry<String, Integer> entry : filterMap.entrySet()) {
+            String k = entry.getKey();
+            Integer v = entry.getValue();
+            System.out.println("key: " + k + ", value: " + v);
+            if (k.toLowerCase().equalsIgnoreCase(val.toLowerCase())) {
+                parsedImage.setImageResource(v);
+            }
+        }
+    }
+
+    private void lookUnSelected(ImageView parsedImage, String val) {
+        for (Map.Entry<String, Integer> entry : selMap.entrySet()) {
+            String k = entry.getKey();
+            Integer v = entry.getValue();
+            System.out.println("key: " + k + ", value: " + v);
+            if (k.toLowerCase().equalsIgnoreCase(val.toLowerCase())) {
+                parsedImage.setImageResource(v);
+            }
+        }
+    }
+
+
+    private void unSelectedAllFilterButton() {
+        lookUnSelected(allButton, "allFilter");
+        lookUnSelected(codeChef, "codeChef");
+        lookUnSelected(codeForces, "codeForces");
+        lookUnSelected(hackerEarth, "hackerEarth");
+        lookUnSelected(hackerRank, "hackerRank");
+        lookUnSelected(leetCode, "leetCode");
+        lookUnSelected(atCoder, "atCoder");
+        lookUnSelected(codeForcesGym, "codeForcesGym");
+        lookUnSelected(topCoder, "topCoder");
+        lookUnSelected(csAcademy, "csAcademy");
+        lookUnSelected(kickStart, "kickStart");
+        lookUnSelected(toph, "toph");
+    }
+
+    public void initSearchWidget() {
+        searchView = binding.contestSearchView;
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint(" Platform Name ");
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                currentString = newText;
+
+                System.out.println("ENTERED TEXT : " + newText);
+
+                ArrayList<ContestModel> contestModels = new ArrayList<>();
+
+
+                for (ContestModel contestModel : contestList) {
+                    if (contestModel.getContestTitle().toLowerCase().contains(newText.toLowerCase())) {
+                        if (filterWord.contains("all")) {
+                            contestModels.add(contestModel);
+                        } else {
+                            for (String filter : filterWord) {
+                                if (contestModel.getContestTitle().toLowerCase().contains(filter)) {
+                                    contestModels.add(contestModel);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                ContestAdapter contestAdapter3 = new ContestAdapter(contestModels, getContext());
+                contestRv.setAdapter(contestAdapter3);
+                contestAdapter3.notifyDataSetChanged();
+
+                return false;
+            }
+        });
+    }
+
+
+    public void filterList(String status) {
+
+        if (status != null && !filterWord.contains(status))
+            filterWord.add(status);
+
+        System.out.println("ENTERED TEXT FILTERED  : " + status);
+
+        ArrayList<ContestModel> contestModels = new ArrayList<>();
+
+
+        for (ContestModel contestModel : contestList) {
+            for (String filter : filterWord) {
+                System.out.println("LIST DATA : " + filter);
+                if (contestModel.getContestTitle().toLowerCase().contains(filter.toLowerCase())) {
+                    if (currentString == "") {
+                        System.out.println("currentString  TA : " + contestModel.getContestTitle());
+                        contestModels.add(contestModel);
+                    } else {
+                        if (contestModel.getContestTitle().toLowerCase().contains(currentString.toLowerCase())) {
+                            contestModels.add(contestModel);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        ContestAdapter contestAdapter1 = new ContestAdapter(contestModels, getContext());
+        contestRv.setAdapter(contestAdapter1);
+        contestAdapter1.notifyDataSetChanged();
+    }
+
+
+    public void allFilterTapped(View view) {
+        filterWord.clear();
+        filterWord.add("all");
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+
+        unSelectedAllFilterButton();
+        lookSelected(allButton, "allFilter");
+
+        ContestAdapter contestAdapter2 = new ContestAdapter(contestList, getContext());
+        contestRv.setAdapter(contestAdapter2);
+    }
+
+    public void codeChef(View view) {
+        filterWord.remove("all");
+        filterList("codeChef");
+        lookSelected(codeChef, "codeChef");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "CODECHEF", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void hackerEarth(View view) {
+        filterWord.remove("all");
+        filterList("hackerEarth");
+        lookSelected(hackerEarth, "hackerEarth");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "HACKEREARTH", Toast.LENGTH_SHORT).show();
+    }
+
+    public void hackerRank(View view) {
+        filterWord.remove("all");
+        filterList("hackerRank");
+        lookSelected(hackerRank, "hackerRank");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "HACKERRANK", Toast.LENGTH_SHORT).show();
+    }
+
+    public void codeForces(View view) {
+        filterWord.remove("all");
+        filterList("codeForces");
+        lookSelected(codeForces, "codeForces");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "CODEFORCES", Toast.LENGTH_SHORT).show();
+    }
+
+    public void leetCode(View view) {
+        filterWord.remove("all");
+        filterList("leetCode");
+        lookSelected(leetCode, "leetCode");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "LEETCODE", Toast.LENGTH_SHORT).show();
+    }
+
+    public void atCoder(View view) {
+        filterWord.remove("all");
+        filterList("atCoder");
+        lookSelected(atCoder, "atCoder");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "ATCODER", Toast.LENGTH_SHORT).show();
+    }
+
+    public void codeForcesGym(View view) {
+        filterWord.remove("all");
+        filterList("CodeForces::Gym");
+        lookSelected(codeForcesGym, "codeForcesGym");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "CODEFORCESGYM", Toast.LENGTH_SHORT).show();
+    }
+
+    public void topCoder(View view) {
+        filterWord.remove("all");
+        filterList("topCoder");
+        lookSelected(topCoder, "topCoder");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "TOPCODER", Toast.LENGTH_SHORT).show();
+    }
+
+    public void csAcademy(View view) {
+        filterWord.remove("all");
+        filterList("cs Academy");
+        lookSelected(csAcademy, "csAcademy");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "CSACADEMY", Toast.LENGTH_SHORT).show();
+    }
+
+    public void kickStart(View view) {
+        filterWord.remove("all");
+        filterList("kick start");
+        lookSelected(kickStart, "kickStart");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "KICKSTART", Toast.LENGTH_SHORT).show();
+    }
+
+    public void Toph(View view) {
+        filterWord.remove("all");
+        filterList("toph");
+        lookSelected(toph, "toph");
+        lookUnSelected(allButton, "allFilter");
+        Toast.makeText(getContext(), "TOPH", Toast.LENGTH_SHORT).show();
+    }
 }
