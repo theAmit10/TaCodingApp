@@ -13,7 +13,9 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -57,6 +59,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
     FragmentContestBinding binding;
     public static PlatformViewModel platformViewModel;
+
+    WebView webView ;
 
 
     // Filtering Contest
@@ -209,6 +213,25 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         csAcademy = binding.csAcademy;
         kickStart = binding.kickStart;
         toph = binding.Toph;
+
+        webView = binding.contestWebView;
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        // Set WebView client
+        webView.setWebChromeClient(new WebChromeClient());
+
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+
+
+
 
 
 
@@ -444,42 +467,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     @Override
     public void onITemClick(Platform platform) {
 
-//        PlatformName platformName = new PlatformName(platform.getPlatformName());
-//        platformViewModel.insertName(platformName);
-//
-//
-//        AtomicBoolean check = new AtomicBoolean(false);
-//
-//        platformViewModel.getmAllPlatformName().observe(getViewLifecycleOwner(), platformNames -> {
-//            String a = platform.getPlatformName().toLowerCase(Locale.ROOT);
-//
-//            for (int j = 0; j < platformNames.size(); j++) {
-//                if (platformNames.get(j).getNplatformName().toLowerCase(Locale.ROOT).equalsIgnoreCase(a)) {
-//                    check.set(true); //means it exist in db
-//                    break;
-//                }
-//            }
-//            System.out.println(" SELECTED  : " + a + " EXISTS : " + check);
-//
-//        });
-//
-//        System.out.println("###########################################################");
-//        System.out.println("SELECTED PLATFORM WORKING  : " + platform.getPlatformName());
-//        System.out.println("###########################################################");
-//
-//
-//        if (check.get()) {
-//            System.out.println("GOOOD : " + check);
-//            platformViewModel.deleteName(platformName);
-//
-//        } else {
-//            System.out.println("BAD : " + check);
-//        }
-//
-////        contestAdapter.updateContest(filteredContestList);
-//
-//        getParentFragmentManager().beginTransaction().detach(ContestFragment.this).commit();
-//        getParentFragmentManager().beginTransaction().attach(ContestFragment.this).commit();
+
+
 
     }
 

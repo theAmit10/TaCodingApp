@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -29,7 +32,6 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
     ArrayList<ContestModel> list;
     Context context;
 
-
     public ContestAdapter(ArrayList<ContestModel> list, Context context) {
         this.list = list;
         this.context = context;
@@ -54,11 +56,45 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
         holder.endDate.setText(contestModel.getEndDate());
 
 
-        holder.itemView.findViewById(R.id.contestView).setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+        holder.contestTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show();
-                
+                System.out.println("DA : "+contestModel.getUrl());
+
+                holder.contestWebView = new WebView(context);
+//                holder.contestWebView.loadUrl(contestModel.getUrl());
+
+
+                holder.contestWebView.loadDataWithBaseURL(contestModel.getUrl(),"Relative Link", "text/html","UTF-8",contestModel.getUrl());
+                holder.contestWebView.setWebChromeClient(new WebChromeClient());
+
+//                holder.contestWebView.setWebViewClient(new wbc());
+
+
+
+                holder.contestWebView.getSettings().setAllowFileAccess(true);
+
+
+                holder.contestWebView.getSettings().setAppCacheEnabled(true);
+
+                holder.contestWebView.getSettings().setJavaScriptEnabled(true);
+                holder.contestWebView.getSettings().setDomStorageEnabled(true);
+
+
+                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+
             }
         });
 
@@ -81,6 +117,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
     public class viewHolder extends RecyclerView.ViewHolder{
 
         ImageView platformImage;
+        WebView contestWebView;
         TextView contestTitle, contestDescription, startDate, endDate;
 
         public viewHolder(@NonNull View itemView) {
@@ -91,7 +128,18 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             contestDescription = itemView.findViewById(R.id.contestDescription);
             startDate = itemView.findViewById(R.id.setStartTime);
             endDate = itemView.findViewById(R.id.setEndTime);
+            contestWebView =(WebView)itemView.findViewById(R.id.contestWebView);
 
+
+        }
+    }
+
+    private class wbc extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 }

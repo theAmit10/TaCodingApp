@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.ContestFragment">
 
+    <WebView
+        android:id="@+id/contestWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -41,6 +46,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
+
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/contestSearchView"
@@ -108,7 +114,7 @@
                         android:onClick="allFilterTapped"
 
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_people"
+                        android:src="@drawable/ic_contest"
                         app:civ_border_color="#FF000000"
                         app:civ_border_width="2dp" />
 
