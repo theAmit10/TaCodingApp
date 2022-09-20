@@ -67,32 +67,22 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
                 System.out.println("DA : "+contestModel.getUrl());
 
                 holder.contestWebView = new WebView(context);
-//                holder.contestWebView.loadUrl(contestModel.getUrl());
-
-
-                holder.contestWebView.loadDataWithBaseURL(contestModel.getUrl(),"Relative Link", "text/html","UTF-8",contestModel.getUrl());
-                holder.contestWebView.setWebChromeClient(new WebChromeClient());
-
-//                holder.contestWebView.setWebViewClient(new wbc());
-
-
-
-                holder.contestWebView.getSettings().setAllowFileAccess(true);
-
-
-                holder.contestWebView.getSettings().setAppCacheEnabled(true);
-
                 holder.contestWebView.getSettings().setJavaScriptEnabled(true);
                 holder.contestWebView.getSettings().setDomStorageEnabled(true);
 
+                holder.contestWebView.loadUrl(""+contestModel.getUrl());
+
+//                holder.contestWebView.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36");
+//                holder.contestWebView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                        view.loadUrl(url);
+//                        return true;
+//                    }
+//                });
+
 
                 Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
 
 
             }

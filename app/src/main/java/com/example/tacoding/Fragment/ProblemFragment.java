@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -53,6 +54,8 @@ public class ProblemFragment extends Fragment {
     // for coding platform
     // FOR PROBLEM TAGS
     ArrayList<ProblemTagModel> list;
+
+    WebView problemWebView;
 
 
     // FOR PROBLEM RV
@@ -167,6 +170,11 @@ public class ProblemFragment extends Fragment {
 //        problemRV.setLayoutManager(linearLayoutManager1);
 //        problemRV.setNestedScrollingEnabled(false);
 //        problemRV.setAdapter(problemAdapter);
+
+
+        problemWebView = binding.problemWebView;
+
+        problemWebView = new WebView(getContext());
 
         // binding the all button
         buttonBinding();

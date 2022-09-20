@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -53,6 +56,35 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
         holder.tags.setText(sb.toString());
 
 
+        holder.rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String urlOrg = "https://codeforces.com/problemset/problem/"+problemModel.getContestId()+"/"+problemModel.getIndex();
+
+                String abc = "https://codeforces.com/contestRegistration/1736";
+                holder.problemWebView = new WebView(v.getContext());
+                holder.problemWebView.setWebChromeClient(new WebChromeClient());
+
+                holder.problemWebView.getSettings().setJavaScriptEnabled(true);
+                holder.problemWebView.getSettings().setDomStorageEnabled(true);
+                holder.problemWebView.getSettings().setAppCacheEnabled(false);
+                holder.problemWebView.loadUrl(abc);
+//                holder.problemWebView.loadUrl(urlOrg);
+
+
+
+                System.out.println("LINK : "+urlOrg);
+                System.out.println("LINK abc : "+abc);
+
+            }
+        });
+
+
+
+
+
+
 
     }
 
@@ -73,6 +105,8 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
     public class viewHolder extends RecyclerView.ViewHolder{
 
         TextView contestId, name, rating, tags;
+        View problemContainer;
+        WebView problemWebView;
 
 
 
@@ -83,6 +117,9 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
             name = itemView.findViewById(R.id.problemContestName);
             rating = itemView.findViewById(R.id.setRating);
             tags  = itemView.findViewById(R.id.setTags);
+            problemContainer = itemView.findViewById(R.id.problemContainer);
+            problemWebView  = (WebView)itemView.findViewById(R.id.problemWebView);
         }
+
     }
 }

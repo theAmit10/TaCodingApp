@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.ContestFragment">
 
+
     <WebView
         android:id="@+id/contestWebView"
         android:layout_width="match_parent"
