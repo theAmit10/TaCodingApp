@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="#0ED3EB"
     android:orientation="vertical"
     tools:context=".Fragment.NewsFragment">
 
@@ -17,7 +19,6 @@
     </androidx.appcompat.widget.SearchView>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,17 +30,19 @@
             android:id="@+id/allFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:onClick="allFilterTapped"
-            android:textColor="@color/teal_200"
-            android:text="ALl" />
+            android:text="ALl"
+            android:textColor="@color/teal_200" />
 
         <Button
             android:id="@+id/first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:onClick="first"
-            android:textColor="@color/teal_200"
-            android:text="first" />
+            android:text="first"
+            android:textColor="@color/teal_200" />
 
 
         <Button
@@ -47,23 +50,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:textColor="@color/teal_200"
             android:onClick="second"
-            android:text="second" />
+            android:text="second"
+            android:textColor="@color/teal_200" />
 
         <Button
             android:id="@+id/third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_200"
+            android:layout_marginStart="20dp"
             android:onClick="third"
-            android:text="third " />
+            android:text="third "
+            android:textColor="@color/teal_200" />
 
 
     </LinearLayout>
-
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -71,9 +72,9 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/newsRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/newsRV"/>
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
 

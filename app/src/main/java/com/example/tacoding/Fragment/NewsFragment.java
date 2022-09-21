@@ -19,6 +19,7 @@ import com.example.tacoding.Model.NewsModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentNewsBinding;
 
+
 import java.util.ArrayList;
 
 public class NewsFragment extends Fragment {
@@ -66,7 +67,6 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = FragmentNewsBinding.inflate(inflater, container, false);
 
 
