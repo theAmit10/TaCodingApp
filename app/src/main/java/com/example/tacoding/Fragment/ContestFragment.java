@@ -1,15 +1,18 @@
 package com.example.tacoding.Fragment;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -27,19 +31,20 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.tacoding.Adapter.ContestAdapter;
 
 import com.example.tacoding.Adapter.IPlatformRVAdapter;
-import com.example.tacoding.Adapter.NewsAdapter;
 import com.example.tacoding.Adapter.PlatformAdapter;
 import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
-import com.example.tacoding.Model.NewsModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
 import com.example.tacoding.tadatabase.Platform;
 import com.example.tacoding.tadatabase.PlatformName;
 import com.example.tacoding.tadatabase.PlatformViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.FadingCircle;
 
 
 import org.json.JSONArray;
@@ -49,11 +54,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
@@ -93,6 +96,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     public static Map<String, Integer> sMap = new HashMap<String, Integer>();
     ArrayList<ContestModel> filteredContestList = new ArrayList<>();
     private PlatformName PlatformNameTA;
+    ProgressBar progressBar;
 
 
     public ContestFragment() {
@@ -103,8 +107,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Toast.makeText(getContext(), "RELOADING", Toast.LENGTH_SHORT).show();
 
         filterWord.add("all");
 
@@ -190,15 +192,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         selMap.put("kickStart", R.drawable.s_kickstarter);
         selMap.put("toph", R.drawable.ta_toph);
 
-        //
-//        lookSelected(allButton, "allFilter");
-
-
-//        platformAdapter = new PlatformAdapter(getContext().getApplicationContext(), this);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        codingPlatformRv.setLayoutManager(linearLayoutManager);
-//        codingPlatformRv.setAdapter(platformAdapter);
-//        codingPlatformRv.setNestedScrollingEnabled(false);
 
         // initing imageView
         allButton = binding.allFilter;
@@ -227,6 +220,19 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                 view.loadUrl(url);
                 return true;
             }
+        });
+
+
+        SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefresh;
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+
+            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
+            Log.d(TAG, "onCreateView: RELOADING CONTEST FRAGMENT");
+            System.out.println("RELOADED Fragment");
+
+
+
+            swipeRefreshLayout.setRefreshing(false);
         });
 
 
@@ -403,13 +409,17 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
             }
         });
 
+        progressBar = binding.spinKit;
+        Sprite doubleBounce = new DoubleBounce();
+        Sprite fadingCircle = new FadingCircle();
+        progressBar.setIndeterminateDrawable(fadingCircle);
+
 
         return binding.getRoot();
     }
 
 
     public void loadContest() {
-
         String contestUrl = "https://www.kontests.net/api/v1/all";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, contestUrl, null, new Response.Listener<JSONArray>() {
@@ -434,19 +444,24 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                                         jsonObject.getString("status")
                                 );
 
+                                progressBar.setVisibility(View.VISIBLE);
                                 // setting contest image
                                 contestModelList.setPlatformImage(sMap.get(jsonObject.getString("site")));
                                 contestList.add(contestModelList);
                             }
 
+
                             ContestAdapter con = new ContestAdapter(contestList,getContext());
+                            progressBar.setVisibility(View.GONE);
                             contestRv.setAdapter(con);
+
 //                            contestAdapter.updateContest(contestList);
                             System.out.println("BLOCK -> LENGTH : " + contestList.size());
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            progressBar.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -455,6 +470,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
+                        progressBar.setVisibility(View.VISIBLE);
 
                     }
                 });
