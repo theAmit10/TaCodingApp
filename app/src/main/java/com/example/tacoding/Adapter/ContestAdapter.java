@@ -1,6 +1,7 @@
 package com.example.tacoding.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.R;
+import com.example.tacoding.WebViewActivity;
 //import com.github.thunder413.datetimeutils.DateTimeUnits;
 //import com.github.thunder413.datetimeutils.DateTimeUtils;
 
@@ -66,11 +68,21 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             public void onClick(View view) {
                 System.out.println("DA : "+contestModel.getUrl());
 
-                holder.contestWebView = new WebView(context);
-                holder.contestWebView.getSettings().setJavaScriptEnabled(true);
-                holder.contestWebView.getSettings().setDomStorageEnabled(true);
+                Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
+                intent.putExtra("url",contestModel.getUrl());
+                context.startActivity(intent);
 
-                holder.contestWebView.loadUrl(""+contestModel.getUrl());
+//                holder.contestWebView = new WebView(context);
+//                holder.contestWebView.getSettings().setJavaScriptEnabled(true);
+//                holder.contestWebView.getSettings().setDomStorageEnabled(true);
+//                holder.contestWebView.getSettings().setAllowFileAccessFromFileURLs(true);
+//                holder.contestWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+//                holder.contestWebView.getSettings().setAllowFileAccess(true);
+//                holder.contestWebView.getSettings().setLoadsImagesAutomatically(false);
+//
+//
+//
+//                holder.contestWebView.loadUrl(""+contestModel.getUrl());
 
 //                holder.contestWebView.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36");
 //                holder.contestWebView.setWebViewClient(new WebViewClient() {
@@ -107,7 +119,6 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
     public class viewHolder extends RecyclerView.ViewHolder{
 
         ImageView platformImage;
-        WebView contestWebView;
         TextView contestTitle, contestDescription, startDate, endDate;
 
         public viewHolder(@NonNull View itemView) {
@@ -118,7 +129,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             contestDescription = itemView.findViewById(R.id.contestDescription);
             startDate = itemView.findViewById(R.id.setStartTime);
             endDate = itemView.findViewById(R.id.setEndTime);
-            contestWebView =(WebView)itemView.findViewById(R.id.contestWebView);
+
 
 
         }

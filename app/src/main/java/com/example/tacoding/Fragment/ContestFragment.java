@@ -63,9 +63,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     FragmentContestBinding binding;
     public static PlatformViewModel platformViewModel;
 
-    WebView webView ;
-
-
     // Filtering Contest
     ArrayList<String> filterWord = new ArrayList<>();
     SearchView searchView;
@@ -207,20 +204,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         kickStart = binding.kickStart;
         toph = binding.Toph;
 
-        webView = binding.contestWebView;
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        // Set WebView client
-        webView.setWebChromeClient(new WebChromeClient());
 
-        webView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
 
 
         SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefresh;

@@ -1,6 +1,7 @@
 package com.example.tacoding.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tacoding.Model.ProblemModel;
 import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
+import com.example.tacoding.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -62,20 +64,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
 
                 String urlOrg = "https://codeforces.com/problemset/problem/"+problemModel.getContestId()+"/"+problemModel.getIndex();
 
-                String abc = "https://codeforces.com/contestRegistration/1736";
-                holder.problemWebView = new WebView(v.getContext());
-                holder.problemWebView.setWebChromeClient(new WebChromeClient());
 
-                holder.problemWebView.getSettings().setJavaScriptEnabled(true);
-                holder.problemWebView.getSettings().setDomStorageEnabled(true);
-                holder.problemWebView.getSettings().setAppCacheEnabled(false);
-                holder.problemWebView.loadUrl(abc);
-//                holder.problemWebView.loadUrl(urlOrg);
+                Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
+                intent.putExtra("url",urlOrg);
+                context.startActivity(intent);
 
 
 
                 System.out.println("LINK : "+urlOrg);
-                System.out.println("LINK abc : "+abc);
 
             }
         });
