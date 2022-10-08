@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,9 @@ import com.example.tacoding.Model.ProblemModel;
 import com.example.tacoding.Model.ProblemTagModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentProblemBinding;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.FadingCircle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +60,8 @@ public class ProblemFragment extends Fragment {
     ArrayList<ProblemTagModel> list;
 
     WebView problemWebView;
+
+    ProgressBar progressBar;
 
 
     // FOR PROBLEM RV
@@ -471,6 +477,12 @@ public class ProblemFragment extends Fragment {
         });
 
 
+        progressBar = binding.spinKit;
+        Sprite doubleBounce = new DoubleBounce();
+        Sprite fadingCircle = new FadingCircle();
+        progressBar.setIndeterminateDrawable(fadingCircle);
+
+
         return binding.getRoot();
     }
 
@@ -626,6 +638,8 @@ public class ProblemFragment extends Fragment {
         String problemUrl = "https://codeforces.com/api/problemset.problems";
 //        String problemUrl = "https://codeforces.com/api/problemset.recentStatus?count=10";
 
+
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, problemUrl, null, new Response.Listener<JSONObject>() {
 
@@ -633,6 +647,7 @@ public class ProblemFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
 
+                            progressBar.setVisibility(View.VISIBLE);
                             JSONObject problemResultJsonObj = response.getJSONObject("result");
                             JSONArray problemJsonArray = problemResultJsonObj.getJSONArray("problems");
 
@@ -682,6 +697,7 @@ public class ProblemFragment extends Fragment {
                             LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                             problemRV.setLayoutManager(linearLayoutManager1);
                             problemRV.setNestedScrollingEnabled(false);
+                            progressBar.setVisibility(View.GONE);
                             problemRV.setAdapter(problemAdapter);
 //                            problemAdapter.updateProblem(problemList);
 
@@ -689,6 +705,7 @@ public class ProblemFragment extends Fragment {
 
                         } catch (JSONException e) {
                             System.out.println("try catch error");
+                            progressBar.setVisibility(View.VISIBLE);
                             e.printStackTrace();
                         }
                     }
@@ -698,6 +715,7 @@ public class ProblemFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
                         System.out.println("volly error");
+                        progressBar.setVisibility(View.VISIBLE);
                         error.printStackTrace();
                     }
                 });

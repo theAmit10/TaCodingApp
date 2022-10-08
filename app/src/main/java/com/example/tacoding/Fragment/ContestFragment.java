@@ -94,6 +94,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     ArrayList<ContestModel> filteredContestList = new ArrayList<>();
     private PlatformName PlatformNameTA;
     ProgressBar progressBar;
+    SwipeRefreshLayout swipeToRefresh;
 
 
     public ContestFragment() {
@@ -207,17 +208,18 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
 
 
-        SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefresh;
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-
-            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
-            Log.d(TAG, "onCreateView: RELOADING CONTEST FRAGMENT");
-            System.out.println("RELOADED Fragment");
-
-
-
-            swipeRefreshLayout.setRefreshing(false);
-        });
+//        SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefresh;
+//        swipeRefreshLayout.setOnRefreshListener(() -> {
+//
+//            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
+//
+//            Log.d(TAG, "onCreateView: RELOADING CONTEST FRAGMENT");
+//            System.out.println("RELOADED Fragment");
+//
+//
+//
+//            swipeRefreshLayout.setRefreshing(false);
+//        });
 
 
 
@@ -399,12 +401,24 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         progressBar.setIndeterminateDrawable(fadingCircle);
 
 
+        swipeToRefresh = binding.swipeToRefresh;
+        swipeToRefresh.setOnRefreshListener(() -> {
+
+            Toast.makeText(getContext(), "KYA BAAT", Toast.LENGTH_SHORT).show();
+            getParentFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
+            System.out.println("REFRESHED");
+
+            swipeToRefresh.setRefreshing(false);
+        });
+
+
         return binding.getRoot();
     }
 
 
     public void loadContest() {
         String contestUrl = "https://www.kontests.net/api/v1/all";
+        System.out.println("goa");
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, contestUrl, null, new Response.Listener<JSONArray>() {
                     @Override
