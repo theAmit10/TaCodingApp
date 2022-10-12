@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:background="@drawable/b1_modi"
             >
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="Problem Name"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +48,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/iceland"
                 android:text="Contest ID"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/problemContestName"
                 app:layout_constraintTop_toBottomOf="@+id/problemContestName" />
@@ -59,6 +60,7 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="Contest Id"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -71,6 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/iceland"
                 android:text="Rating"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/problemContestTitle"
                 app:layout_constraintTop_toBottomOf="@+id/problemContestName" />
@@ -82,6 +85,7 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="1800"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/problemRating"
                 app:layout_constraintTop_toTopOf="@+id/problemRating" />
@@ -94,7 +98,7 @@
                 android:fontFamily="@font/iceland"
                 android:inputType="textMultiLine"
                 android:text="Tags"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/problemContestTitle" />
@@ -108,6 +112,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="implementation, bitmask."
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

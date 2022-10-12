@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="#0ED3EB"
+    android:background="@drawable/b1"
     android:orientation="vertical"
     tools:context=".Fragment.NewsFragment">
 
@@ -69,8 +69,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newsRV"
             android:layout_width="match_parent"

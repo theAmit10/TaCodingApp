@@ -4,18 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b1"
     tools:context=".Fragment.ProblemFragment">
-
-    <WebView
-        android:id="@+id/problemWebView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="WebViewLayout" />
 
     <View
         android:id="@+id/view"
@@ -24,7 +14,6 @@
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#E4E1E1"
         android:paddingStart="8dp"
         android:paddingTop="4dp"
         android:paddingEnd="8dp"
@@ -34,6 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <WebView
+        android:id="@+id/problemWebView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        tools:ignore="WebViewLayout" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
         android:layout_marginStart="5dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="PROBLEM"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -61,13 +63,14 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/problemSearchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40font_mdp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        app:queryHint="Problem Name ">
+        app:queryHint="Problem Name "
+        app:searchIcon="@drawable/ic_baseline_search_white">
 
     </androidx.appcompat.widget.SearchView>
 
@@ -79,7 +82,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/gray"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fillViewport="true"
+
         android:isScrollContainer="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -100,17 +104,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/problemTags"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30font_mdp"
                 android:layout_marginBottom="@dimen/_10font_mdp"
                 android:fontFamily="@font/anonymous_pro"
-                android:text="        PROBLEM TAGS"
-                android:textColor="@color/black"
+                android:background="@drawable/b1_modi"
+                android:text="          PROBLEM TAGS"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
                 app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView"
@@ -137,65 +141,65 @@
                     <Button
                         android:id="@+id/allFilter"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="allFilterTapped"
                         android:text="All" />
 
                     <Button
                         android:id="@+id/binarySearch"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="binarySearch"
                         android:text="binary search" />
 
                     <Button
                         android:id="@+id/twoSat"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="twoSat"
                         android:text="2-sat" />
 
 
                     <Button
                         android:id="@+id/bitmasks"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="bitmasks"
                         android:text="bitmasks" />
 
                     <Button
                         android:id="@+id/bruteForce"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="bruteForce"
                         android:text="brute force" />
 
                     <Button
                         android:id="@+id/chineseRemainderTheorem"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="chineseRemainderTheorem"
                         android:text="chinese remainder theorem" />
 
                     <Button
                         android:id="@+id/combinatorics"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="combinatorics"
                         android:text="combinatorics" />
 
                     <Button
                         android:id="@+id/constructiveAlgorithms"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="constructiveAlgorithms"
                         android:text="constructive algorithms" />
 
@@ -226,24 +230,24 @@
                     <Button
                         android:id="@+id/dp"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="dp"
                         android:text="dp" />
 
                     <Button
                         android:id="@+id/dsu"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="dsu"
                         android:text="dsu" />
 
                     <Button
                         android:id="@+id/expressionParsing"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="expressionParsing"
                         android:text="expression parsing" />
 
@@ -258,64 +262,64 @@
                     <Button
                         android:id="@+id/flows"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="flows"
                         android:text="flows" />
 
                     <Button
                         android:id="@+id/games"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="games"
                         android:text="games" />
 
                     <Button
                         android:id="@+id/geometry"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="geometry"
                         android:text="geometry" />
 
                     <Button
                         android:id="@+id/graphMatchings"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="graphMatchings"
                         android:text="graph matchings" />
 
                     <Button
                         android:id="@+id/graphs"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="graphs"
                         android:text="graphs" />
 
                     <Button
                         android:id="@+id/greedy"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="greedy"
                         android:text="greedy" />
 
                     <Button
                         android:id="@+id/hashing"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="hashing"
                         android:text="hashing" />
 
                     <Button
                         android:id="@+id/interactive"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="interactive"
                         android:text="interactive" />
 
@@ -340,8 +344,8 @@
                         android:id="@+id/meetInTheMiddle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="meetInTheMiddle"
                         android:fontFamily="@font/anonymous_pro"
+                        android:onClick="meetInTheMiddle"
                         android:text="meet-in-the-middle" />
 
                     <Button
@@ -411,24 +415,24 @@
                     <Button
                         android:id="@+id/trees"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="trees"
                         android:text="trees" />
 
                     <Button
                         android:id="@+id/implementation"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="implementation"
                         android:text="implementation" />
 
                     <Button
                         android:id="@+id/twoPointers"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="twoPointers"
                         android:text="two pointers" />
 
@@ -455,13 +459,14 @@
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30font_mdp"
+                android:layout_marginTop="@dimen/_10font_mdp"
                 android:layout_marginBottom="@dimen/_10font_mdp"
                 android:fontFamily="@font/anonymous_pro"
-                android:layout_marginTop="@dimen/_10font_mdp"
                 android:gravity="center"
-                android:text="       SELECT YOUR CODING LEVEL"
-                android:textColor="@color/black"
+                android:background="@drawable/b1_modi"
+                android:text="    SELECT YOUR CODING LEVEL"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/view14"
                 app:layout_constraintStart_toStartOf="@+id/view14"
@@ -479,9 +484,9 @@
                     android:id="@+id/BeginnersBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="beginners"
-                    android:fontFamily="@font/anonymous_pro"
                     android:layout_marginStart="20dp"
+                    android:fontFamily="@font/anonymous_pro"
+                    android:onClick="beginners"
                     android:text="Beginners" />
 
 
