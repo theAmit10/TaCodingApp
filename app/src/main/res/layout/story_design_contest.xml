@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <View
         android:id="@+id/contestView"
@@ -12,7 +13,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="#FEFFFF"
+        android:background="@drawable/b1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +46,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/iceland"
         android:text="Contest Title"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/reminder"
         app:layout_constraintStart_toEndOf="@+id/platformImage"
@@ -61,7 +62,7 @@
         android:maxLines="3"
         android:nestedScrollingEnabled="true"
         android:text="Contest Description"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/platformImage"
         app:layout_constraintTop_toBottomOf="@+id/platformImage"
@@ -74,7 +75,7 @@
         android:layout_marginTop="15dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="End Time"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startTime"
         app:layout_constraintTop_toBottomOf="@+id/startTime" />
@@ -86,7 +87,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="Start Time"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/contestDescription"
         app:layout_constraintTop_toBottomOf="@+id/contestDescription" />
@@ -97,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:fontFamily="@font/anonymous_pro"
+        android:textColor="@color/white"
         android:text="9:00 PM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/setStartTime"
@@ -108,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="14dp"
+        android:textColor="@color/white"
         android:fontFamily="@font/anonymous_pro"
         android:text="7:00 PM"
         app:layout_constraintEnd_toEndOf="parent"

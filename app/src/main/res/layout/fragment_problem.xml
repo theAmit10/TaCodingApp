@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".Fragment.ProblemFragment">
 
     <WebView
@@ -39,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/problem"
+        android:fontFamily="@font/anonymous_pro"
+        android:text="PROBLEM"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -99,13 +100,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/problemTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Problem TAGS"
+                android:layout_marginBottom="@dimen/_10font_mdp"
+                android:fontFamily="@font/anonymous_pro"
+                android:text="        PROBLEM TAGS"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
@@ -133,12 +137,14 @@
                     <Button
                         android:id="@+id/allFilter"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="allFilterTapped"
                         android:text="All" />
 
                     <Button
                         android:id="@+id/binarySearch"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="binarySearch"
@@ -146,6 +152,7 @@
 
                     <Button
                         android:id="@+id/twoSat"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="twoSat"
@@ -154,6 +161,7 @@
 
                     <Button
                         android:id="@+id/bitmasks"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="bitmasks"
@@ -161,6 +169,7 @@
 
                     <Button
                         android:id="@+id/bruteForce"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="bruteForce"
@@ -169,12 +178,14 @@
                     <Button
                         android:id="@+id/chineseRemainderTheorem"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="chineseRemainderTheorem"
                         android:text="chinese remainder theorem" />
 
                     <Button
                         android:id="@+id/combinatorics"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="combinatorics"
@@ -183,6 +194,7 @@
                     <Button
                         android:id="@+id/constructiveAlgorithms"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="constructiveAlgorithms"
                         android:text="constructive algorithms" />
@@ -191,6 +203,7 @@
                         android:id="@+id/dataStructures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="dataStructures"
                         android:text="data structures" />
 
@@ -198,6 +211,7 @@
                         android:id="@+id/dfsAndSimilar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="dfsAndSimilar"
                         android:text="dfs and similar" />
 
@@ -205,12 +219,14 @@
                         android:id="@+id/divideAndConquer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="divideAndConquer"
                         android:text="divide and conquer" />
 
                     <Button
                         android:id="@+id/dp"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="dp"
                         android:text="dp" />
@@ -218,6 +234,7 @@
                     <Button
                         android:id="@+id/dsu"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="dsu"
                         android:text="dsu" />
@@ -225,6 +242,7 @@
                     <Button
                         android:id="@+id/expressionParsing"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="expressionParsing"
                         android:text="expression parsing" />
@@ -233,12 +251,14 @@
                         android:id="@+id/fft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="fft"
                         android:text="fft" />
 
                     <Button
                         android:id="@+id/flows"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="flows"
                         android:text="flows" />
@@ -246,6 +266,7 @@
                     <Button
                         android:id="@+id/games"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="games"
                         android:text="games" />
@@ -253,6 +274,7 @@
                     <Button
                         android:id="@+id/geometry"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="geometry"
                         android:text="geometry" />
@@ -260,6 +282,7 @@
                     <Button
                         android:id="@+id/graphMatchings"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="graphMatchings"
                         android:text="graph matchings" />
@@ -267,12 +290,14 @@
                     <Button
                         android:id="@+id/graphs"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="graphs"
                         android:text="graphs" />
 
                     <Button
                         android:id="@+id/greedy"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="greedy"
@@ -281,12 +306,14 @@
                     <Button
                         android:id="@+id/hashing"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="hashing"
                         android:text="hashing" />
 
                     <Button
                         android:id="@+id/interactive"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="interactive"
@@ -297,6 +324,7 @@
                         android:id="@+id/math"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="math"
                         android:text="math" />
 
@@ -304,6 +332,7 @@
                         android:id="@+id/metrices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="metrices"
                         android:text="metrices" />
 
@@ -312,12 +341,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="meetInTheMiddle"
+                        android:fontFamily="@font/anonymous_pro"
                         android:text="meet-in-the-middle" />
 
                     <Button
                         android:id="@+id/numberTheory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="numberTheory"
                         android:text="number theory" />
 
@@ -325,6 +356,7 @@
                         android:id="@+id/probablities"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="probablities"
                         android:text="probablities" />
 
@@ -332,6 +364,7 @@
                         android:id="@+id/schedules"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="schedules"
                         android:text="schedules" />
 
@@ -339,6 +372,7 @@
                         android:id="@+id/shortestPaths"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="shortestPaths"
                         android:text="shortest paths" />
 
@@ -346,6 +380,7 @@
                         android:id="@+id/sortings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="sortings"
                         android:text="sortings" />
 
@@ -353,6 +388,7 @@
                         android:id="@+id/stringSuffixStructures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="stringSuffixStructures"
                         android:text="string suffix structures" />
 
@@ -360,6 +396,7 @@
                         android:id="@+id/strings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="strings"
                         android:text="strings" />
 
@@ -367,12 +404,14 @@
                         android:id="@+id/ternarySearch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:onClick="ternarySearch"
                         android:text="ternary search" />
 
                     <Button
                         android:id="@+id/trees"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="trees"
                         android:text="trees" />
@@ -380,6 +419,7 @@
                     <Button
                         android:id="@+id/implementation"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="implementation"
                         android:text="implementation" />
@@ -387,6 +427,7 @@
                     <Button
                         android:id="@+id/twoPointers"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/anonymous_pro"
                         android:layout_height="wrap_content"
                         android:onClick="twoPointers"
                         android:text="two pointers" />
@@ -410,11 +451,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SELECT YOUR CODING LEVEL"
+                android:layout_marginBottom="@dimen/_10font_mdp"
+                android:fontFamily="@font/anonymous_pro"
+                android:layout_marginTop="@dimen/_10font_mdp"
+                android:gravity="center"
+                android:text="       SELECT YOUR CODING LEVEL"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/view14"
@@ -434,6 +480,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="beginners"
+                    android:fontFamily="@font/anonymous_pro"
+                    android:layout_marginStart="20dp"
                     android:text="Beginners" />
 
 
@@ -441,7 +489,8 @@
                     android:id="@+id/IntermediatesBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/anonymous_pro"
                     android:onClick="intermediate"
                     android:text="Intermediates" />
 
@@ -449,6 +498,8 @@
                     android:id="@+id/AdvancedBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/anonymous_pro"
                     android:onClick="advanced"
                     android:text="Advanced " />
 
@@ -473,6 +524,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

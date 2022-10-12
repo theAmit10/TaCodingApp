@@ -527,7 +527,7 @@ public class ProblemFragment extends Fragment {
 
 
         //inting color
-        white = ContextCompat.getColor(getContext(), R.color.white);
+        white = ContextCompat.getColor(getContext(), R.color.gray);
         red = ContextCompat.getColor(getContext(), R.color.teal_200);
         darkGray = ContextCompat.getColor(getContext(), R.color.black);
 

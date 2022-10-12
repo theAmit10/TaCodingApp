@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0B0A0A"
-    android:backgroundTint="@color/black"
+    android:background="@drawable/b1"
     tools:context=".Fragment.ContestFragment">
 
 
@@ -17,7 +16,7 @@
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#201E1E"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,10 +65,10 @@
         android:id="@+id/contestSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A3E3EC"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:searchIcon="@drawable/ic_baseline_search_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:queryHint="Contest Name "></androidx.appcompat.widget.SearchView>
@@ -87,7 +86,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#000000"
+            android:background="@drawable/b1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

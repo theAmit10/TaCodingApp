@@ -27,9 +27,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:rbb_activeItemType="text"
-        app:rbb_backgroundColor="#00BCD4"
-        app:rbb_indicatorColor="@color/white"
+        app:rbb_backgroundColor="@color/white"
+        app:rbb_indicatorColor="@color/black"
         app:rbb_tabs="@xml/tabs"
-        app:rbb_textColor="@color/white"
+        app:rbb_textColor="@color/black"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

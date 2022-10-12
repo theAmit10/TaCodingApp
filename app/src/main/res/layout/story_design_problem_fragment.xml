@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/problemContainer"
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -20,7 +21,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+
+            >
 
             <TextView
                 android:id="@+id/problemContestName"
@@ -102,27 +105,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="implementation, bitmask."
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-            <View
-                android:id="@+id/view10"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setTags" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
