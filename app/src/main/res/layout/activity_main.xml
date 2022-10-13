@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:rbb_activeItemType="text"
-        android:background="@drawable/b1_modi"
+        android:background="@drawable/button_active_bg"
         app:rbb_indicatorColor="@color/black"
         app:rbb_tabs="@xml/tabs"
         app:rbb_textColor="@color/black"

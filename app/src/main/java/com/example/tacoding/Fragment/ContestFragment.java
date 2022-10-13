@@ -42,6 +42,8 @@ import com.example.tacoding.databinding.FragmentContestBinding;
 import com.example.tacoding.tadatabase.Platform;
 import com.example.tacoding.tadatabase.PlatformName;
 import com.example.tacoding.tadatabase.PlatformViewModel;
+import com.github.thunder413.datetimeutils.DateTimeStyle;
+import com.github.thunder413.datetimeutils.DateTimeUtils;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.github.ybq.android.spinkit.style.FadingCircle;
@@ -53,6 +55,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -289,11 +292,11 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         topcoderList.add(new TopCoderModel(R.drawable.p6, "Raju", "Candidate Master", "CodeForces"));
         topcoderList.add(new TopCoderModel(R.drawable.p2, "Rakesh", "Grand Master", "CodeForces"));
 
-        TopCoderAdapter topCoderAdapter = new TopCoderAdapter(topcoderList, getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        topCoderRv.setLayoutManager(linearLayoutManager1);
-        topCoderRv.setNestedScrollingEnabled(false);
-        topCoderRv.setAdapter(topCoderAdapter);
+//        TopCoderAdapter topCoderAdapter = new TopCoderAdapter(topcoderList, getContext());
+//        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        topCoderRv.setLayoutManager(linearLayoutManager1);
+//        topCoderRv.setNestedScrollingEnabled(false);
+//        topCoderRv.setAdapter(topCoderAdapter);
 
 
         // For Contest List
@@ -445,6 +448,25 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
                                 progressBar.setVisibility(View.VISIBLE);
                                 // setting contest image
                                 contestModelList.setPlatformImage(sMap.get(jsonObject.getString("site")));
+
+
+
+                                System.out.println("Start Time : "+contestModelList.getStartDate());
+                                Date date = DateTimeUtils.formatDate(contestModelList.getStartDate());
+                                Date endDate = DateTimeUtils.formatDate(contestModelList.getEndDate());
+                                System.out.println("Start Edit Time : "+date);
+                                System.out.println("Start format Time : "+DateTimeUtils.formatWithStyle(date,DateTimeStyle.FULL));
+
+
+                                contestModelList.setStartDate(""+date);
+                                contestModelList.setEndDate(""+endDate);
+//
+//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.FULL); // Tuesday, June 13, 2017
+//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.LONG); // June 13, 2017
+//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.MEDIUM); // Jun 13, 2017
+//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.SHORT); // 06/13/17
+
+                                System.out.println("End Time : "+contestModelList.getEndDate());
                                 contestList.add(contestModelList);
                             }
 

@@ -79,28 +79,29 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
 //                holder.contestWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 //                holder.contestWebView.getSettings().setAllowFileAccess(true);
 //                holder.contestWebView.getSettings().setLoadsImagesAutomatically(false);
-//
-//
-//
-//                holder.contestWebView.loadUrl(""+contestModel.getUrl());
-
-//                holder.contestWebView.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36");
-//                holder.contestWebView.setWebViewClient(new WebViewClient() {
-//                    @Override
-//                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                        view.loadUrl(url);
-//                        return true;
-//                    }
-//                });
-
-
                 Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
 
 
             }
         });
 
+
+        holder.contestView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("DA : "+contestModel.getUrl());
+
+                Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
+                intent.putExtra("url",contestModel.getUrl());
+                context.startActivity(intent);
+                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
+
+
 
 
     public void updateContest(ArrayList<ContestModel> updatedConstest){
@@ -120,6 +121,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
 
         ImageView platformImage;
         TextView contestTitle, contestDescription, startDate, endDate;
+        View contestView;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,6 +131,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             contestDescription = itemView.findViewById(R.id.contestDescription);
             startDate = itemView.findViewById(R.id.setStartTime);
             endDate = itemView.findViewById(R.id.setEndTime);
+            contestView = itemView.findViewById(R.id.contestView);
 
 
 

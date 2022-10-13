@@ -23,6 +23,13 @@ public class WebViewActivity extends AppCompatActivity {
         WebViewClient webViewClient  = new WebViewClient();
         webView.setWebViewClient(webViewClient);
         webView.loadUrl(url);
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setLoadsImagesAutomatically(false);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 

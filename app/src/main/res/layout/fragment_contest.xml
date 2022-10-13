@@ -127,7 +127,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_contest"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -140,7 +140,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_codechef"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -153,7 +153,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_hackerearth"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -166,7 +166,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_hackerrank"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -179,7 +179,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_codeforces"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -192,7 +192,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_leetcode"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -205,7 +205,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/ta_atcoder"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -218,7 +218,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_codeforces"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -231,7 +231,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_topcoder"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -244,7 +244,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_csacademy"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -257,7 +257,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/s_kickstarter"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -270,7 +270,7 @@
 
                             android:scaleType="centerCrop"
                             android:src="@drawable/ta_toph"
-                            app:civ_border_color="#FF000000"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
 
                     </LinearLayout>
@@ -297,7 +297,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/iceland"
-                    android:text="Top Rank Coders"
+                    android:text="Coding Contest For Coder"
                     android:textColor="@color/white"
                     android:textSize="34sp"
                     app:layout_constraintEnd_toEndOf="@+id/view4"
@@ -348,6 +348,7 @@
                     android:text="Month"
                     android:textColor="@color/white"
                     android:textSize="18sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view4" />
 
@@ -357,7 +358,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     app:SpinKit_Color="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/contestRv"
                     app:layout_constraintEnd_toEndOf="parent"

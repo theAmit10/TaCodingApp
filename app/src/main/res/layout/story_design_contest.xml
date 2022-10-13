@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/contestView"
-        android:layout_width="393dp"
+        android:layout_width="0dp"
         android:layout_height="192dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/b1_modi"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/contestTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/contestTitle"
-        app:srcCompat="@drawable/ic_baseline_add_alarm_24" />
+        app:srcCompat="@drawable/ic_baseline_add_alarm_white" />
 
     <TextView
         android:id="@+id/contestTitle"
@@ -72,13 +71,12 @@
         android:id="@+id/endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:fontFamily="@font/anonymous_pro"
         android:text="End Time"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startTime"
-        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+        app:layout_constraintTop_toTopOf="@+id/setEndTime" />
 
     <TextView
         android:id="@+id/startTime"
@@ -96,13 +94,18 @@
         android:id="@+id/setEndTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="14dp"
-        android:fontFamily="@font/anonymous_pro"
-        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/iceland"
         android:text="9:00 PM"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15font_mdp"
+        app:layout_constraintBottom_toTopOf="@+id/view8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/setStartTime"
-        app:layout_constraintTop_toTopOf="@+id/endTime" />
+        app:layout_constraintTop_toBottomOf="@+id/setStartTime" />
 
     <TextView
         android:id="@+id/setStartTime"
@@ -110,9 +113,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="14dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/anonymous_pro"
+        android:fontFamily="@font/iceland"
         android:text="7:00 PM"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15font_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/startTime"
         app:layout_constraintTop_toTopOf="@+id/startTime" />
@@ -121,12 +125,12 @@
         android:id="@+id/view8"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="14dp"
-        android:background="@color/gray"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setEndTime" />
+        app:layout_constraintTop_toBottomOf="@+id/contestView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

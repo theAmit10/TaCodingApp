@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setting the root fragment for home page
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
+        transaction.replace(R.id.fragmentContainer, new ContestFragment());
         transaction.commit();
 
         binding.bottomNavigation.setOnItemSelectListener(new ReadableBottomBar.ItemSelectListener() {
