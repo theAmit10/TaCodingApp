@@ -112,10 +112,10 @@
                 android:layout_height="@dimen/_30font_mdp"
                 android:layout_marginBottom="@dimen/_10font_mdp"
                 android:fontFamily="@font/anonymous_pro"
-                android:background="@drawable/b1_modi"
-                android:text="          PROBLEM TAGS"
-                android:textColor="@color/white"
-                android:textSize="24sp"
+                android:background="@drawable/b1"
+                android:text="          PROBLEM TAGS         "
+                android:textColor="@color/teal_200"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
                 app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView"
                 app:layout_constraintHorizontal_bias="0.55"
@@ -143,7 +143,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:textColor="@color/white"
                         android:onClick="allFilterTapped"
+                        android:background="@drawable/follow_active_bg"
                         android:text="All" />
 
                     <Button
@@ -151,7 +153,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="binarySearch"
+                        android:textColor="@color/white"
                         android:text="binary search" />
 
                     <Button
@@ -159,7 +164,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="twoSat"
+                        android:textColor="@color/white"
                         android:text="2-sat" />
 
 
@@ -168,6 +176,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="bitmasks"
                         android:text="bitmasks" />
 
@@ -176,6 +187,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
+                        android:textColor="@color/white"
                         android:onClick="bruteForce"
                         android:text="brute force" />
 
@@ -183,7 +197,10 @@
                         android:id="@+id/chineseRemainderTheorem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="chineseRemainderTheorem"
                         android:text="chinese remainder theorem" />
 
@@ -192,6 +209,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="combinatorics"
                         android:text="combinatorics" />
 
@@ -199,7 +219,10 @@
                         android:id="@+id/constructiveAlgorithms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="constructiveAlgorithms"
                         android:text="constructive algorithms" />
 
@@ -207,22 +230,31 @@
                         android:id="@+id/dataStructures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="dataStructures"
                         android:text="data structures" />
 
                     <Button
                         android:id="@+id/dfsAndSimilar"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="dfsAndSimilar"
                         android:text="dfs and similar" />
 
                     <Button
                         android:id="@+id/divideAndConquer"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="divideAndConquer"
                         android:text="divide and conquer" />
@@ -230,15 +262,21 @@
                     <Button
                         android:id="@+id/dp"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="dp"
                         android:text="dp" />
 
                     <Button
                         android:id="@+id/dsu"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="dsu"
                         android:text="dsu" />
@@ -246,7 +284,10 @@
                     <Button
                         android:id="@+id/expressionParsing"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="expressionParsing"
                         android:text="expression parsing" />
@@ -254,7 +295,10 @@
                     <Button
                         android:id="@+id/fft"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="fft"
                         android:text="fft" />
@@ -263,6 +307,9 @@
                         android:id="@+id/flows"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="flows"
                         android:text="flows" />
@@ -270,8 +317,11 @@
                     <Button
                         android:id="@+id/games"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="games"
                         android:text="games" />
 
@@ -279,6 +329,9 @@
                         android:id="@+id/geometry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="geometry"
                         android:text="geometry" />
@@ -287,7 +340,10 @@
                         android:id="@+id/graphMatchings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="graphMatchings"
                         android:text="graph matchings" />
 
@@ -295,7 +351,10 @@
                         android:id="@+id/graphs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="graphs"
                         android:text="graphs" />
 
@@ -304,22 +363,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:textColor="@color/white"
                         android:onClick="greedy"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:text="greedy" />
 
                     <Button
                         android:id="@+id/hashing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="hashing"
                         android:text="hashing" />
 
                     <Button
                         android:id="@+id/interactive"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="interactive"
                         android:text="interactive" />
 
@@ -328,7 +396,10 @@
                         android:id="@+id/math"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="math"
                         android:text="math" />
 
@@ -336,7 +407,10 @@
                         android:id="@+id/metrices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="metrices"
                         android:text="metrices" />
 
@@ -344,7 +418,10 @@
                         android:id="@+id/meetInTheMiddle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="meetInTheMiddle"
                         android:text="meet-in-the-middle" />
 
@@ -352,7 +429,10 @@
                         android:id="@+id/numberTheory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="numberTheory"
                         android:text="number theory" />
 
@@ -360,7 +440,10 @@
                         android:id="@+id/probablities"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="probablities"
                         android:text="probablities" />
 
@@ -368,7 +451,10 @@
                         android:id="@+id/schedules"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="schedules"
                         android:text="schedules" />
 
@@ -376,23 +462,32 @@
                         android:id="@+id/shortestPaths"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="shortestPaths"
                         android:text="shortest paths" />
 
                     <Button
                         android:id="@+id/sortings"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="sortings"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:text="sortings" />
 
                     <Button
                         android:id="@+id/stringSuffixStructures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="stringSuffixStructures"
                         android:text="string suffix structures" />
 
@@ -400,7 +495,10 @@
                         android:id="@+id/strings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="strings"
                         android:text="strings" />
 
@@ -408,7 +506,10 @@
                         android:id="@+id/ternarySearch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="ternarySearch"
                         android:text="ternary search" />
 
@@ -416,15 +517,21 @@
                         android:id="@+id/trees"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="trees"
                         android:text="trees" />
 
                     <Button
                         android:id="@+id/implementation"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="implementation"
                         android:text="implementation" />
 
@@ -432,7 +539,10 @@
                         android:id="@+id/twoPointers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/anonymous_pro"
+                        android:layout_marginStart="@dimen/_10font_mdp"
+                        android:background="@drawable/follow_active_bg"
                         android:onClick="twoPointers"
                         android:text="two pointers" />
 
@@ -464,9 +574,9 @@
                 android:layout_marginBottom="@dimen/_10font_mdp"
                 android:fontFamily="@font/anonymous_pro"
                 android:gravity="center"
-                android:background="@drawable/b1_modi"
-                android:text="    SELECT YOUR CODING LEVEL"
-                android:textColor="@color/white"
+                android:background="@drawable/b1"
+                android:text="        SELECT YOUR CODING LEVEL     "
+                android:textColor="@color/teal_200"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/view14"
                 app:layout_constraintStart_toStartOf="@+id/view14"
@@ -480,31 +590,37 @@
                 tools:ignore="MissingConstraints">
 
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/BeginnersBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="35dp"
                     android:fontFamily="@font/anonymous_pro"
+                    android:background="@drawable/follow_active_bg"
                     android:onClick="beginners"
+                    android:textColor="@color/white"
                     android:text="Beginners" />
 
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/IntermediatesBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:fontFamily="@font/anonymous_pro"
+                    android:background="@drawable/follow_active_bg"
+                    android:textColor="@color/white"
                     android:onClick="intermediate"
                     android:text="Intermediates" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/AdvancedBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:fontFamily="@font/anonymous_pro"
+                    android:background="@drawable/follow_active_bg"
+                    android:textColor="@color/white"
                     android:onClick="advanced"
                     android:text="Advanced " />
 
@@ -518,7 +634,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                app:SpinKit_Color="@color/black"
+                app:SpinKit_Color="@color/teal_200"
                 app:layout_constraintVertical_bias="0.90999997" />
 
 

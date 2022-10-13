@@ -2,6 +2,7 @@ package com.example.tacoding.Fragment;
 
 import static java.lang.Thread.sleep;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -527,23 +528,25 @@ public class ProblemFragment extends Fragment {
 
 
         //inting color
-        white = ContextCompat.getColor(getContext(), R.color.gray);
+        white = ContextCompat.getColor(getContext(), R.color.white);
         red = ContextCompat.getColor(getContext(), R.color.teal_200);
         darkGray = ContextCompat.getColor(getContext(), R.color.black);
 
 
     }
 
+    @SuppressLint("ResourceAsColor")
     private void lookSelected(Button parsedButton) {
         parsedButton.setTextColor(red);
-        parsedButton.setBackgroundColor(darkGray);
+//        parsedButton.setBackgroundColor(R.color.black);
+        parsedButton.setBackgroundResource(R.drawable.button_active_bg);
 
     }
 
     private void lookUnSelected(Button parsedButton) {
-        parsedButton.setTextColor(red);
-        parsedButton.setBackgroundColor(white);
-
+        parsedButton.setTextColor(white);
+        parsedButton.setBackgroundResource(R.drawable.follow_active_bg);
+//        parsedButton.setBackgroundColor(white);
     }
 
     private void unSelectedAllFilterButton() {
