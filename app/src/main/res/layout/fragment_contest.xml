@@ -358,14 +358,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    app:SpinKit_Color="@color/white"
+                    app:SpinKit_Color="@color/teal_200"
                     app:layout_constraintBottom_toBottomOf="@+id/contestRv"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view4"
-                    app:layout_constraintVertical_bias="0.90999997" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contestRv"

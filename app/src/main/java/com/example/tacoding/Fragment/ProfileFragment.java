@@ -6,92 +6,154 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.tacoding.Adapter.ContestAdapter;
 import com.example.tacoding.Adapter.ProfileAdapter;
+import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
+import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.ProfileModel;
 import com.example.tacoding.Model.AddUserModel;
 import com.example.tacoding.R;
+import com.example.tacoding.databinding.FragmentContestBinding;
+import com.example.tacoding.databinding.FragmentProfileBinding;
+import com.github.thunder413.datetimeutils.DateTimeStyle;
+import com.github.thunder413.datetimeutils.DateTimeUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProfileFragment extends Fragment {
 
-    // for coding platform
-    RecyclerView codingPlatformRv;
-    ArrayList<CodingPlatformModel> list;
-
-    // for profile platform
-    RecyclerView profileProgressRV;
-    ArrayList<ProfileModel> profileList;
-
-    // for profileUserDetailsModel
-    ArrayList<AddUserModel> addUserModelArrayList;
-
+    ArrayList<ProfileModel> arrayList = new ArrayList<>();
+    FragmentProfileBinding binding;
+    String photo ="",fullName="amit",rank="",rating="",maxRating="",lastOnline="", handle="";
 
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        binding  = FragmentProfileBinding.inflate(inflater, container, false);
 
-        // for coding platform
-        codingPlatformRv = view.findViewById(R.id.problemTagRV);
-        list = new ArrayList<>();
-        list.add(new CodingPlatformModel(R.drawable.ic_codechef_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerearth_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_hackerrank_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_leetcode_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_codeforces_svgrepo_com));
-        list.add(new CodingPlatformModel(R.drawable.ic_people));
+        binding.profileSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ENtered text : "+binding.profileUserName.getText());
+                String abc = "";
+                loadProfile(String.valueOf(binding.profileUserName.getText()));
+                binding.profileUserName.setText(abc);
+            }
+        });
 
-//        CodingPlatformAdapter codingPlatformAdapter = new CodingPlatformAdapter(list,getContext());
-//        ProfileAdapter codingPlatformAdapter = new ProfileAdapter(list, getContext());
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        codingPlatformRv.setLayoutManager(linearLayoutManager);
-//        codingPlatformRv.setNestedScrollingEnabled(false);
-//        codingPlatformRv.setAdapter(codingPlatformAdapter);
-
-
-        //for profile
-        profileProgressRV = view.findViewById(R.id.profileProgressRV);
-        profileList = new ArrayList<>();
-        profileList.add(new ProfileModel(R.drawable.ic_codechef_svgrepo_com,"Codechef","200","1850"));
-        profileList.add(new ProfileModel(R.drawable.ic_codeforces_svgrepo_com,"Codeforces","260","1800"));
-        profileList.add(new ProfileModel(R.drawable.ic_leetcode_svgrepo_com,"leetcode","10","1900"));
-        profileList.add(new ProfileModel(R.drawable.ic_hackerearth_svgrepo_com,"hackerearth","20","2000"));
-        profileList.add(new ProfileModel(R.drawable.ic_hackerrank_svgrepo_com,"hackerrank","300","1800"));
-        profileList.add(new ProfileModel(R.drawable.ic_leetcode_svgrepo_com,"Leetcode","20","1850"));
-        profileList.add(new ProfileModel(R.drawable.ic_codechef_svgrepo_com,"Codechef","100","180"));
-        profileList.add(new ProfileModel(R.drawable.ic_codeforces_svgrepo_com,"Codeforces","200","1800"));
-        profileList.add(new ProfileModel(R.drawable.ic_codechef_svgrepo_com,"Codechef","2","1850"));
-
-        ProfileAdapter profileAdapter = new ProfileAdapter(profileList,getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        profileProgressRV.setLayoutManager(linearLayoutManager1);
-        profileProgressRV.setNestedScrollingEnabled(false);
-        profileProgressRV.setAdapter(profileAdapter);
-
-
-
-
-        return view;
+        String names =  "DmitriyH";
+        loadProfile(names);
+        return binding.getRoot();
     }
+
+    private void loadProfile(String names) {
+        String profileUrl = "https://codeforces.com/api/user.info?handles="+names;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, profileUrl, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArrayResult = response.getJSONArray("result");
+                    JSONObject jsonObject = jsonArrayResult.getJSONObject(0);
+                    jsonObject.getString("titlePhoto");
+                    jsonObject.getString("firstName");
+                    jsonObject.getString("lastName");
+                    jsonObject.getString("rating");
+                    jsonObject.getString("rank");
+                    jsonObject.getString("maxRating");
+                    jsonObject.getString("handle");
+                    jsonObject.getString("lastOnlineTimeSeconds");
+
+
+                    String name = jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
+
+
+                    binding.setName.setText(name);
+                    binding.setRating.setText(jsonObject.getString("rating"));
+                    binding.setRank.setText(jsonObject.getString("rank"));
+                    binding.setMaxRating.setText(jsonObject.getString("maxRating"));
+                    binding.setHandler.setText(jsonObject.getString("handle"));
+                    binding.setLastOnline.setText(jsonObject.getString("lastOnlineTimeSeconds"));
+
+
+
+
+
+                    ProfileModel profileModel = new ProfileModel(
+                            jsonObject.getString("titlePhoto"),
+                            fullName,
+                            jsonObject.getString("rating"),
+                            jsonObject.getString("rank"),
+                            jsonObject.getString("maxRating"),
+                            jsonObject.getString("handle"),
+                            jsonObject.getString("lastOnlineTimeSeconds")
+                    );
+
+
+                    System.out.println("firstname: " + jsonObject.getString("firstName"));
+                    System.out.println("firstname: " + jsonObject.getString("lastName"));
+                    System.out.println("firstname: " + jsonObject.getString("handle"));
+                    System.out.println("firstname: " + jsonObject.getString("titlePhoto"));
+                    System.out.println("firstname: " + jsonObject.getString("rating"));
+                    System.out.println("fullNAME: " + fullName);
+
+                    arrayList.add(profileModel);
+
+
+                } catch (Exception e) {
+                    System.out.println("TRY CATCH ERROR");
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                System.out.println("Error happened ");
+                Toast.makeText(getContext(), "NO USER FOUND : "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+
+
+
+        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
+
 }

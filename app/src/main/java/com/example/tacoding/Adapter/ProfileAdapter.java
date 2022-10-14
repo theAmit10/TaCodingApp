@@ -41,10 +41,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.viewHold
 
         ProfileModel profileModel = list.get(position);
 
-        holder.profilePlatformImage.setImageResource(profileModel.getProfilePlatformImage());
-        holder.profileCodingPlatformName.setText(profileModel.getProfileCodingPlatformName());
-        holder.profileRating.setText(profileModel.getProfileRating());
-        holder.profileProblemSolve.setText(profileModel.getProfileProblemSolve());
+//        holder.profilePlatformImage.setImageResource(profileModel.getProfilePlatformImage());
+//        holder.profileCodingPlatformName.setText(profileModel.getProfileCodingPlatformName());
+//        holder.profileRating.setText(profileModel.getProfileRating());
+//        holder.profileProblemSolve.setText(profileModel.getProfileProblemSolve());
 
     }
 

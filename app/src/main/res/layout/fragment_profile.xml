@@ -9,7 +9,11 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,81 +37,176 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/p4" />
+
+
             </com.github.florent37.diagonallayout.DiagonalLayout>
 
-            <TextView
+
+            <EditText
                 android:id="@+id/profileUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="15dp"
-                android:text="Username"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:focusableInTouchMode="true"
+                android:hint="Codeforces username"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toStartOf="@id/profileSearch"
+                tools:ignore="TouchTargetSizeCheck" />
 
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70font_mdp"
+            <ImageView
+                android:id="@+id/profileSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_baseline_person_search_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/diagonalLayout">
+                app:layout_constraintTop_toTopOf="@id/profileUserName" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/problemTagRV"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/addPlatformImage"
-                            android:layout_width="@dimen/_50font_mdp"
-                            android:layout_height="@dimen/_45font_mdp"
-                            android:src="@drawable/ic_add_svgrepo_com"
-                            app:civ_border_color="#FF000000"
-                            app:civ_border_width="2dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <View
                 android:id="@+id/view11"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
                 android:background="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView4" />
+                app:layout_constraintTop_toBottomOf="@+id/diagonalLayout" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/profileProgressRV"
+            <TextView
+                android:id="@+id/setHandler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Username"
+                app:layout_constraintEnd_toEndOf="@+id/view11"
+                app:layout_constraintStart_toStartOf="@+id/view11"
+                app:layout_constraintTop_toBottomOf="@+id/view11" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailsContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view11" />
+                app:layout_constraintTop_toBottomOf="@+id/setHandler">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/setName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="full name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/name"
+                        app:layout_constraintTop_toTopOf="@+id/name" />
+
+                    <TextView
+                        android:id="@+id/rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="rank"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                    <TextView
+                        android:id="@+id/setRank"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="rank"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rank"
+                        app:layout_constraintTop_toTopOf="@+id/rank" />
+
+                    <TextView
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="rating"
+                        app:layout_constraintStart_toStartOf="@+id/rank"
+                        app:layout_constraintTop_toBottomOf="@+id/rank" />
+
+                    <TextView
+                        android:id="@+id/setRating"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="setRating"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rating"
+                        app:layout_constraintTop_toTopOf="@+id/rating" />
+
+                    <TextView
+                        android:id="@+id/maxRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text=" Max rating"
+                        app:layout_constraintStart_toStartOf="@+id/rating"
+                        app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+                    <TextView
+                        android:id="@+id/setMaxRating"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="set max Rating"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/maxRating"
+                        app:layout_constraintTop_toTopOf="@+id/maxRating" />
+
+                    <TextView
+                        android:id="@+id/lastOnline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Last Online"
+                        app:layout_constraintStart_toStartOf="@+id/maxRating"
+                        app:layout_constraintTop_toBottomOf="@+id/maxRating" />
+
+                    <TextView
+                        android:id="@+id/setLastOnline"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text=" Set Last Online"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lastOnline"
+                        app:layout_constraintTop_toTopOf="@+id/lastOnline" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

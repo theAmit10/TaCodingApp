@@ -2,6 +2,7 @@
     <string name="app_name">TaCoding</string>
     <string name="contest">Contest</string>
     <string name="problem">Problem</string>
+    <string name="profile">Profile</string>
     <string name="user">Users</string>
     <string name="news">News</string>
     <string name="add">Add</string>

@@ -48,17 +48,19 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.fragmentContainer, new ContestFragment());
                         break;
                     case 1:
-                        transaction.replace(R.id.fragmentContainer, new UserFragment());
-                        break;
-                    case 2:
-                        transaction.replace(R.id.fragmentContainer, new NewsFragment());
-                        break;
-                    case 3:
+//                        transaction.replace(R.id.fragmentContainer, new UserFragment());
                         transaction.replace(R.id.fragmentContainer, new ProblemFragment());
                         break;
-                    case 4:
+                    case 2:
+//                        transaction.replace(R.id.fragmentContainer, new NewsFragment());
                         transaction.replace(R.id.fragmentContainer, new ProfileFragment());
                         break;
+//                    case 3:
+//                        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
+//                        break;
+//                    case 4:
+//                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
+//                        break;
                 }
 
                 transaction.commit();

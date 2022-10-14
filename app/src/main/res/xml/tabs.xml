@@ -3,16 +3,16 @@
     <tab
         drawable="@drawable/ic_contest"
         text="@string/contest" />
-    <tab
-        drawable="@drawable/ic_addfriend"
-        text="@string/user" />
-    <tab
-        drawable="@drawable/ic_news"
-        text="@string/news" />
+<!--    <tab-->
+<!--        drawable="@drawable/ic_addfriend"-->
+<!--        text="@string/user" />-->
+<!--    <tab-->
+<!--        drawable="@drawable/ic_news"-->
+<!--        text="@string/news" />-->
     <tab
         drawable="@drawable/ic_problem"
         text="@string/problem" />
     <tab
         drawable="@drawable/ic_profile"
-        text="@string/add" />
+        text="@string/profile" />
 </Tabs>

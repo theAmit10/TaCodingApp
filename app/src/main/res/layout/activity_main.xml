@@ -23,13 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:rbb_textSize="@dimen/_5font_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:rbb_activeItemType="text"
-        android:background="@drawable/button_active_bg"
-        app:rbb_indicatorColor="@color/black"
+        app:rbb_backgroundColor="#292727"
+        app:rbb_indicatorHeight="@dimen/_4mdp"
+        app:rbb_indicatorColor="@color/teal_200"
         app:rbb_tabs="@xml/tabs"
-        app:rbb_textColor="@color/black"
+        app:rbb_textColor="@color/teal_200"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
