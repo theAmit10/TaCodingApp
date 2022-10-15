@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b1"
     tools:context=".Fragment.ProfileFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -36,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/p4" />
+                    android:src="@drawable/ic_profile" />
 
 
             </com.github.florent37.diagonallayout.DiagonalLayout>
@@ -44,26 +45,30 @@
 
             <EditText
                 android:id="@+id/profileUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="1dp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30font_mdp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/b1"
                 android:focusableInTouchMode="true"
                 android:hint="Codeforces username"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/diagonalLayout"
-                app:layout_constraintEnd_toStartOf="@id/profileSearch"
+                android:textColor="@color/teal_200"
+                android:textColorHint="@color/teal_200"
+                app:layout_constraintBottom_toTopOf="@+id/view11"
+                app:layout_constraintEnd_toStartOf="@+id/profileSearch"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:id="@+id/profileSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_baseline_person_search_24"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_baseline_search_white"
+                app:layout_constraintBottom_toTopOf="@+id/view11"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/profileUserName" />
+                app:layout_constraintTop_toTopOf="@+id/profileUserName" />
 
 
             <View
@@ -71,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,12 +86,17 @@
 
             <TextView
                 android:id="@+id/setHandler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30font_mdp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/b1"
+                android:fontFamily="@font/iceland"
                 android:text="Username"
+                android:textAlignment="center"
+                android:textColor="@color/teal_200"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="@+id/view11"
                 app:layout_constraintStart_toStartOf="@+id/view11"
                 app:layout_constraintTop_toBottomOf="@+id/view11" />
@@ -106,7 +116,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/b1_modi">
 
                     <TextView
                         android:id="@+id/name"
@@ -114,16 +125,30 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="name"
+                        android:background="@drawable/button_active_bg"
+                        android:fontFamily="@font/iceland"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  Name  "
+                        android:textColor="@color/teal_200"
+
+                        android:textSize="@dimen/_15font_mdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/setName"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="20dp"
-                        android:text="full name"
+                        android:background="@drawable/b1"
+                        android:fontFamily="@font/anonymous_pro"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  full name  "
+                        android:textAlignment="center"
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_16font_mdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/name"
                         app:layout_constraintTop_toTopOf="@+id/name" />
@@ -133,16 +158,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="rank"
+                        android:background="@drawable/button_active_bg"
+                        android:fontFamily="@font/iceland"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  Rank  "
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_15font_mdp"
                         app:layout_constraintStart_toStartOf="@+id/name"
                         app:layout_constraintTop_toBottomOf="@+id/name" />
 
                     <TextView
                         android:id="@+id/setRank"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="20dp"
-                        android:text="rank"
+                        android:background="@drawable/b1"
+                        android:fontFamily="@font/anonymous_pro"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  rank  "
+                        android:textAlignment="center"
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_16font_mdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/rank"
                         app:layout_constraintTop_toTopOf="@+id/rank" />
@@ -152,16 +190,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="rating"
+                        android:background="@drawable/button_active_bg"
+                        android:fontFamily="@font/iceland"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  Rating  "
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_15font_mdp"
                         app:layout_constraintStart_toStartOf="@+id/rank"
                         app:layout_constraintTop_toBottomOf="@+id/rank" />
 
                     <TextView
                         android:id="@+id/setRating"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="10dp"
-                        android:text="setRating"
+                        android:background="@drawable/b1"
+                        android:fontFamily="@font/anonymous_pro"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  setRating  "
+                        android:textAlignment="center"
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_16font_mdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/rating"
                         app:layout_constraintTop_toTopOf="@+id/rating" />
@@ -171,16 +222,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text=" Max rating"
+                        android:background="@drawable/button_active_bg"
+                        android:fontFamily="@font/iceland"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text=" Max rating "
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_15font_mdp"
                         app:layout_constraintStart_toStartOf="@+id/rating"
                         app:layout_constraintTop_toBottomOf="@+id/rating" />
 
                     <TextView
                         android:id="@+id/setMaxRating"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="10dp"
+                        android:background="@drawable/b1"
+                        android:fontFamily="@font/anonymous_pro"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
                         android:text="set max Rating"
+                        android:textAlignment="center"
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_16font_mdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/maxRating"
                         app:layout_constraintTop_toTopOf="@+id/maxRating" />
@@ -190,16 +254,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Last Online"
+                        android:background="@drawable/button_active_bg"
+                        android:fontFamily="@font/iceland"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
+                        android:text="  Last Online  "
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_15font_mdp"
                         app:layout_constraintStart_toStartOf="@+id/maxRating"
                         app:layout_constraintTop_toBottomOf="@+id/maxRating" />
 
                     <TextView
                         android:id="@+id/setLastOnline"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_marginStart="10dp"
+                        android:background="@drawable/b1"
+                        android:fontFamily="@font/anonymous_pro"
+                        android:paddingTop="@dimen/_1mdp"
+                        android:paddingBottom="@dimen/_1mdp"
                         android:text=" Set Last Online"
+                        android:textAlignment="center"
+                        android:textColor="@color/teal_200"
+                        android:textSize="@dimen/_16font_mdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/lastOnline"
                         app:layout_constraintTop_toTopOf="@+id/lastOnline" />

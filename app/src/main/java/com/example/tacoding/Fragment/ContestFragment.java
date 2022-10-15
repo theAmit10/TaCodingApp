@@ -80,9 +80,8 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
 
     // for coding platform
-    RecyclerView codingPlatformRv;
     ArrayList<CodingPlatformModel> list;
-    PlatformAdapter platformAdapter;
+
 
     //for top coder
     RecyclerView topCoderRv;
@@ -94,8 +93,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
     ContestAdapter contestAdapter;
     public static Map<String, Integer> map = new HashMap<String, Integer>();
     public static Map<String, Integer> sMap = new HashMap<String, Integer>();
-    ArrayList<ContestModel> filteredContestList = new ArrayList<>();
-    private PlatformName PlatformNameTA;
+
     ProgressBar progressBar;
     SwipeRefreshLayout swipeToRefresh;
 

@@ -44,19 +44,14 @@ import java.util.concurrent.Executors;
 public class ProblemFragment extends Fragment {
 
     FragmentProblemBinding binding;
-
     SearchView searchView;
-
     private String selectedFilter = "";
-
-
     ArrayList<String> filteredWord = new ArrayList<>();
     String currentSearchText = "";
-
     String lowRange = "800";
     String maxRange = "3500";
 
-    // for coding platform
+
     // FOR PROBLEM TAGS
     ArrayList<ProblemTagModel> list;
 
@@ -96,10 +91,7 @@ public class ProblemFragment extends Fragment {
             @Override
             public void run() {
                 try {
-
                     loadProblem();
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -119,7 +111,6 @@ public class ProblemFragment extends Fragment {
         binding = FragmentProblemBinding.inflate(inflater, container, false);
 
         // for coding platform
-
         list = new ArrayList<>();
 
         list.add(new ProblemTagModel("2-sat"));
@@ -538,7 +529,7 @@ public class ProblemFragment extends Fragment {
     @SuppressLint("ResourceAsColor")
     private void lookSelected(Button parsedButton) {
         parsedButton.setTextColor(red);
-//        parsedButton.setBackgroundColor(R.color.black);
+
         parsedButton.setBackgroundResource(R.drawable.button_active_bg);
 
     }
@@ -546,7 +537,6 @@ public class ProblemFragment extends Fragment {
     private void lookUnSelected(Button parsedButton) {
         parsedButton.setTextColor(white);
         parsedButton.setBackgroundResource(R.drawable.follow_active_bg);
-//        parsedButton.setBackgroundColor(white);
     }
 
     private void unSelectedAllFilterButton() {

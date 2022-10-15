@@ -48,19 +48,12 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.fragmentContainer, new ContestFragment());
                         break;
                     case 1:
-//                        transaction.replace(R.id.fragmentContainer, new UserFragment());
                         transaction.replace(R.id.fragmentContainer, new ProblemFragment());
                         break;
                     case 2:
-//                        transaction.replace(R.id.fragmentContainer, new NewsFragment());
                         transaction.replace(R.id.fragmentContainer, new ProfileFragment());
                         break;
-//                    case 3:
-//                        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
-//                        break;
-//                    case 4:
-//                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
-//                        break;
+
                 }
 
                 transaction.commit();
@@ -83,16 +76,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String s) {
-
                 return false;
             }
         });
 
         return super.onCreateOptionsMenu(menu);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
 

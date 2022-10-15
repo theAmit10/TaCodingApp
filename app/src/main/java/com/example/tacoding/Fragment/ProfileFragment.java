@@ -27,8 +27,10 @@ import com.example.tacoding.Model.AddUserModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
 import com.example.tacoding.databinding.FragmentProfileBinding;
+import com.example.tacoding.tadatabase.Platform;
 import com.github.thunder413.datetimeutils.DateTimeStyle;
 import com.github.thunder413.datetimeutils.DateTimeUtils;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +38,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
     ArrayList<ProfileModel> arrayList = new ArrayList<>();
     FragmentProfileBinding binding;
-    String photo ="",fullName="amit",rank="",rating="",maxRating="",lastOnline="", handle="";
+    String photo ="",fullName="",rank="",rating="",maxRating="", handle="" , firstName="", lastName="",lastOnlineTimeSeconds= "", name = "";
 
 
     public ProfileFragment() {
@@ -72,12 +75,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        String names =  "DmitriyH";
-        loadProfile(names);
+//        String names =  "DmitriyH";
+//        loadProfile(names);
         return binding.getRoot();
     }
 
     private void loadProfile(String names) {
+
         String profileUrl = "https://codeforces.com/api/user.info?handles="+names;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, profileUrl, null, new Response.Listener<JSONObject>() {
@@ -86,50 +90,62 @@ public class ProfileFragment extends Fragment {
                 try {
                     JSONArray jsonArrayResult = response.getJSONArray("result");
                     JSONObject jsonObject = jsonArrayResult.getJSONObject(0);
-                    jsonObject.getString("titlePhoto");
-                    jsonObject.getString("firstName");
-                    jsonObject.getString("lastName");
-                    jsonObject.getString("rating");
-                    jsonObject.getString("rank");
-                    jsonObject.getString("maxRating");
-                    jsonObject.getString("handle");
-                    jsonObject.getString("lastOnlineTimeSeconds");
+
+                    photo = jsonObject.getString("titlePhoto");
+                    handle = jsonObject.getString("handle");
+                    lastOnlineTimeSeconds = jsonObject.getString("lastOnlineTimeSeconds");
 
 
-                    String name = jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
+
+
+
+                    if(jsonObject.has("firstName")){
+                        firstName = jsonObject.getString("firstName");
+                    }else {
+                        firstName = "No";
+                    }
+
+                    if(jsonObject.has("lastName")){
+                        lastName = jsonObject.getString("lastName");
+                    }else {
+                        lastName = "Name";
+                    }
+
+                    if(jsonObject.has("rating")){
+                        rating = jsonObject.getString("rating");
+                    }else {
+                        rating = "unrated";
+                    }
+
+                    if(jsonObject.has("maxRating")){
+                        maxRating= jsonObject.getString("maxRating");
+                    }else {
+                        maxRating = "unrated";
+                    }
+
+                    if(jsonObject.has("rank")){
+                        rank= jsonObject.getString("rank");
+                    }else {
+                        rank = "No Rank";
+                    }
+
+
+
+                    name = firstName + " " + lastName;
 
 
                     binding.setName.setText(name);
-                    binding.setRating.setText(jsonObject.getString("rating"));
-                    binding.setRank.setText(jsonObject.getString("rank"));
-                    binding.setMaxRating.setText(jsonObject.getString("maxRating"));
-                    binding.setHandler.setText(jsonObject.getString("handle"));
-                    binding.setLastOnline.setText(jsonObject.getString("lastOnlineTimeSeconds"));
+                    binding.setRating.setText(rating);
+                    binding.setRank.setText(rank);
+                    binding.setMaxRating.setText(maxRating);
+                    binding.setHandler.setText(handle);
+                    binding.setLastOnline.setText(lastOnlineTimeSeconds);
 
+                    Picasso.get().load(jsonObject.getString("titlePhoto"))
+                            .placeholder(R.drawable.ic_profile)
+                            .into(binding.profileUserImage);
 
-
-
-
-                    ProfileModel profileModel = new ProfileModel(
-                            jsonObject.getString("titlePhoto"),
-                            fullName,
-                            jsonObject.getString("rating"),
-                            jsonObject.getString("rank"),
-                            jsonObject.getString("maxRating"),
-                            jsonObject.getString("handle"),
-                            jsonObject.getString("lastOnlineTimeSeconds")
-                    );
-
-
-                    System.out.println("firstname: " + jsonObject.getString("firstName"));
-                    System.out.println("firstname: " + jsonObject.getString("lastName"));
-                    System.out.println("firstname: " + jsonObject.getString("handle"));
-                    System.out.println("firstname: " + jsonObject.getString("titlePhoto"));
-                    System.out.println("firstname: " + jsonObject.getString("rating"));
                     System.out.println("fullNAME: " + fullName);
-
-                    arrayList.add(profileModel);
-
 
                 } catch (Exception e) {
                     System.out.println("TRY CATCH ERROR");
@@ -147,8 +163,6 @@ public class ProfileFragment extends Fragment {
                 error.printStackTrace();
             }
         });
-
-
 
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
