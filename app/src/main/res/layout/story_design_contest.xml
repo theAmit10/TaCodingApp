@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/contestTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/contestTitle"
-        app:srcCompat="@drawable/ic_baseline_add_alarm_white" />
+        app:srcCompat="@drawable/ic_contest" />
 
     <TextView
         android:id="@+id/contestTitle"

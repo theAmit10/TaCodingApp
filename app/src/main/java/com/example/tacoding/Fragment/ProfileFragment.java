@@ -3,10 +3,8 @@ package com.example.tacoding.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.KeyEvent;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,30 +13,21 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.tacoding.Adapter.ContestAdapter;
-import com.example.tacoding.Adapter.ProfileAdapter;
 import com.example.tacoding.Api.MySingleton;
-import com.example.tacoding.Model.CodingPlatformModel;
-import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.ProfileModel;
-import com.example.tacoding.Model.AddUserModel;
 import com.example.tacoding.R;
-import com.example.tacoding.databinding.FragmentContestBinding;
 import com.example.tacoding.databinding.FragmentProfileBinding;
-import com.example.tacoding.tadatabase.Platform;
-import com.github.thunder413.datetimeutils.DateTimeStyle;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.github.thunder413.datetimeutils.DateTimeUnits;
 import com.github.thunder413.datetimeutils.DateTimeUtils;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
@@ -54,6 +43,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -76,7 +66,8 @@ public class ProfileFragment extends Fragment {
         });
 
 //        String names =  "DmitriyH";
-//        loadProfile(names);
+        Editable intialNames =  binding.profileUserName.getText();
+        loadProfile(String.valueOf(intialNames));
         return binding.getRoot();
     }
 
@@ -94,6 +85,10 @@ public class ProfileFragment extends Fragment {
                     photo = jsonObject.getString("titlePhoto");
                     handle = jsonObject.getString("handle");
                     lastOnlineTimeSeconds = jsonObject.getString("lastOnlineTimeSeconds");
+
+                    Date date = DateTimeUtils.formatDate(Long.parseLong(lastOnlineTimeSeconds), DateTimeUnits.SECONDS);
+
+                    String dateString = date+"";
 
 
 
@@ -139,7 +134,7 @@ public class ProfileFragment extends Fragment {
                     binding.setRank.setText(rank);
                     binding.setMaxRating.setText(maxRating);
                     binding.setHandler.setText(handle);
-                    binding.setLastOnline.setText(lastOnlineTimeSeconds);
+                    binding.setLastOnline.setText(dateString);
 
                     Picasso.get().load(jsonObject.getString("titlePhoto"))
                             .placeholder(R.drawable.ic_profile)
