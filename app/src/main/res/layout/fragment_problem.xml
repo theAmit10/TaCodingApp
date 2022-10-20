@@ -53,7 +53,7 @@
         android:id="@+id/profileUserImage"
         android:layout_width="@dimen/_50font_mdp"
         android:layout_height="@dimen/_45font_mdp"
-        android:src="@drawable/p2"
+        android:src="@drawable/ic_profile_svgrepo_com"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -70,6 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:queryHint="Problem Name "
+        app:queryBackground="@drawable/edit_text_background"
         app:searchIcon="@drawable/ic_baseline_search_white">
 
     </androidx.appcompat.widget.SearchView>
@@ -157,7 +158,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:onClick="binarySearch"
                         android:textColor="@color/white"
-                        android:text="binary search" />
+                        android:text=" Binary search " />
 
                     <Button
                         android:id="@+id/twoSat"
@@ -191,7 +192,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:textColor="@color/white"
                         android:onClick="bruteForce"
-                        android:text="brute force" />
+                        android:text=" brute force " />
 
                     <Button
                         android:id="@+id/chineseRemainderTheorem"
@@ -202,7 +203,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="chineseRemainderTheorem"
-                        android:text="chinese remainder theorem" />
+                        android:text=" chinese remainder theorem " />
 
                     <Button
                         android:id="@+id/combinatorics"
@@ -213,7 +214,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="combinatorics"
-                        android:text="combinatorics" />
+                        android:text=" combinatorics " />
 
                     <Button
                         android:id="@+id/constructiveAlgorithms"
@@ -224,7 +225,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="constructiveAlgorithms"
-                        android:text="constructive algorithms" />
+                        android:text=" constructive algorithms " />
 
                     <Button
                         android:id="@+id/dataStructures"
@@ -235,7 +236,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="dataStructures"
-                        android:text="data structures" />
+                        android:text=" data structures " />
 
                     <Button
                         android:id="@+id/dfsAndSimilar"
@@ -246,7 +247,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="dfsAndSimilar"
-                        android:text="dfs and similar" />
+                        android:text=" dfs and similar " />
 
                     <Button
                         android:id="@+id/divideAndConquer"
@@ -257,7 +258,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="divideAndConquer"
-                        android:text="divide and conquer" />
+                        android:text=" divide and conquer " />
 
                     <Button
                         android:id="@+id/dp"
@@ -279,7 +280,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="dsu"
-                        android:text="dsu" />
+                        android:text=" dsu " />
 
                     <Button
                         android:id="@+id/expressionParsing"
@@ -290,7 +291,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="expressionParsing"
-                        android:text="expression parsing" />
+                        android:text=" expression parsing " />
 
                     <Button
                         android:id="@+id/fft"
@@ -312,7 +313,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="flows"
-                        android:text="flows" />
+                        android:text=" flows " />
 
                     <Button
                         android:id="@+id/games"
@@ -323,7 +324,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="games"
-                        android:text="games" />
+                        android:text=" games " />
 
                     <Button
                         android:id="@+id/geometry"
@@ -334,7 +335,7 @@
                         android:background="@drawable/follow_active_bg"
                         android:fontFamily="@font/anonymous_pro"
                         android:onClick="geometry"
-                        android:text="geometry" />
+                        android:text=" geometry " />
 
                     <Button
                         android:id="@+id/graphMatchings"
@@ -345,7 +346,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="graphMatchings"
-                        android:text="graph matchings" />
+                        android:text=" graph matchings " />
 
                     <Button
                         android:id="@+id/graphs"
@@ -356,7 +357,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="graphs"
-                        android:text="graphs" />
+                        android:text=" graphs " />
 
                     <Button
                         android:id="@+id/greedy"
@@ -367,7 +368,7 @@
                         android:onClick="greedy"
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
-                        android:text="greedy" />
+                        android:text=" greedy " />
 
                     <Button
                         android:id="@+id/hashing"
@@ -378,7 +379,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="hashing"
-                        android:text="hashing" />
+                        android:text=" hashing " />
 
                     <Button
                         android:id="@+id/interactive"
@@ -389,7 +390,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="interactive"
-                        android:text="interactive" />
+                        android:text=" interactive " />
 
 
                     <Button
@@ -401,7 +402,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="math"
-                        android:text="math" />
+                        android:text=" math " />
 
                     <Button
                         android:id="@+id/metrices"
@@ -412,7 +413,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="metrices"
-                        android:text="metrices" />
+                        android:text=" metrices " />
 
                     <Button
                         android:id="@+id/meetInTheMiddle"
@@ -423,7 +424,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="meetInTheMiddle"
-                        android:text="meet-in-the-middle" />
+                        android:text=" meet-in-the-middle " />
 
                     <Button
                         android:id="@+id/numberTheory"
@@ -434,7 +435,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="numberTheory"
-                        android:text="number theory" />
+                        android:text=" number theory " />
 
                     <Button
                         android:id="@+id/probablities"
@@ -456,7 +457,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="schedules"
-                        android:text="schedules" />
+                        android:text=" schedules " />
 
                     <Button
                         android:id="@+id/shortestPaths"
@@ -467,7 +468,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="shortestPaths"
-                        android:text="shortest paths" />
+                        android:text=" shortest paths " />
 
                     <Button
                         android:id="@+id/sortings"
@@ -478,7 +479,7 @@
                         android:onClick="sortings"
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
-                        android:text="sortings" />
+                        android:text=" sortings " />
 
                     <Button
                         android:id="@+id/stringSuffixStructures"
@@ -489,7 +490,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="stringSuffixStructures"
-                        android:text="string suffix structures" />
+                        android:text=" string suffix structures " />
 
                     <Button
                         android:id="@+id/strings"
@@ -500,7 +501,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="strings"
-                        android:text="strings" />
+                        android:text=" strings " />
 
                     <Button
                         android:id="@+id/ternarySearch"
@@ -511,7 +512,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="ternarySearch"
-                        android:text="ternary search" />
+                        android:text=" ternary search " />
 
                     <Button
                         android:id="@+id/trees"
@@ -533,7 +534,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="implementation"
-                        android:text="implementation" />
+                        android:text=" implementation " />
 
                     <Button
                         android:id="@+id/twoPointers"
@@ -544,7 +545,7 @@
                         android:layout_marginStart="@dimen/_10font_mdp"
                         android:background="@drawable/follow_active_bg"
                         android:onClick="twoPointers"
-                        android:text="two pointers" />
+                        android:text=" two pointers " />
 
 
                 </LinearLayout>
@@ -611,7 +612,7 @@
                     android:background="@drawable/follow_active_bg"
                     android:textColor="@color/white"
                     android:onClick="intermediate"
-                    android:text="Intermediates" />
+                    android:text=" Intermediates " />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/AdvancedBtn"
@@ -622,7 +623,7 @@
                     android:background="@drawable/follow_active_bg"
                     android:textColor="@color/white"
                     android:onClick="advanced"
-                    android:text="Advanced " />
+                    android:text="Advanced" />
 
 
             </LinearLayout>

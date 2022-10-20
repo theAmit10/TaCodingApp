@@ -58,19 +58,14 @@ public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.viewHold
         holder.tags.setText(sb.toString());
 
 
-        holder.rating.setOnClickListener(new View.OnClickListener() {
+        holder.problemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String urlOrg = "https://codeforces.com/problemset/problem/"+problemModel.getContestId()+"/"+problemModel.getIndex();
-
-
                 Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
                 intent.putExtra("url",urlOrg);
                 context.startActivity(intent);
-
-
-
                 System.out.println("LINK : "+urlOrg);
 
             }

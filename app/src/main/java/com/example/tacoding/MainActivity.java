@@ -18,6 +18,9 @@ import com.example.tacoding.databinding.ActivityMainBinding;
 import com.example.tacoding.tadatabase.PlatformViewModel;
 import com.iammert.library.readablebottombar.ReadableBottomBar;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
 
      ActivityMainBinding binding;
@@ -44,14 +47,48 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
                 switch (i){
-                    case 0:
-                        transaction.replace(R.id.fragmentContainer, new ContestFragment());
+                    case 0: ExecutorService service = Executors.newSingleThreadExecutor();
+                        service.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    transaction.replace(R.id.fragmentContainer, new ContestFragment());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+//                        transaction.replace(R.id.fragmentContainer, new ContestFragment());
                         break;
                     case 1:
-                        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
+                        ExecutorService service1 = Executors.newSingleThreadExecutor();
+                        service1.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    transaction.replace(R.id.fragmentContainer, new ProblemFragment());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+//                        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
                         break;
                     case 2:
-                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
+                        ExecutorService service2 = Executors.newSingleThreadExecutor();
+                        service2.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    transaction.replace(R.id.fragmentContainer, new ProfileFragment());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+//                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
                         break;
 
                 }

@@ -41,7 +41,7 @@
         android:layout_width="@dimen/_50font_mdp"
         android:layout_height="@dimen/_45font_mdp"
         android:scaleType="centerCrop"
-        android:src="@drawable/p4"
+        android:src="@drawable/ic_profile_svgrepo_com"
         app:civ_border_color="#0B0909"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -70,10 +70,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         android:background="@drawable/b1_modified"
         android:outlineSpotShadowColor="@color/teal_200"
+        android:textColor="@color/teal_200"
+        android:textColorHint="@color/teal_200"
         android:outlineAmbientShadowColor="@color/teal_200"
         app:searchIcon="@drawable/ic_baseline_search_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
+        app:queryBackground="@drawable/edit_text_background"
         app:queryHint="Contest Name "></androidx.appcompat.widget.SearchView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -307,29 +310,6 @@
                     app:layout_constraintStart_toStartOf="@+id/view4"
                     app:layout_constraintTop_toBottomOf="@+id/view6" />
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontalScrollView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/topCoderRV"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="16dp" />
-                    </LinearLayout>
-                </HorizontalScrollView>
-
                 <View
                     android:id="@+id/view4"
                     android:layout_width="wrap_content"
@@ -341,20 +321,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Month"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view4" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <com.github.ybq.android.spinkit.SpinKitView
                     android:id="@+id/spin_kit"
@@ -362,11 +329,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
                     app:SpinKit_Color="@color/teal_200"
-                    app:layout_constraintBottom_toBottomOf="@+id/contestRv"
                     app:layout_constraintEnd_toEndOf="@id/contestRv"
-                    app:layout_constraintStart_toStartOf="@id/contestRv" />
+                    app:layout_constraintStart_toStartOf="@id/contestRv"
+                    app:layout_constraintTop_toTopOf="@+id/contestRv" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contestRv"
@@ -378,7 +345,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

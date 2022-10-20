@@ -3,6 +3,7 @@ package com.example.tacoding.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.ProfileModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentProfileBinding;
+import com.example.tacoding.tadatabase.Platform;
+import com.example.tacoding.tadatabase.PlatformName;
+import com.example.tacoding.tadatabase.PlatformViewModel;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.github.thunder413.datetimeutils.DateTimeUnits;
 import com.github.thunder413.datetimeutils.DateTimeUtils;
@@ -33,6 +37,7 @@ public class ProfileFragment extends Fragment {
 
     ArrayList<ProfileModel> arrayList = new ArrayList<>();
     FragmentProfileBinding binding;
+    public PlatformViewModel platformViewModel;
     String photo ="",fullName="",rank="",rating="",maxRating="", handle="" , firstName="", lastName="",lastOnlineTimeSeconds= "", name = "";
 
 
@@ -43,6 +48,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        platformViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(PlatformViewModel.class);
 
 
     }
@@ -58,16 +65,36 @@ public class ProfileFragment extends Fragment {
         binding.profileSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ENtered text : "+binding.profileUserName.getText());
+                System.out.println("Entered text : "+binding.profileUserName.getText());
                 String abc = "";
+                PlatformName platformName = new PlatformName(String.valueOf(binding.profileUserName.getText()));
+                if(!platformName.getNplatformName().equals("")){
+                    platformViewModel.insertName(platformName);
+                }
                 loadProfile(String.valueOf(binding.profileUserName.getText()));
                 binding.profileUserName.setText(abc);
             }
         });
 
+
+
 //        String names =  "DmitriyH";
-        Editable intialNames =  binding.profileUserName.getText();
-        loadProfile(String.valueOf(intialNames));
+//        Editable intialNames =  binding.profileUserName.getText();
+
+
+
+        platformViewModel.getmAllPlatformName().observeForever(platformNames ->
+        {
+            System.out.println("#####################SELECTED PLATFORM DATA #####################");
+            for (int i = 0; i < platformNames.size(); i++) {
+                System.out.println("VAL : " + platformNames.get(i).getNplatformName());
+            }
+            System.out.println("#####################SELECTED PLATFORM DATA #####################");
+
+            loadProfile(platformNames.get(platformNames.size() - 1).getNplatformName());
+            System.out.println("LAST ELEMENT : "+platformNames.get(platformNames.size() - 1).getNplatformName());
+        });
+
         return binding.getRoot();
     }
 
@@ -154,7 +181,11 @@ public class ProfileFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 System.out.println("Error happened ");
-                Toast.makeText(getContext(), "NO USER FOUND : "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                if(binding.profileUserName.getText().equals("")){
+                    Toast.makeText(getContext(), "ENTER USER NAME  "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "NO USER FOUND : "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                }
                 error.printStackTrace();
             }
         });

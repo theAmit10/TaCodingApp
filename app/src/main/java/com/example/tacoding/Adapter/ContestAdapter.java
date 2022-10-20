@@ -67,21 +67,9 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             @Override
             public void onClick(View view) {
                 System.out.println("DA : "+contestModel.getUrl());
-
                 Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
                 intent.putExtra("url",contestModel.getUrl());
                 context.startActivity(intent);
-
-//                holder.contestWebView = new WebView(context);
-//                holder.contestWebView.getSettings().setJavaScriptEnabled(true);
-//                holder.contestWebView.getSettings().setDomStorageEnabled(true);
-//                holder.contestWebView.getSettings().setAllowFileAccessFromFileURLs(true);
-//                holder.contestWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-//                holder.contestWebView.getSettings().setAllowFileAccess(true);
-//                holder.contestWebView.getSettings().setLoadsImagesAutomatically(false);
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-
-
             }
         });
 

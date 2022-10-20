@@ -279,16 +279,16 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
         //          For Top Coder
         //        topCoderRv = view.findViewById(R.id.topCoderRV);
-        topCoderRv = binding.topCoderRV;
-        topcoderList = new ArrayList<>();
-        topcoderList.add(new TopCoderModel(R.drawable.p7, "Wasu", "Grand Master", "CodeForces"));
-        topcoderList.add(new TopCoderModel(R.drawable.p1, "James", "Master", "CodeChef"));
-        topcoderList.add(new TopCoderModel(R.drawable.p2, "Goku", "Candidate", "Hackerrank"));
-        topcoderList.add(new TopCoderModel(R.drawable.p3, "Gyan", "Grand Master", "Codechef"));
-        topcoderList.add(new TopCoderModel(R.drawable.p4, "Sinchan", "intermediate", "CodeForces"));
-        topcoderList.add(new TopCoderModel(R.drawable.p5, "Nobita", "Master", "CodeForces"));
-        topcoderList.add(new TopCoderModel(R.drawable.p6, "Raju", "Candidate Master", "CodeForces"));
-        topcoderList.add(new TopCoderModel(R.drawable.p2, "Rakesh", "Grand Master", "CodeForces"));
+//        topCoderRv = binding.topCoderRV;
+//        topcoderList = new ArrayList<>();
+//        topcoderList.add(new TopCoderModel(R.drawable.p7, "Wasu", "Grand Master", "CodeForces"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p1, "James", "Master", "CodeChef"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p2, "Goku", "Candidate", "Hackerrank"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p3, "Gyan", "Grand Master", "Codechef"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p4, "Sinchan", "intermediate", "CodeForces"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p5, "Nobita", "Master", "CodeForces"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p6, "Raju", "Candidate Master", "CodeForces"));
+//        topcoderList.add(new TopCoderModel(R.drawable.p2, "Rakesh", "Grand Master", "CodeForces"));
 
 //        TopCoderAdapter topCoderAdapter = new TopCoderAdapter(topcoderList, getContext());
 //        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);

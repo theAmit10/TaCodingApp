@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b1"
     tools:context=".WebViewActivity">
 
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="75dp"
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#E4E1E1"
+        android:background="@drawable/b1"
         android:paddingStart="8dp"
         android:paddingTop="4dp"
         android:paddingEnd="8dp"
@@ -29,7 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="TACODING"
-        android:textSize="16sp"
+        android:textColor="@color/teal_200"
+        android:textSize="24sp"
+        android:fontFamily="@font/iceland"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
@@ -39,7 +42,7 @@
         android:id="@+id/profileUserImage"
         android:layout_width="@dimen/_50font_mdp"
         android:layout_height="@dimen/_45font_mdp"
-        android:src="@drawable/p2"
+        android:src="@drawable/ic_profile_svgrepo_com"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -60,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileUserImage" />
 
-    <WebView
+    <org.mozilla.geckoview.GeckoView
         android:id="@+id/webviewOrg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -69,5 +72,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
