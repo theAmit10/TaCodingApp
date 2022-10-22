@@ -7,13 +7,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import org.mozilla.geckoview.GeckoRuntime;
-import org.mozilla.geckoview.GeckoSession;
-import org.mozilla.geckoview.GeckoView;
-
 public class WebViewActivity extends AppCompatActivity {
 
-    private static GeckoRuntime sRuntime;
+//    private static GeckoRuntime sRuntime;
 
     WebView webView ;
     String url = "";
@@ -23,18 +19,18 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
-//        webView = findViewById(R.id.webviewOrg);
+        webView = findViewById(R.id.webviewOrg);
         url = getIntent().getStringExtra("url");
 
-        GeckoView view = findViewById(R.id.webviewOrg);
-        GeckoSession session = new GeckoSession();
-        session.setContentDelegate(new GeckoSession.ContentDelegate() {});
-        if (sRuntime == null) {
-            sRuntime = GeckoRuntime.create(this);
-        }
-        session.open(sRuntime);
-        view.setSession(session);
-        session.loadUri(url);
+//        GeckoView view = findViewById(R.id.webviewOrg);
+//        GeckoSession session = new GeckoSession();
+//        session.setContentDelegate(new GeckoSession.ContentDelegate() {});
+//        if (sRuntime == null) {
+//            sRuntime = GeckoRuntime.create(this);
+//        }
+//        session.open(sRuntime);
+//        view.setSession(session);
+//        session.loadUri(url);
 //        session.loadUri("https://github.com/theAmit10");
 
 
@@ -43,28 +39,26 @@ public class WebViewActivity extends AppCompatActivity {
 
 
 
-//        WebViewClient webViewClient  = new WebViewClient();
-//        webView.setWebViewClient(webViewClient);
-//
-//        webView.getSettings().setLoadWithOverviewMode(true);
-//        webView.getSettings().setUseWideViewPort(true);
-//        webView.getSettings().setSupportZoom(true);
-//        webView.getSettings().setBuiltInZoomControls(true);
-//        webView.getSettings().setDisplayZoomControls(false);
-//        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-//        webView.setScrollbarFadingEnabled(false);
-//
-//
-//        webView.getSettings().setJavaScriptEnabled(true);
-//        webView.getSettings().setDomStorageEnabled(true);
-//        webView.getSettings().setAllowFileAccessFromFileURLs(true);
-//        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-//        webView.getSettings().setAllowFileAccess(true);
-//        webView.getSettings().setLoadsImagesAutomatically(false);
-////        WebSettings webSettings = webView.getSettings();
-////        webSettings.setJavaScriptEnabled(true);
-//
-//        webView.loadUrl(url);
+        WebViewClient webViewClient  = new WebViewClient();
+        webView.setWebViewClient(webViewClient);
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.setScrollbarFadingEnabled(false);
+
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        webView.loadUrl(url);
 
     }
 

@@ -1,24 +1,19 @@
 package com.example.tacoding.Fragment;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -30,17 +25,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.tacoding.Adapter.ContestAdapter;
 
-import com.example.tacoding.Adapter.IPlatformRVAdapter;
-import com.example.tacoding.Adapter.PlatformAdapter;
-import com.example.tacoding.Adapter.TopCoderAdapter;
 import com.example.tacoding.Api.MySingleton;
 import com.example.tacoding.Model.CodingPlatformModel;
 import com.example.tacoding.Model.ContestModel;
 import com.example.tacoding.Model.TopCoderModel;
 import com.example.tacoding.R;
 import com.example.tacoding.databinding.FragmentContestBinding;
-import com.example.tacoding.tadatabase.Platform;
-import com.example.tacoding.tadatabase.PlatformName;
+
 import com.example.tacoding.tadatabase.PlatformViewModel;
 import com.github.thunder413.datetimeutils.DateTimeStyle;
 import com.github.thunder413.datetimeutils.DateTimeUtils;
@@ -61,7 +52,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ContestFragment extends Fragment implements IPlatformRVAdapter {
+public class ContestFragment extends Fragment  {
 
     FragmentContestBinding binding;
     public static PlatformViewModel platformViewModel;
@@ -208,27 +199,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
 
 
-
-//        SwipeRefreshLayout swipeRefreshLayout = binding.swipeToRefresh;
-//        swipeRefreshLayout.setOnRefreshListener(() -> {
-//
-//            getFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
-//
-//            Log.d(TAG, "onCreateView: RELOADING CONTEST FRAGMENT");
-//            System.out.println("RELOADED Fragment");
-//
-//
-//
-//            swipeRefreshLayout.setRefreshing(false);
-//        });
-
-
-
-
-
-
-
-
 //        #############################################################
         // below code is commedted because the following data has been already added to the local database.
         //       #############################################################
@@ -276,25 +246,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
             System.out.println("#####################SELECTED PLATFORM DATA #####################");
         });
 
-
-        //          For Top Coder
-        //        topCoderRv = view.findViewById(R.id.topCoderRV);
-//        topCoderRv = binding.topCoderRV;
-//        topcoderList = new ArrayList<>();
-//        topcoderList.add(new TopCoderModel(R.drawable.p7, "Wasu", "Grand Master", "CodeForces"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p1, "James", "Master", "CodeChef"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p2, "Goku", "Candidate", "Hackerrank"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p3, "Gyan", "Grand Master", "Codechef"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p4, "Sinchan", "intermediate", "CodeForces"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p5, "Nobita", "Master", "CodeForces"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p6, "Raju", "Candidate Master", "CodeForces"));
-//        topcoderList.add(new TopCoderModel(R.drawable.p2, "Rakesh", "Grand Master", "CodeForces"));
-
-//        TopCoderAdapter topCoderAdapter = new TopCoderAdapter(topcoderList, getContext());
-//        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        topCoderRv.setLayoutManager(linearLayoutManager1);
-//        topCoderRv.setNestedScrollingEnabled(false);
-//        topCoderRv.setAdapter(topCoderAdapter);
 
 
         // For Contest List
@@ -405,7 +356,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
         swipeToRefresh = binding.swipeToRefresh;
         swipeToRefresh.setOnRefreshListener(() -> {
 
-            Toast.makeText(getContext(), "KYA BAAT", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Contest Refreshed", Toast.LENGTH_SHORT).show();
             getParentFragmentManager().beginTransaction().detach(ContestFragment.this).attach(ContestFragment.this).commit();
             System.out.println("REFRESHED");
 
@@ -458,11 +409,6 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
                                 contestModelList.setStartDate(""+date);
                                 contestModelList.setEndDate(""+endDate);
-//
-//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.FULL); // Tuesday, June 13, 2017
-//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.LONG); // June 13, 2017
-//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.MEDIUM); // Jun 13, 2017
-//                                DateTimeUtils.formatWithStyle("2017-06-13", DateTimeStyle.SHORT); // 06/13/17
 
                                 System.out.println("End Time : "+contestModelList.getEndDate());
                                 contestList.add(contestModelList);
@@ -498,13 +444,7 @@ public class ContestFragment extends Fragment implements IPlatformRVAdapter {
 
     }
 
-    @Override
-    public void onITemClick(Platform platform) {
 
-
-
-
-    }
 
     private void lookSelected(ImageView parsedImage, String val) {
         for (Map.Entry<String, Integer> entry : filterMap.entrySet()) {

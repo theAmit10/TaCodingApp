@@ -78,11 +78,10 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.viewHold
             @Override
             public void onClick(View v) {
                 System.out.println("DA : "+contestModel.getUrl());
-
                 Intent intent = new Intent(context.getApplicationContext(), WebViewActivity.class);
                 intent.putExtra("url",contestModel.getUrl());
                 context.startActivity(intent);
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+
             }
         });
 

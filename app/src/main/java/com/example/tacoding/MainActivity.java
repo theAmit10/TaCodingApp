@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
                 switch (i){
-                    case 0: ExecutorService service = Executors.newSingleThreadExecutor();
+                    case 0:
+                        ExecutorService service = Executors.newSingleThreadExecutor();
                         service.execute(new Runnable() {
                             @Override
                             public void run() {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-//                        transaction.replace(R.id.fragmentContainer, new ContestFragment());
+//                       transaction.replace(R.id.fragmentContainer, new ContestFragment());
                         break;
                     case 1:
                         ExecutorService service1 = Executors.newSingleThreadExecutor();

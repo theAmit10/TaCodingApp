@@ -181,10 +181,12 @@ public class ProfileFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 System.out.println("Error happened ");
-                if(binding.profileUserName.getText().equals("")){
-                    Toast.makeText(getContext(), "ENTER USER NAME  "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "NO USER FOUND : "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                if(getContext() != null){
+                    if(binding.profileUserName.getText().equals("")){
+                        Toast.makeText(getContext(), "ENTER USER NAME  "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "NO USER FOUND : "+binding.profileUserName.getText(), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 error.printStackTrace();
             }

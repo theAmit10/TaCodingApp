@@ -85,6 +85,7 @@ public class ProblemFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         filteredWord.add("all");
 
         ExecutorService loadProblemThread = Executors.newSingleThreadExecutor();
@@ -107,6 +108,7 @@ public class ProblemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+        super.onViewStateRestored(savedInstanceState);
         // Inflate the layout for this fragment
 //        View view = inflater.inflate(R.layout.fragment_problem, container, false);
 
@@ -472,7 +474,6 @@ public class ProblemFragment extends Fragment {
 
 
         progressBar = binding.spinKit;
-        Sprite doubleBounce = new DoubleBounce();
         Sprite fadingCircle = new FadingCircle();
         progressBar.setIndeterminateDrawable(fadingCircle);
 
@@ -480,16 +481,9 @@ public class ProblemFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
 
-    }
+
 
     private void buttonBinding() {
         allButton = binding.allFilter;
@@ -750,7 +744,7 @@ public class ProblemFragment extends Fragment {
         ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
         problemRV.setAdapter(problemAdapter1);
 
-        problemAdapter.notifyDataSetChanged();
+//        problemAdapter.notifyDataSetChanged();
 
     }
 
@@ -787,7 +781,7 @@ public class ProblemFragment extends Fragment {
         ProblemAdapter problemAdapter1 = new ProblemAdapter(filterProblemList, getContext());
         problemRV.setAdapter(problemAdapter1);
 
-        problemAdapter.notifyDataSetChanged();
+//        problemAdapter.notifyDataSetChanged();
 
     }
 
