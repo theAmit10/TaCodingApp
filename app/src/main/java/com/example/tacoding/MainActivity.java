@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         });
-//                       transaction.replace(R.id.fragmentContainer, new ContestFragment());
+//                        transaction.replace(R.id.fragmentContainer, new ContestFragment());
                         break;
                     case 1:
                         ExecutorService service1 = Executors.newSingleThreadExecutor();
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 //                        transaction.replace(R.id.fragmentContainer, new ProblemFragment());
                         break;
                     case 2:
+
                         ExecutorService service2 = Executors.newSingleThreadExecutor();
                         service2.execute(new Runnable() {
                             @Override
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                         });
 //                        transaction.replace(R.id.fragmentContainer, new ProfileFragment());
                         break;
-
                 }
 
                 transaction.commit();

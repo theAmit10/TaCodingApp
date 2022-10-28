@@ -90,9 +90,12 @@ public class ProfileFragment extends Fragment {
                 System.out.println("VAL : " + platformNames.get(i).getNplatformName());
             }
             System.out.println("#####################SELECTED PLATFORM DATA #####################");
+            System.out.println("SIZE : "+platformNames.size());
 
-            loadProfile(platformNames.get(platformNames.size() - 1).getNplatformName());
-            System.out.println("LAST ELEMENT : "+platformNames.get(platformNames.size() - 1).getNplatformName());
+            if(platformNames.size()!=0){
+                loadProfile(platformNames.get(platformNames.size()-1 ).getNplatformName());
+                System.out.println("LAST ELEMENT : "+platformNames.get(platformNames.size() - 1).getNplatformName());
+            }
         });
 
         return binding.getRoot();
