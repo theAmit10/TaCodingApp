@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class ProblemFragment extends Fragment {
     String lowRange = "800";
     String maxRange = "3500";
 
+    LinearLayout pfContainer;
 
     // FOR PROBLEM TAGS
     ArrayList<ProblemTagModel> list;
@@ -524,6 +526,8 @@ public class ProblemFragment extends Fragment {
         trees = binding.trees;
         twoPointers = binding.twoPointers;
 
+        pfContainer = binding.pfContainer;
+
 
         //inting color
         white = ContextCompat.getColor(getContext(), R.color.white);
@@ -648,6 +652,7 @@ public class ProblemFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
 
+                            pfContainer.setVisibility(View.GONE);
                             progressBar.setVisibility(View.VISIBLE);
                             JSONObject problemResultJsonObj = response.getJSONObject("result");
                             JSONArray problemJsonArray = problemResultJsonObj.getJSONArray("problems");
@@ -699,6 +704,7 @@ public class ProblemFragment extends Fragment {
                             problemRV.setLayoutManager(linearLayoutManager1);
                             problemRV.setNestedScrollingEnabled(false);
                             progressBar.setVisibility(View.GONE);
+                            pfContainer.setVisibility(View.VISIBLE);
                             problemRV.setAdapter(problemAdapter);
 //                            problemAdapter.updateProblem(problemList);
 
@@ -706,6 +712,7 @@ public class ProblemFragment extends Fragment {
 
                         } catch (JSONException e) {
                             System.out.println("try catch error");
+                            pfContainer.setVisibility(View.GONE);
                             progressBar.setVisibility(View.VISIBLE);
                             e.printStackTrace();
                         }
